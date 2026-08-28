@@ -34,7 +34,7 @@ Claim tests run with `npm run test:claims`. The full suite checks demo reset, pa
 
 ## Deploy
 
-Deploy the contents of `dist/` as a static site. `staticwebapp.config.json` provides SPA fallback and security headers for Azure Static Web Apps.
+Deploy the contents of `dist/` as a static site. `staticwebapp.config.json` routes app pages and sets security headers for Azure Static Web Apps.
 
 ## Project notes
 
