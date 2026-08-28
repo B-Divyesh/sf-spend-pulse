@@ -267,6 +267,8 @@ test("production output uses hashed assets and supplies a real 404 override", as
   expect(assets.some((name) => /^app-[a-zA-Z0-9_-]+\.css$/.test(name))).toBeTruthy();
   const config = JSON.parse(readFileSync(join(process.cwd(), "dist", "staticwebapp.config.json"), "utf8"));
   expect(config.responseOverrides["404"].rewrite).toBe("/404.html");
+  expect(config.navigationFallback).toBeUndefined();
+  expect(config.routes.filter((route: { rewrite?: string }) => route.rewrite === "/index.html")).toHaveLength(4);
   expect(readFileSync(join(process.cwd(), "dist", "404.html"), "utf8")).toContain("This page is not on the route");
 });
 
