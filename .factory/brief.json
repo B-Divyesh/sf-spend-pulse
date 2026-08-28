@@ -1,0 +1,8 @@
+{
+  "slug": "spend-pulse",
+  "title": "Spend Pulse",
+  "summary": "See if your weekly spending is on pace with one quick entry.",
+  "artifact_class": "pwa-offline",
+  "monetization": "free",
+  "smallest_useful_product": "Offline PWA with a weekly discretionary allowance, a one-tap amount entry, a rolling pace indicator, and an optional on-device daily or weekly notification."
+}
