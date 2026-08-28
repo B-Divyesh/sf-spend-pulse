@@ -261,6 +261,23 @@ test("390px layout reflows at 200% text and core links meet touch targets", asyn
   }
 });
 
+test("header and footer navigation links meet the 44px touch-target baseline on desktop and mobile", async ({ browser }) => {
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
+    const page = await browser.newPage({ viewport });
+    await page.goto("/");
+    const links = page.locator(".site-header nav a, .site-footer a");
+    expect(await links.count()).toBeGreaterThan(0);
+    for (let index = 0; index < await links.count(); index += 1) {
+      const link = links.nth(index);
+      const box = await link.boundingBox();
+      expect(box, `${await link.innerText()} at ${viewport.width}px should have a bounding box`).not.toBeNull();
+      expect(box?.width, `${await link.innerText()} at ${viewport.width}px should be at least 44px wide`).toBeGreaterThanOrEqual(44);
+      expect(box?.height, `${await link.innerText()} at ${viewport.width}px should be at least 44px high`).toBeGreaterThanOrEqual(44);
+    }
+    await page.close();
+  }
+});
+
 test("production output uses hashed assets and supplies a real 404 override", async () => {
   const assets = readdirSync(join(process.cwd(), "dist", "assets"));
   expect(assets.some((name) => /^app-[a-zA-Z0-9_-]+\.js$/.test(name))).toBeTruthy();

@@ -52,7 +52,7 @@ p { max-width: 68ch; line-height: 1.55; }
 .contour-mark::before, .contour-mark i { content: ""; display: block; width: 22px; height: 17px; border: 1px solid var(--pine); border-radius: 50% 43% 52% 48%; }
 .contour-mark i { width: 9px; height: 7px; margin: 4px auto; }
 nav { display: flex; gap: 24px; align-items: center; }
-nav a { min-height: 44px; display: inline-flex; align-items: center; color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; }
+nav a { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; }
 nav a:hover { border-color: var(--ink); }
 .demo-bar { min-height: 48px; padding: 8px max(16px, calc((100vw - 1240px) / 2)); display: flex; align-items: center; justify-content: space-between; gap: 16px; background: var(--ink); color: var(--paper); font-size: .9rem; }
 .demo-actions { display: flex; gap: 8px; }
@@ -144,7 +144,7 @@ progress::-moz-progress-bar { background: #73c9a4; }
 .site-footer { width: min(1240px, calc(100% - 32px)); margin: 96px auto 0; padding: 32px 0 max(32px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr auto; gap: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
 .site-footer p { margin-bottom: 0; }
 .site-footer div { display: flex; gap: 20px; }
-.site-footer a, .privacy-section a, .text-main a { min-height: 44px; display: inline-flex; align-items: center; }
+.site-footer a, .privacy-section a, .text-main a { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; }
 .build { grid-column: 1 / -1; }
 .demo-main { padding: 72px 0 32px; }
 .demo-intro { margin-bottom: 56px; }
