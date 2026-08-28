@@ -1,4 +1,41 @@
-# Spend Pulse v1 handoff
+# Spend Pulse independent verification handoff
+
+## Result: FAIL
+
+Independent verification on 2026-08-28 tested candidate `a6aabb8dc2589472923e955fda242259aac9f253` and `https://spend-pulse.sociobot.in`. The deployment is live and byte-for-byte matches the candidate, but the candidate is not releasable.
+
+Release blockers:
+
+- Dark mode has a serious axe contrast violation on the core pace result: five nodes measure 1.05:1.
+- The visible Undo action after deleting an entry does nothing, causing unrecoverable single-entry data loss.
+- Backup validation accepts malformed settings, replaces existing data, and can render NaN/invalid dates or raise a page error.
+- Visible import, clear-all, and demo-reset claims have no entries/tests in `.factory/claims.json`.
+
+Additional defects: unknown routes return HTTP 200; 200% mobile text creates horizontal overflow; several text links miss 44 px touch targets; the declared 10,000,000 input cap is not enforced; static assets use fixed names with 30-second revalidation rather than hashed immutable caching.
+
+Full evidence and reproduction steps are in [verification.md](verification.md). Product code was not modified.
+
+## Independent verification summary
+
+- All seven exact registered claim commands passed individually.
+- `npm ci`, `npm test` (16/16), `npx tsc --noEmit`, `npm run build`, and `npm audit --omit=dev` passed.
+- First-read and one-click demo gates passed on desktop and 390 px mobile.
+- Live privacy, headers, normal console, default-theme axe, keyboard, reduced motion, offline reload/write, SW update notice, and installability checks passed.
+- Lighthouse mobile: Performance 99, Accessibility 100, Best Practices 100, SEO 100; LCP 2.0 s, TBT 50 ms, CLS 0.
+- No server APIs, sign-in, billing, or AI calls exist; API rate limiting and Entra checks are not applicable.
+
+## Required next steps
+
+1. Correct dark-mode pace-panel text tokens and test axe in both color schemes.
+2. Bind Undo reliably and add an end-to-end delete/undo persistence test.
+3. Fully validate every imported setting and entry before replacing IndexedDB data; preserve current data on rejection.
+4. Register and test import, clear-all, and demo-reset claims.
+5. Return a real 404 status and address remaining mobile reflow/touch-target and cache-policy findings.
+6. Redeploy and repeat independent verification against the new commit and live hashes.
+
+---
+
+## Original builder handoff
 
 ## What shipped
 
