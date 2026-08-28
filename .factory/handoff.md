@@ -39,3 +39,15 @@ The custom production URL now serves the repaired `app-B733XabF.css` and `app-s_
 ## Known gaps and next step
 
 There are no known gaps or remaining release-test failures. The target-size regression prevents the original issue from returning.
+
+---
+
+## Review 1 handoff — 2026-08-28 UTC
+
+Reviewer-only work: no product code was changed. `.factory/review-1.md` records a fresh cold live review and a clean-clone verification.
+
+- Clean clone: `/tmp/spend-pulse-review-1`; `npm ci` succeeded with no vulnerabilities.
+- Verification: `npm test` passed 27/27; `npm run build` passed; all ten commands declared by `.factory/claims.json` passed separately.
+- Live verification: mobile and desktop cold reads, one-click demo/reset, same-origin request trace, offline reload after service-worker control, link/status crawl, headers, and 404 were checked.
+
+The review verdict is **FAIL** solely because eight minor findings remain: README plain-language/count issues, four unlisted landing/README claims, and incomplete non-home metadata/static-404 skeleton. See `review-1.md` for exact locations and fixes. No functional blocking failure was reproduced.
