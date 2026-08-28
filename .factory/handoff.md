@@ -85,7 +85,21 @@ Web Apps artifact; `public/staticwebapp.config.json` is copied into it.
 
 ## Deployment
 
-Push this repair commit to `main`. The work order deploy class is `static`; the
-factory's static deployment should publish `dist/` to
-`https://spend-pulse.sociobot.in`. Re-run live hash, response-policy, 404,
-PWA update/offline, and identity checks after propagation.
+Deployed the verified `dist/` artifact to Azure Static Web App
+`sf-spend-pulse` (production) on 2026-08-28 UTC. Repair commits are
+`c332a93` and `8595bc4`, both pushed to `main`.
+
+Post-deploy evidence against `https://spend-pulse.sociobot.in`:
+
+- `verify-url.sh` passed (200 on the app root, no browser console errors,
+  title/lang/one-H1/main/alt checks all pass).
+- The current `index.html`, hashed JS, hashed CSS, `sw.js`, and
+  `manifest.webmanifest` have byte-for-byte matching SHA-256 hashes locally
+  and live.
+- The hashed JS response has `Cache-Control: public, max-age=31536000,
+  immutable` and the expected CSP, HSTS, referrer policy, `nosniff`, and
+  permissions policy.
+- `/demo`, `/settings`, `/privacy`, and `/terms` each return 200; an unknown
+  route returns HTTP 404 with the designed `Page not found — Spend Pulse` page.
+- A live dark-mode axe run reports zero serious/critical findings. At 390 px
+  with 200% root text, live document width remains 390 px.
