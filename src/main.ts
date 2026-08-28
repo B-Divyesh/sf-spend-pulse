@@ -2,6 +2,7 @@ import "./styles.css";
 import { deleteDatabase, loadData, removeEntry, replaceData, saveEntry, saveSettings } from "./db";
 import { entriesThisWeek, paceSummary, startOfWeek } from "./pace";
 import type { AppData, Currency, ReminderCadence, Settings, SpendEntry } from "./types";
+import terrainLedgerUrl from "./assets/terrain-ledger.webp";
 
 const appRoot = document.querySelector<HTMLDivElement>("#app");
 if (!appRoot) throw new Error("The app root is missing.");
@@ -12,6 +13,10 @@ let data: AppData = { settings: null, entries: [] };
 let loadError = "";
 let undoEntry: SpendEntry | null = null;
 let noticeTimer = 0;
+
+const MAX_AMOUNT = 10_000_000;
+const currencies: readonly Currency[] = ["USD", "EUR", "GBP", "INR"];
+const reminderCadences: readonly ReminderCadence[] = ["none", "daily", "weekly"];
 
 const titles: Record<string, string> = {
   "/": "Spend Pulse — Keep weekly spending on pace",
@@ -126,7 +131,7 @@ function setupPanel(): string {
       </div>
       <div class="field amount-field">
         <label for="allowance">Weekly amount</label>
-        <input id="allowance" name="allowance" type="number" inputmode="decimal" min="1" max="10000000" step="0.01" required aria-describedby="setup-error" />
+        <input id="allowance" name="allowance" type="number" inputmode="decimal" min="1" max="${MAX_AMOUNT}" step="0.01" required aria-describedby="setup-error" />
       </div>
       <button class="primary-button" type="submit">Set weekly amount</button>
       <p id="setup-error" class="form-error" role="alert"></p>
@@ -161,7 +166,7 @@ function entryForm(): string {
     <div class="section-heading"><div><span class="map-label">New marker · 02</span><h2 id="entry-title">Add today’s spending</h2></div></div>
     <div class="quick-add" aria-label="Quick amounts"><span>Quick add</span>${[5, 10, 20].map((amount) => `<button class="quick-button" type="button" data-action="quick-add" data-amount="${amount}" aria-label="Add ${money(amount)}">+${money(amount)}</button>`).join("")}</div>
     <form id="entry-form" class="entry-form" novalidate>
-      <div class="field"><label for="spend-amount">Amount</label><input id="spend-amount" name="amount" type="number" inputmode="decimal" min="0.01" max="10000000" step="0.01" required /></div>
+      <div class="field"><label for="spend-amount">Amount</label><input id="spend-amount" name="amount" type="number" inputmode="decimal" min="0.01" max="${MAX_AMOUNT}" step="0.01" required /></div>
       <div class="field note-field"><label for="spend-note">Note <span>(optional)</span></label><input id="spend-note" name="note" maxlength="80" autocomplete="off" /></div>
       <div class="field"><label for="spend-date">Date</label><input id="spend-date" name="date" type="date" value="${localDate()}" required /></div>
       <button class="primary-button" type="submit">Add spending</button>
@@ -202,7 +207,7 @@ function homePage(): string {
         ${facts()}
       </div>
       <figure class="hero-map">
-        <img src="/assets/terrain-ledger.webp" width="1200" height="800" alt="A paper relief map turns a weekly route into seven trail markers." fetchpriority="high" decoding="async" />
+        <img src="${terrainLedgerUrl}" width="1200" height="800" alt="A paper relief map turns a weekly route into seven trail markers." fetchpriority="high" decoding="async" />
         <figcaption>One route. Seven days. No bank connection.</figcaption>
       </figure>
     </section>
@@ -251,7 +256,7 @@ function settingsPage(): string {
     ${loadError ? errorState() : `<form id="settings-form" class="settings-form" novalidate>
       <section aria-labelledby="weekly-settings"><h2 id="weekly-settings">Weekly amount</h2>
         <div class="settings-grid"><div class="field"><label for="settings-currency">Currency</label><select id="settings-currency" name="currency"><option value="USD" ${settings?.currency === "USD" ? "selected" : ""}>USD</option><option value="EUR" ${settings?.currency === "EUR" ? "selected" : ""}>EUR</option><option value="GBP" ${settings?.currency === "GBP" ? "selected" : ""}>GBP</option><option value="INR" ${settings?.currency === "INR" ? "selected" : ""}>INR</option></select></div>
-        <div class="field"><label for="settings-allowance">Weekly amount</label><input id="settings-allowance" name="allowance" type="number" inputmode="decimal" min="1" max="10000000" step="0.01" value="${settings?.weeklyAllowance ?? ""}" required /></div>
+        <div class="field"><label for="settings-allowance">Weekly amount</label><input id="settings-allowance" name="allowance" type="number" inputmode="decimal" min="1" max="${MAX_AMOUNT}" step="0.01" value="${settings?.weeklyAllowance ?? ""}" required /></div>
         <div class="field"><label for="week-start">Week starts</label><select id="week-start" name="weekStart"><option value="1" ${settings?.weekStarts !== 0 ? "selected" : ""}>Monday</option><option value="0" ${settings?.weekStarts === 0 ? "selected" : ""}>Sunday</option></select></div></div>
       </section>
       <section aria-labelledby="reminder-settings"><h2 id="reminder-settings">On-device reminder</h2><p>The app checks reminders when it is open. Your browser may stop reminders after you close it.</p>
@@ -312,8 +317,27 @@ function showNotice(message: string, withUndo = false): void {
   if (!notice) return;
   clearTimeout(noticeTimer);
   notice.innerHTML = `${escapeHtml(message)}${withUndo ? ` <button class="text-button" data-action="undo-delete">Undo</button>` : ""}`;
+  notice.querySelector<HTMLButtonElement>("[data-action=undo-delete]")?.addEventListener("click", () => { void restoreUndo(); });
   notice.classList.add("is-visible");
   noticeTimer = window.setTimeout(() => notice.classList.remove("is-visible"), 6000);
+}
+
+async function restoreUndo(): Promise<void> {
+  if (!undoEntry) return;
+  const entry = undoEntry;
+  try {
+    await saveEntry(isDemo, entry);
+    data.entries.unshift(entry);
+    undoEntry = null;
+    render();
+    showNotice("Entry restored.");
+  } catch {
+    showNotice("The entry could not be restored. Check browser storage, then try again.");
+  }
+}
+
+function validAmount(amount: number): boolean {
+  return Number.isFinite(amount) && amount > 0 && amount <= MAX_AMOUNT;
 }
 
 function setFormError(id: string, message: string): void {
@@ -324,8 +348,8 @@ function setFormError(id: string, message: string): void {
 async function submitSetup(form: HTMLFormElement): Promise<void> {
   const formData = new FormData(form);
   const allowance = Number(formData.get("allowance"));
-  if (!Number.isFinite(allowance) || allowance <= 0) {
-    setFormError("setup-error", "Enter a weekly amount greater than zero.");
+  if (!validAmount(allowance)) {
+    setFormError("setup-error", `Enter a weekly amount from 0.01 to ${MAX_AMOUNT.toLocaleString()}.`);
     return;
   }
   const settings: Settings = { weeklyAllowance: allowance, currency: formData.get("currency") as Currency, weekStarts: 1, reminderCadence: "none", reminderTime: "18:00" };
@@ -343,11 +367,11 @@ async function submitEntry(form: HTMLFormElement): Promise<void> {
   const formData = new FormData(form);
   const amount = Number(formData.get("amount"));
   const date = String(formData.get("date"));
-  if (!Number.isFinite(amount) || amount <= 0) {
-    setFormError("entry-error", "Enter an amount greater than zero.");
+  if (!validAmount(amount)) {
+    setFormError("entry-error", `Enter an amount from 0.01 to ${MAX_AMOUNT.toLocaleString()}.`);
     return;
   }
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+  if (!isLocalDate(date)) {
     setFormError("entry-error", "Choose a valid date, then add the entry again.");
     return;
   }
@@ -378,8 +402,8 @@ async function quickAdd(amount: number): Promise<void> {
 async function submitSettings(form: HTMLFormElement): Promise<void> {
   const formData = new FormData(form);
   const allowance = Number(formData.get("allowance"));
-  if (!Number.isFinite(allowance) || allowance <= 0) {
-    setFormError("settings-error", "Enter a weekly amount greater than zero.");
+  if (!validAmount(allowance)) {
+    setFormError("settings-error", `Enter a weekly amount from 0.01 to ${MAX_AMOUNT.toLocaleString()}.`);
     return;
   }
   const settings: Settings = {
@@ -400,10 +424,48 @@ async function submitSettings(form: HTMLFormElement): Promise<void> {
   }
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function isLocalDate(value: unknown): value is string {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T12:00:00`);
+  return !Number.isNaN(date.getTime()) && localDate(date) === value;
+}
+
+function isTimestamp(value: unknown): value is string {
+  return typeof value === "string" && !Number.isNaN(Date.parse(value));
+}
+
+function validSettings(value: unknown): value is Settings {
+  if (!isRecord(value)) return false;
+  return validAmount(value.weeklyAllowance as number)
+    && currencies.includes(value.currency as Currency)
+    && (value.weekStarts === 0 || value.weekStarts === 1)
+    && reminderCadences.includes(value.reminderCadence as ReminderCadence)
+    && typeof value.reminderTime === "string"
+    && /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(value.reminderTime)
+    && (value.lastReminderAt === undefined || isTimestamp(value.lastReminderAt));
+}
+
+function validEntry(value: unknown): value is SpendEntry {
+  return isRecord(value)
+    && typeof value.id === "string" && value.id.length > 0 && value.id.length <= 200
+    && validAmount(value.amount as number)
+    && typeof value.note === "string" && value.note.length <= 80
+    && isLocalDate(value.occurredAt)
+    && isTimestamp(value.createdAt);
+}
+
 function validImport(value: unknown): value is AppData {
-  if (!value || typeof value !== "object") return false;
-  const candidate = value as Partial<AppData>;
-  return Array.isArray(candidate.entries) && candidate.entries.every((entry) => typeof entry?.id === "string" && typeof entry.amount === "number" && entry.amount > 0 && typeof entry.occurredAt === "string") && (candidate.settings === null || (typeof candidate.settings?.weeklyAllowance === "number" && candidate.settings.weeklyAllowance > 0));
+  if (!isRecord(value) || !Array.isArray(value.entries) || !(value.settings === null || validSettings(value.settings))) return false;
+  const ids = new Set<string>();
+  return value.entries.every((entry) => {
+    if (!validEntry(entry) || ids.has(entry.id)) return false;
+    ids.add(entry.id);
+    return true;
+  });
 }
 
 function downloadFile(name: string, contents: string, type: string): void {
@@ -482,21 +544,20 @@ function bindEvents(): void {
   app.querySelectorAll<HTMLButtonElement>("button[data-action]").forEach((button) => button.addEventListener("click", async () => {
     const action = button.dataset.action;
     if (action === "reload") location.reload();
-    if (action === "reset-demo") { await deleteDatabase(true); await load(); render(); showNotice("Demo reset to the sample week."); }
+    if (action === "reset-demo") { await deleteDatabase(true); undoEntry = null; await load(); render(); showNotice("Demo reset to the sample week."); }
     if (action === "start-real") { await deleteDatabase(true); await navigate("/"); }
     if (action === "delete-entry") {
       const entry = data.entries.find((item) => item.id === button.dataset.id);
       if (!entry) return;
       await removeEntry(isDemo, entry.id); undoEntry = entry; data.entries = data.entries.filter((item) => item.id !== entry.id); render(); showNotice("Entry deleted.", true);
     }
-    if (action === "undo-delete" && undoEntry) { await saveEntry(isDemo, undoEntry); data.entries.unshift(undoEntry); undoEntry = null; render(); showNotice("Entry restored."); }
     if (action === "export-json") downloadFile("spend-pulse-backup.json", JSON.stringify(data, null, 2), "application/json");
     if (action === "export-csv") exportCsv();
     if (action === "quick-add") await quickAdd(Number(button.dataset.amount));
     if (action === "test-notification") await testNotification();
     if (action === "clear-data") {
       if (confirm(`Clear every ${isDemo ? "demo" : "local"} entry and setting? This cannot be undone.`)) {
-        await deleteDatabase(isDemo); data = { settings: null, entries: [] }; render(); showNotice("All local data cleared.");
+        await deleteDatabase(isDemo); data = { settings: null, entries: [] }; undoEntry = null; render(); showNotice("All local data cleared.");
       }
     }
   }));

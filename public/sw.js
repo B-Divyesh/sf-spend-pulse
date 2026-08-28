@@ -1,4 +1,4 @@
-const CACHE = "spend-pulse-shell-v3";
+const CACHE = "spend-pulse-shell-v4";
 const SHELL = [
   "/",
   "/demo",
@@ -8,9 +8,6 @@ const SHELL = [
   "/offline.html",
   "/manifest.webmanifest",
   "/favicon.svg",
-  "/assets/app.js",
-  "/assets/app.css",
-  "/assets/terrain-ledger.webp",
   "/social-card.webp",
   "/fonts/atkinson.ttf",
   "/icons/icon-192.png",
@@ -19,7 +16,22 @@ const SHELL = [
 ];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting()));
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE);
+    const shellResponse = await fetch("/");
+    const shell = await shellResponse.clone().text();
+    const assetUrls = [...shell.matchAll(/(?:src|href)=["']([^"']+)["']/g)]
+      .map((match) => match[1])
+      .filter((url) => url.startsWith("/"));
+    const bundles = await Promise.all(assetUrls
+      .filter((url) => /\.js(?:$|\?)/.test(url))
+      .map(async (url) => (await fetch(url)).text()));
+    const bundledAssetUrls = bundles.flatMap((bundle) => [...bundle.matchAll(/\/?assets\/[A-Za-z0-9._-]+/g)]
+      .map((match) => `/${match[0].replace(/^\//, "")}`));
+    await cache.put("/", shellResponse.clone());
+    await cache.addAll([...new Set([...SHELL, ...assetUrls, ...bundledAssetUrls])]);
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener("activate", (event) => {

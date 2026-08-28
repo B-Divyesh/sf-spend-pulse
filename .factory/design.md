@@ -21,6 +21,7 @@ Light mode is the primary treatment; dark mode follows the device setting.
 | `--pine-contrast` | `#FFFFFF` | `#102019` | text on primary action |
 | `--ochre` | `#B95F28` | `#F2A36C` | trail marker and caution |
 | `--danger` | `#9C3535` | `#FF9A91` | over-pace state |
+| `--pulse-ink` | `#F3F0E6` | `#F5F1E6` | readable text within the high-contrast pace panel |
 
 All text and controls target WCAG AA contrast. Pace is always stated in words and numbers, never by color alone.
 

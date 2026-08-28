@@ -35,6 +35,27 @@
     "sandbox": "fresh /demo sample; download both formats and assert settings and entry rows"
   },
   {
+    "id": "data-import",
+    "claim": "Imports a JSON backup and replaces local data",
+    "where": "settings data section",
+    "test": "npm test -- --grep @claim:data-import",
+    "sandbox": "fresh /demo settings; import a complete valid backup and assert its amount and entry replace sample data"
+  },
+  {
+    "id": "data-clear",
+    "claim": "You can clear everything from Settings",
+    "where": "landing privacy section, settings data section, privacy page",
+    "test": "npm test -- --grep @claim:data-clear",
+    "sandbox": "fresh /demo settings; accept the clear confirmation and assert settings and entries are removed"
+  },
+  {
+    "id": "demo-reset",
+    "claim": "Reset demo restores the sample data",
+    "where": "demo banner and demo explanation",
+    "test": "npm test -- --grep @claim:demo-reset",
+    "sandbox": "fresh /demo sample; add a quick entry, reset the demo, and assert the original total and entry return"
+  },
+  {
     "id": "notification-permission",
     "claim": "Notification permission is requested only after the user presses the test button",
     "where": "settings and privacy page",

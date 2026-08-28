@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
     "preview": "vite preview --host 127.0.0.1",
     "test": "playwright test",
     "test:claims": "playwright test --grep @claim:"

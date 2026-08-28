@@ -13,7 +13,7 @@ Try the isolated sample at `/demo`. It uses a separate `spend-pulse-demo-v1` dat
 Requires Node.js 22 or newer.
 
 ```sh
-npm install
+npm ci
 npm run dev
 ```
 
@@ -23,12 +23,14 @@ Open `http://localhost:5173`. The demo is at `http://localhost:5173/demo`.
 
 ```sh
 npm test
+npm run typecheck
+npm run lint
 npm run build
 ```
 
 The exact production build command is `npm run build`. Static output lands in `dist/`, with `dist/index.html` at its root.
 
-Claim tests run with `npm run test:claims`. The full suite checks the demo sandbox, pace updates, exports, offline reloads, explicit notification permission, keyboard use, mobile width, and serious accessibility issues.
+Claim tests run with `npm run test:claims`. The full suite checks the demo sandbox and reset, pace updates, import/export/clear recovery, offline reloads, explicit notification permission, keyboard use, mobile reflow, and serious accessibility issues in both color schemes.
 
 ## Deploy
 

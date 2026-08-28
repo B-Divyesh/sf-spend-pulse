@@ -1,86 +1,91 @@
-# Spend Pulse independent verification handoff
+# Spend Pulse repair handoff
 
-## Result: FAIL
+## Repair result
 
-Independent verification on 2026-08-28 tested candidate `a6aabb8dc2589472923e955fda242259aac9f253` and `https://spend-pulse.sociobot.in`. The deployment is live and byte-for-byte matches the candidate, but the candidate is not releasable.
+Repaired the release blockers recorded in verification commit
+`01c8ed586b5cdc8d5e564718f8b8172198e60018` for candidate
+`a6aabb8dc2589472923e955fda242259aac9f253`. The product remains a static,
+local-first offline PWA; its researched scope and existing passing behavior are
+unchanged.
 
-Release blockers:
+## What changed
 
-- Dark mode has a serious axe contrast violation on the core pace result: five nodes measure 1.05:1.
-- The visible Undo action after deleting an entry does nothing, causing unrecoverable single-entry data loss.
-- Backup validation accepts malformed settings, replaces existing data, and can render NaN/invalid dates or raise a page error.
-- Visible import, clear-all, and demo-reset claims have no entries/tests in `.factory/claims.json`.
-
-Additional defects: unknown routes return HTTP 200; 200% mobile text creates horizontal overflow; several text links miss 44 px touch targets; the declared 10,000,000 input cap is not enforced; static assets use fixed names with 30-second revalidation rather than hashed immutable caching.
-
-Full evidence and reproduction steps are in [verification.md](verification.md). Product code was not modified.
-
-## Independent verification summary
-
-- All seven exact registered claim commands passed individually.
-- `npm ci`, `npm test` (16/16), `npx tsc --noEmit`, `npm run build`, and `npm audit --omit=dev` passed.
-- First-read and one-click demo gates passed on desktop and 390 px mobile.
-- Live privacy, headers, normal console, default-theme axe, keyboard, reduced motion, offline reload/write, SW update notice, and installability checks passed.
-- Lighthouse mobile: Performance 99, Accessibility 100, Best Practices 100, SEO 100; LCP 2.0 s, TBT 50 ms, CLS 0.
-- No server APIs, sign-in, billing, or AI calls exist; API rate limiting and Entra checks are not applicable.
-
-## Required next steps
-
-1. Correct dark-mode pace-panel text tokens and test axe in both color schemes.
-2. Bind Undo reliably and add an end-to-end delete/undo persistence test.
-3. Fully validate every imported setting and entry before replacing IndexedDB data; preserve current data on rejection.
-4. Register and test import, clear-all, and demo-reset claims.
-5. Return a real 404 status and address remaining mobile reflow/touch-target and cache-policy findings.
-6. Redeploy and repeat independent verification against the new commit and live hashes.
-
----
-
-## Original builder handoff
-
-## What shipped
-
-- A responsive offline PWA for one weekly discretionary amount and manual spend entries.
-- Rolling pace against the elapsed week, weekly remaining amount, $5/$10/$20 quick adds, dated notes, deletion, and undo.
-- Local-first IndexedDB storage with JSON backup, JSON restore, and CSV export.
-- Optional daily or first-day-of-week notifications. Permission is requested only from the test control.
-- An isolated `/demo` seeded with a $250 allowance and three realistic entries. It uses a separate IndexedDB database and can be reset or discarded.
-- Real `/privacy`, `/terms`, `/settings`, `/demo`, and designed 404 routes with History API navigation, focus restoration, and route announcements.
-- A hand-written service worker, offline fallback, install manifest, update notice, icons, security headers, sitemap, and robots file.
-- A distinct topographic-cartography interface with light and dark treatments, reduced motion, a self-hosted font, and original generated map art.
-- Claim registry, copy audit, demo documentation, tests, README, and MIT license.
+- Fixed the dark-mode pace panel token so its core results use readable ink on
+  the dark panel. Playwright axe now checks `/demo` with dark color preference.
+- Fixed delete Undo by binding its dynamically-created control when the notice
+  is rendered. Regression coverage deletes, restores, and reloads the entry.
+- Validated an entire JSON backup before `replaceData` can clear IndexedDB:
+  settings, supported currency, week start, reminder settings, amount ranges,
+  ISO dates/timestamps, entry notes, ids, and duplicate ids are rejected.
+  Regression coverage rejects the verifier's incomplete-settings and bad-
+  currency cases plus an invalid calendar date, while keeping the sample data.
+- Registered and tested the visible backup import, clear-all, and demo-reset
+  claims in `.factory/claims.json`.
+- Added `404.html` and the Static Web Apps `responseOverrides` setting; added
+  immutable cache headers for hashed `/assets/*` files.
+- Moved the hero image into Vite's asset pipeline, so JS, CSS, and image names
+  are content-hashed. The versioned service worker discovers and precaches all
+  of those shell assets, including the image referenced by the bundle.
+- Made the small-screen header wrap at 200% text size, expanded footer and
+  prose links to 44 px targets, and enforced the declared $10,000,000 amount
+  cap in JavaScript as well as HTML attributes.
 
 ## Run and verify
 
+Requires Node.js 22 or newer.
+
 ```sh
-npm install
+npm ci
+npm run typecheck
+npm run lint
 npm test
 npm run test:claims
+npm audit --omit=dev
 npm run build
 ```
 
-The required build command is `npm run build`. It writes `dist/index.html` and the static app to `dist/`.
+The production build writes `dist/index.html`. Deploy `dist/` as the Static
+Web Apps artifact; `public/staticwebapp.config.json` is copied into it.
 
-Final local results on 2026-08-28:
+## Verification evidence (2026-08-28 UTC)
 
-- `npm test`: 16 passed.
-- `npm run test:claims`: 7 passed.
-- `npm run build`: passed; JavaScript 27.91 KB raw / 9.15 KB gzip, CSS 16.74 KB raw / 4.58 KB gzip.
-- Hero WebP: 128 KB. Self-hosted font: 54 KB.
-- `/opt/fleet/lib/verify-url.sh`: passed with one title, `lang=en`, one h1, main landmark, complete alt text, and no console errors.
-- Playwright axe checks: no serious or critical findings on home, demo, settings, privacy, terms, or 404.
-- Lighthouse mobile: Performance 98, Accessibility 100, Best Practices 100, SEO 100.
-- Lighthouse lab metrics: FCP 1.2 s, LCP 2.3 s, TBT 0 ms, CLS 0.
-- Offline test: `/demo` loaded once, browser set offline, then reloaded with the app and sample data intact.
-- `npm audit --omit=dev`: zero vulnerabilities.
+- Clean install: `npm ci` — passed (24 packages, 0 vulnerabilities).
+- Type/lint: `npm run typecheck` and `npm run lint` — passed.
+- Browser integration/accessibility: `npm test` — **26 passed**. This includes
+  desktop and 390 px paths, keyboard setup/entry, 200% text reflow, 44 px link
+  targets, default-route axe checks, dark-mode axe checks, malformed import
+  protection, delete/Undo persistence, declared amount cap, service-worker
+  hashed-asset precache, and offline reload.
+- Claims: `npm run test:claims` — **10 passed**. Every registered exact command
+  was also run individually and passed: offline reload, local-only privacy,
+  demo isolation, pace update, JSON/CSV export, import, clear, demo reset,
+  notification permission, and on-device reminder.
+- Product build: `npm run build` — passed. Current emitted JS is 28.84 KB raw
+  / 9.50 KB gzip; CSS is 16.95 KB raw / 4.61 KB gzip; the hashed hero WebP is
+  130.94 KB; the self-hosted font is 54.35 KB.
+- Local production smoke: `/opt/fleet/lib/verify-url.sh http://127.0.0.1:4173`
+  passed with no console errors, `lang=en`, one H1, a main landmark, and no
+  missing image alt text.
+- Mobile Lighthouse against local production preview: Performance **98**,
+  Accessibility **100**, Best Practices **100**, SEO **100**; FCP 1.2 s, LCP
+  2.3 s, TBT 0 ms, CLS 0.
+- Privacy and network: the local-only claim intercepts the whole demo flow and
+  permits only same-origin requests; no analytics, account, bank, payment, or
+  AI call exists. There are no server API, billing, or identity endpoints, so
+  rate-limit and Entra checks are not applicable.
 
 ## Known limits
 
-- Web browsers do not provide reliable scheduled local notifications after every PWA is fully closed. Spend Pulse checks due reminders while open or when resumed, and explains this beside the setting.
-- Data is intentionally device-local. Browser storage removal also removes entries unless the user exported a backup.
-- Currency is a display preference. Spend Pulse does not convert amounts.
+- Browsers do not reliably deliver scheduled notifications once a PWA is fully
+  closed. Spend Pulse checks due reminders while open or resumed and says so in
+  Settings.
+- Data stays in browser IndexedDB. Clearing browser storage removes it unless
+  the visitor exported a backup.
+- Currency is a display preference; Spend Pulse does not convert money.
 
-## Next steps
+## Deployment
 
-- Deploy `dist/` through the factory static pipeline.
-- Verify install and notification behavior on the target Android and iOS browser versions after deployment.
-- If pilot retention warrants it, consider a user-controlled encrypted sync feature. Keep local-only use as the default.
+Push this repair commit to `main`. The work order deploy class is `static`; the
+factory's static deployment should publish `dist/` to
+`https://spend-pulse.sociobot.in`. Re-run live hash, response-policy, 404,
+PWA update/offline, and identity checks after propagation.
