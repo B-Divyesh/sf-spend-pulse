@@ -1,0 +1,51 @@
+[
+  {
+    "id": "offline-reload",
+    "claim": "Works offline after the first visit",
+    "where": "landing facts, README",
+    "test": "npm test -- --grep @claim:offline-reload",
+    "sandbox": "fresh browser context at /demo; wait for the service worker, go offline, and reload"
+  },
+  {
+    "id": "local-only",
+    "claim": "The app is free; entries stay on this device with no analytics, account, or bank connection",
+    "where": "landing facts, privacy page, README",
+    "test": "npm test -- --grep @claim:local-only",
+    "sandbox": "fresh browser context at /demo; intercept the full entry flow and allow only same-origin requests"
+  },
+  {
+    "id": "demo-sandbox",
+    "claim": "Demo changes never touch real data",
+    "where": "demo banner and demo explanation",
+    "test": "npm test -- --grep @claim:demo-sandbox",
+    "sandbox": "fresh browser context; create real data, change demo data, leave demo, and verify the real data"
+  },
+  {
+    "id": "pace-check",
+    "claim": "A one-tap spending entry updates this week's rolling pace",
+    "where": "live product and README",
+    "test": "npm test -- --grep @claim:pace-check",
+    "sandbox": "fresh /demo sample; press the $10 quick-add control and assert the visible weekly spent total changes by $10"
+  },
+  {
+    "id": "data-export",
+    "claim": "Exports local entries as JSON or CSV",
+    "where": "settings data section and README",
+    "test": "npm test -- --grep @claim:data-export",
+    "sandbox": "fresh /demo sample; download both formats and assert settings and entry rows"
+  },
+  {
+    "id": "notification-permission",
+    "claim": "Notification permission is requested only after the user presses the test button",
+    "where": "settings and privacy page",
+    "test": "npm test -- --grep @claim:notification-permission",
+    "sandbox": "fresh context with a requestPermission spy; load settings, then press the explicit control"
+  },
+  {
+    "id": "on-device-reminder",
+    "claim": "Checks a daily or weekly reminder while the app is open",
+    "where": "settings",
+    "test": "npm test -- --grep @claim:on-device-reminder",
+    "sandbox": "fresh browser context with on-device notification APIs recorded; save a due daily reminder and assert its title and body"
+  }
+]

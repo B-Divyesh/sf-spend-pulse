@@ -27,7 +27,7 @@ All text and controls target WCAG AA contrast. Pace is always stated in words an
 ## Type
 
 - Display: **Georgia**, local system serif. Its humanist shapes resemble map titles and make the single result feel considered.
-- Body and controls: **Atkinson Hyperlegible**, self-hosted WOFF2, with Arial/system sans fallback. It makes small dates and amounts easy to distinguish.
+- Body and controls: **Atkinson Hyperlegible**, self-hosted TTF, with Arial/system sans fallback. It makes small dates and amounts easy to distinguish.
 - Amounts use tabular figures. Headlines use a compact `clamp(2.45rem, 8vw, 5.75rem)` scale; body copy stays at 17–18px.
 
 ## Shape, spacing, and layout
@@ -51,7 +51,7 @@ The signature motion is a single contour “settle”: after a saved entry, cont
 
 ## Asset plan and provenance
 
-- `public/assets/terrain-ledger.webp` and `.avif`: original generated hero illustration, shown beside the live product and reused as the source for the social preview.
+- `public/assets/terrain-ledger.webp`: original generated hero illustration, shown beside the live product and reused as the source for the social preview.
 - `public/social-card.webp`: locally composed 1200×630 crop using the original illustration and HTML text remains separate from the asset.
 - App icons and favicon: hand-authored geometric SVG contour mark, rasterized locally for install icons. No icon library.
 
@@ -69,4 +69,3 @@ The signature motion is a single contour “settle”: after a saved entry, cont
 **Negative list:** no text, no numbers, no logos, no watermark, no people, no hands, no coins, no credit cards, no banking UI, no neon, no gradient, no glossy 3D, no illegible glyphs
 
 Generated with the factory image deployment on 2026-08-28. The generated image is original to Spend Pulse. Source PNG and prompt sidecar live in `assets/src/`; optimized derivatives ship in `public/assets/`.
-
