@@ -1,85 +1,45 @@
-# Spend Pulse polish 1 handoff
+# Spend Pulse adversarial review 2 handoff
 
 ## Outcome
 
-Perfection-loop round 1 is complete. All eight findings in `.factory/review-1.md` are resolved, including every minor copy and metadata issue. No earlier `.factory/polish-*.md` existed. The earlier navigation, Undo, import, dark-contrast, and mobile defects remain covered by regression tests and pass.
+Review 2 is complete against live production and candidate `8aa426434409ecd8ef59b511d20372a92f007ba0`.
 
-The topographic cartography identity and offline-PWA deployment class are unchanged. The one-click sample URL is now https://spend-pulse.sociobot.in/?demo=1.
+Verdict: **FAIL**. `.factory/review-2.md` records one blocking claim-coverage defect and six minor copy/first-screen findings. No product code was changed.
 
-## Changes
+The blocking issue is not a runtime failure: the `data-clear` command passes, but its test does not assert that entries are removed even though the registered sandbox requires that assertion. The live product otherwise completed the core job, one-click demo, reset, real/demo isolation, and offline flow.
 
-- Rewrote the flagged README sentences with the product’s plain “day-to-day spending” and “this browser” terms.
-- Removed unlisted claims about product scope, financial advice, deployment dependencies, and visitor-facing art provenance.
-- Made `/?demo=1` load the isolated, populated demo immediately. The persistent banner retains Reset demo and Start for real.
-- Added full per-route title, description, canonical, Open Graph, and Twitter updates.
-- Rebuilt the production 404 with matching navigation, footer, legal links, metadata, apple icon, mobile layout, focus style, dark mode, and reduced motion.
-- Updated the service-worker cache to `spend-pulse-shell-v5` and precached the query-demo entry.
-- Added browser regressions for the query demo, route metadata, history/focus restoration, static-404 structure, claim-test uniqueness, and light/dark accessibility on every route.
-- Added the 81-character verb-first catalog line in `.factory/catalog-description.txt`.
+## Verification performed
 
-The exact finding-to-change-to-evidence matrix is in `.factory/polish-1.md`.
+From a clean clone at `/tmp/spend-pulse-review-2-Lz0Lrg`:
 
-## Verification
-
-Repair code commit: `95cf481` (`fix: close cumulative review findings`). It was pushed to `origin/main` before deployment.
-
-From `/work/repo`:
-
-- `npm ci`: passed; 24 packages, zero vulnerabilities.
+- `npm ci`: passed; 24 packages, zero reported vulnerabilities.
+- `npm run build`: passed and produced `dist/`.
+- Every one of the ten `.factory/claims.json` commands ran separately and selected one passing test.
+- `npm test`: passed 42/42.
 - `npm run typecheck`: passed.
 - `npm run lint`: passed.
-- `npm run build`: passed and produced `dist/index.html`.
-- `npm test`: 42/42 passed.
-- `npm audit --omit=dev`: zero vulnerabilities.
-- Built JS: 30.06 KB raw / 9.73 KB gzip.
-- Built CSS: 16.98 KB raw / 4.61 KB gzip.
-- Hero image: 130.94 KB. Self-hosted font: 54.35 KB.
+- `npm audit --omit=dev`: passed with zero vulnerabilities.
 
-A clean clone at `/tmp/spend-pulse-polish-clean-hYkpDj` ran `npm ci`, `npm run build`, and every declared claim command separately. Each command selected one test and passed:
+Live checks covered:
 
-- `offline-reload`
-- `local-only`
-- `demo-sandbox`
-- `pace-check`
-- `data-export`
-- `data-import`
-- `data-clear`
-- `demo-reset`
-- `notification-permission`
-- `on-device-reminder`
+- Fresh 390 × 844 and 1440 × 900 first reads.
+- Populated `$250` demo, `$82.80 → $92.80 → $82.80` quick-add/reset flow, and `$125` real-data isolation.
+- Offline reload after service-worker control and same-origin request logging.
+- Route metadata, H1/main/header/footer structure, 404 status and design, deep links, H1 focus, browser Back, and all links.
+- Light/dark axe scans on all product routes; zero serious/critical findings.
+- Earlier Undo, malformed-import, maximum-amount, dark-contrast, 200% mobile reflow, and 44 px target regressions.
+- `/opt/fleet/lib/verify-url.sh`; the live root passed.
 
-The full suite covers keyboard input, invalid and maximum amounts, delete/Undo persistence, malformed imports, mobile 200% reflow, 44 px targets, service-worker precaching, and the production route configuration. Axe found zero serious or critical issues across all routes and the 404 in both light and dark modes.
+Evidence is under `.factory/review-2-artifacts/`.
 
-`verify-url.sh` passed locally and live with one H1, `lang=en`, main, complete image alt and button names, and zero page or console errors. Evidence is under `.factory/polish-1-artifacts/`.
+## Findings left for repair
 
-Local Lighthouse mobile: Performance 98, Accessibility 100, Best Practices 100, SEO 100; FCP 1.2 s, LCP 2.3 s, TBT 0 ms, CLS 0.
+1. Strengthen `@claim:data-clear` to prove both settings and entries are empty.
+2. Register and tag the populated-sample demo promise.
+3. Fit all three product facts into the 390 × 844 first screen.
+4. Standardize browser/device storage wording.
+5. Standardize weekly amount/allowance terminology.
+6. Replace “A budget tool without the baggage” with a self-contained heading.
+7. Remove the internal database name from the README introduction.
 
-Live Lighthouse mobile: Performance 99, Accessibility 100, Best Practices 100, SEO 100; FCP 1.2 s, LCP 1.8 s, TBT 0 ms, CLS 0.
-
-## Deployment and live cold check
-
-Factory deployment command:
-
-```sh
-/opt/fleet/lib/deploy-static.sh spend-pulse dist
-```
-
-Azure Static Web Apps deployment `5d6f97dc-3f0b-4859-ae0d-be655f78c8e5` succeeded for `sf-spend-pulse`. Production is https://spend-pulse.sociobot.in.
-
-After deployment, a fresh 390 × 844 Chromium context verified:
-
-- First screen: headline and sample action visible; document width exactly 390 px.
-- Demo: title `Demo — Spend Pulse`; persistent banner visible; `$82.80 → $92.80 → $82.80` after quick add and reset.
-- Isolation: Start for real opened the empty real setup, not sample data.
-- Routing: H1 focus passed after forward navigation and browser Back.
-- Metadata: title, description, canonical, Open Graph, and Twitter values passed on all five app routes.
-- 404: unknown route returned HTTP 404 with shared navigation plus Privacy and Terms.
-- Privacy: zero cross-origin requests and zero normal-flow console/page errors.
-- Offline: the controlled query demo reloaded with its heading and banner while the browser was offline.
-- Accessibility: live mobile axe scans found zero serious/critical findings on six routes in both themes.
-
-SHA-256 content matches between `dist/` and production for `index.html`, `sw.js`, `manifest.webmanifest`, `404.html`, `404.css`, app JS, app CSS, and terrain art.
-
-## Known gaps
-
-None. No review finding or test failure is deferred.
+See `.factory/review-2.md` for exact quotes, word counts, evidence, and concrete rewrites.

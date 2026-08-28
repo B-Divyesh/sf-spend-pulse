@@ -1,0 +1,218 @@
+{
+  "url": "https://spend-pulse.sociobot.in/",
+  "title": "Spend Pulse — Keep weekly spending on pace",
+  "h1": [
+    "Keep weekly spending on pace"
+  ],
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "scrollY": 0
+  },
+  "visible": [
+    {
+      "tag": "a",
+      "text": "Demo",
+      "rect": {
+        "x": 1131,
+        "y": 18,
+        "width": 44,
+        "height": 44,
+        "top": 18,
+        "right": 1175,
+        "bottom": 62,
+        "left": 1131
+      }
+    },
+    {
+      "tag": "a",
+      "text": "Settings",
+      "rect": {
+        "x": 1199,
+        "y": 18,
+        "width": 63,
+        "height": 44,
+        "top": 18,
+        "right": 1262,
+        "bottom": 62,
+        "left": 1199
+      }
+    },
+    {
+      "tag": "a",
+      "text": "Privacy",
+      "rect": {
+        "x": 1286,
+        "y": 18,
+        "width": 54,
+        "height": 44,
+        "top": 18,
+        "right": 1340,
+        "bottom": 62,
+        "left": 1286
+      }
+    },
+    {
+      "tag": "span",
+      "text": "A private weekly spending check",
+      "rect": {
+        "x": 130,
+        "y": 175.25,
+        "width": 477.4375,
+        "height": 17,
+        "top": 175.25,
+        "right": 607.4375,
+        "bottom": 192.25,
+        "left": 130
+      }
+    },
+    {
+      "tag": "h1",
+      "text": "Keep weekly spending on pace",
+      "rect": {
+        "x": 130,
+        "y": 208.25,
+        "width": 477.4375,
+        "height": 271.3125,
+        "top": 208.25,
+        "right": 607.4375,
+        "bottom": 479.5625,
+        "left": 130
+      }
+    },
+    {
+      "tag": "p",
+      "text": "For people who want a quick budget check without another finance account.",
+      "rect": {
+        "x": 130,
+        "y": 503.5625,
+        "width": 477.4375,
+        "height": 60.1875,
+        "top": 503.5625,
+        "right": 607.4375,
+        "bottom": 563.75,
+        "left": 130
+      }
+    },
+    {
+      "tag": "a",
+      "text": "Try it with sample data",
+      "rect": {
+        "x": 130,
+        "y": 595.75,
+        "width": 209,
+        "height": 48,
+        "top": 595.75,
+        "right": 339,
+        "bottom": 643.75,
+        "left": 130
+      }
+    },
+    {
+      "tag": "span",
+      "text": "See a filled week. Your data stays untouched.",
+      "rect": {
+        "x": 355,
+        "y": 599.109375,
+        "width": 210,
+        "height": 41.28125,
+        "top": 599.109375,
+        "right": 565,
+        "bottom": 640.390625,
+        "left": 355
+      }
+    },
+    {
+      "tag": "span",
+      "text": "◎",
+      "rect": {
+        "x": 130,
+        "y": 675.75,
+        "width": 24,
+        "height": 23,
+        "top": 675.75,
+        "right": 154,
+        "bottom": 698.75,
+        "left": 130
+      }
+    },
+    {
+      "tag": "span",
+      "text": "⌂",
+      "rect": {
+        "x": 130,
+        "y": 708.75,
+        "width": 24,
+        "height": 23,
+        "top": 708.75,
+        "right": 154,
+        "bottom": 731.75,
+        "left": 130
+      }
+    },
+    {
+      "tag": "span",
+      "text": "○",
+      "rect": {
+        "x": 130,
+        "y": 741.75,
+        "width": 24,
+        "height": 23,
+        "top": 741.75,
+        "right": 154,
+        "bottom": 764.75,
+        "left": 130
+      }
+    },
+    {
+      "tag": "figcaption",
+      "text": "One route. Seven days. No bank connection.",
+      "rect": {
+        "x": 1117,
+        "y": 681,
+        "width": 277,
+        "height": 33,
+        "top": 681,
+        "right": 1394,
+        "bottom": 714,
+        "left": 1117
+      }
+    }
+  ],
+  "actions": [
+    {
+      "tag": "a",
+      "text": "Spend Pulse",
+      "href": "https://spend-pulse.sociobot.in/"
+    },
+    {
+      "tag": "a",
+      "text": "Demo",
+      "href": "https://spend-pulse.sociobot.in/?demo=1"
+    },
+    {
+      "tag": "a",
+      "text": "Settings",
+      "href": "https://spend-pulse.sociobot.in/settings"
+    },
+    {
+      "tag": "a",
+      "text": "Privacy",
+      "href": "https://spend-pulse.sociobot.in/privacy"
+    },
+    {
+      "tag": "a",
+      "text": "Try it with sample data",
+      "href": "https://spend-pulse.sociobot.in/?demo=1"
+    }
+  ],
+  "status": 200,
+  "consoleErrors": [],
+  "requests": [
+    "https://spend-pulse.sociobot.in/",
+    "https://spend-pulse.sociobot.in/assets/app-CxwhuaBC.js",
+    "https://spend-pulse.sociobot.in/assets/app-B733XabF.css",
+    "https://spend-pulse.sociobot.in/fonts/atkinson.ttf",
+    "https://spend-pulse.sociobot.in/assets/terrain-ledger-PWEQjYm4.webp"
+  ]
+}

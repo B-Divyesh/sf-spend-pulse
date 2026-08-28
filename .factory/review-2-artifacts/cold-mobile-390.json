@@ -1,0 +1,190 @@
+{
+  "url": "https://spend-pulse.sociobot.in/",
+  "title": "Spend Pulse — Keep weekly spending on pace",
+  "h1": [
+    "Keep weekly spending on pace"
+  ],
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "scrollY": 0
+  },
+  "visible": [
+    {
+      "tag": "a",
+      "text": "Demo",
+      "rect": {
+        "x": 16,
+        "y": 84,
+        "width": 51,
+        "height": 44,
+        "top": 84,
+        "right": 67,
+        "bottom": 128,
+        "left": 16
+      }
+    },
+    {
+      "tag": "a",
+      "text": "Settings",
+      "rect": {
+        "x": 158.5,
+        "y": 84,
+        "width": 67,
+        "height": 44,
+        "top": 84,
+        "right": 225.5,
+        "bottom": 128,
+        "left": 158.5
+      }
+    },
+    {
+      "tag": "a",
+      "text": "Privacy",
+      "rect": {
+        "x": 317,
+        "y": 84,
+        "width": 57,
+        "height": 44,
+        "top": 84,
+        "right": 374,
+        "bottom": 128,
+        "left": 317
+      }
+    },
+    {
+      "tag": "span",
+      "text": "A private weekly spending check",
+      "rect": {
+        "x": 16,
+        "y": 488,
+        "width": 358,
+        "height": 17,
+        "top": 488,
+        "right": 374,
+        "bottom": 505,
+        "left": 16
+      }
+    },
+    {
+      "tag": "h1",
+      "text": "Keep weekly spending on pace",
+      "rect": {
+        "x": 16,
+        "y": 521,
+        "width": 358,
+        "height": 85.5625,
+        "top": 521,
+        "right": 374,
+        "bottom": 606.5625,
+        "left": 16
+      }
+    },
+    {
+      "tag": "p",
+      "text": "For people who want a quick budget check without another finance account.",
+      "rect": {
+        "x": 16,
+        "y": 630.5625,
+        "width": 358,
+        "height": 60.1875,
+        "top": 630.5625,
+        "right": 374,
+        "bottom": 690.75,
+        "left": 16
+      }
+    },
+    {
+      "tag": "a",
+      "text": "Try it with sample data",
+      "rect": {
+        "x": 16,
+        "y": 722.75,
+        "width": 209,
+        "height": 48,
+        "top": 722.75,
+        "right": 225,
+        "bottom": 770.75,
+        "left": 16
+      }
+    },
+    {
+      "tag": "span",
+      "text": "See a filled week. Your data stays untouched.",
+      "rect": {
+        "x": 16,
+        "y": 786.75,
+        "width": 293,
+        "height": 20.640625,
+        "top": 786.75,
+        "right": 309,
+        "bottom": 807.390625,
+        "left": 16
+      }
+    },
+    {
+      "tag": "span",
+      "text": "◎",
+      "rect": {
+        "x": 16,
+        "y": 839.390625,
+        "width": 24,
+        "height": 23,
+        "top": 839.390625,
+        "right": 40,
+        "bottom": 862.390625,
+        "left": 16
+      }
+    },
+    {
+      "tag": "figcaption",
+      "text": "One route. Seven days. No bank connection.",
+      "rect": {
+        "x": 128,
+        "y": 382,
+        "width": 230,
+        "height": 50,
+        "top": 382,
+        "right": 358,
+        "bottom": 432,
+        "left": 128
+      }
+    }
+  ],
+  "actions": [
+    {
+      "tag": "a",
+      "text": "Spend Pulse",
+      "href": "https://spend-pulse.sociobot.in/"
+    },
+    {
+      "tag": "a",
+      "text": "Demo",
+      "href": "https://spend-pulse.sociobot.in/?demo=1"
+    },
+    {
+      "tag": "a",
+      "text": "Settings",
+      "href": "https://spend-pulse.sociobot.in/settings"
+    },
+    {
+      "tag": "a",
+      "text": "Privacy",
+      "href": "https://spend-pulse.sociobot.in/privacy"
+    },
+    {
+      "tag": "a",
+      "text": "Try it with sample data",
+      "href": "https://spend-pulse.sociobot.in/?demo=1"
+    }
+  ],
+  "status": 200,
+  "consoleErrors": [],
+  "requests": [
+    "https://spend-pulse.sociobot.in/",
+    "https://spend-pulse.sociobot.in/assets/app-CxwhuaBC.js",
+    "https://spend-pulse.sociobot.in/assets/app-B733XabF.css",
+    "https://spend-pulse.sociobot.in/fonts/atkinson.ttf",
+    "https://spend-pulse.sociobot.in/assets/terrain-ledger-PWEQjYm4.webp"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "url": "https://spend-pulse.sociobot.in",
+  "loadMs": 654,
+  "errors": [],
+  "a11y": {
+    "title": "Spend Pulse — Keep weekly spending on pace",
+    "lang": "en",
+    "h1": 1,
+    "main": true,
+    "imgsMissingAlt": 0,
+    "buttonsUnlabeled": 0,
+    "textLength": 1185
+  }
+}

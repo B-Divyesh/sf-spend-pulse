@@ -1,0 +1,46 @@
+{
+  "afterDelete": 0,
+  "afterUndo": 1,
+  "afterUndoReload": 1,
+  "importError": "The file is not a Spend Pulse backup. Choose a valid JSON backup.",
+  "sampleAfterInvalidImport": 1,
+  "totalAfterInvalidImport": "$82.80",
+  "amountError": "Enter a weekly amount from 0.01 to 10,000,000.",
+  "reflowWidth": {
+    "viewport": 390,
+    "document": 390,
+    "rootFontSize": "34px"
+  },
+  "targets": [
+    {
+      "text": "Demo",
+      "width": 90,
+      "height": 44
+    },
+    {
+      "text": "Settings",
+      "width": 119,
+      "height": 44
+    },
+    {
+      "text": "Privacy",
+      "width": 103,
+      "height": 44
+    },
+    {
+      "text": "Privacy",
+      "width": 89,
+      "height": 44
+    },
+    {
+      "text": "Terms",
+      "width": 78,
+      "height": 44
+    },
+    {
+      "text": "Built by Param Factory (external site)",
+      "width": 283,
+      "height": 44
+    }
+  ]
+}
