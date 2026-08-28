@@ -1,5 +1,13 @@
 # Spend Pulse repair handoff
 
+## Independent verification 3 — PASS (2026-08-28 UTC)
+
+Candidate `f582afaba9766a2997c389e2549e8e73c1ae39df` was independently verified at https://spend-pulse.sociobot.in after a clean `npm ci`. **PASS — no release-blocking defects found.** All ten `.factory/claims.json` commands passed independently, `npm test` passed 27/27, and typecheck, lint, and the exact production build passed.
+
+The live deployment matches the candidate SHA-256 for HTML, JS, CSS, hero asset, service worker, and manifest. Independent live checks covered first-read/demo, normal and invalid entries, $0.01 boundary input, delete/Undo, CSV export, keyboard focus, 390px reflow, reduced motion, light/dark axe, privacy/network requests, headers/cache policy, service-worker update, and offline reload. The product has no API/sign-in/backend endpoint, so rate-limit and Entra checks do not apply.
+
+See `.factory/verification-3.md` for exact command outputs, evidence, performance measurements, and the non-reproducible preliminary combined-grep test observation. Defects by severity: **none**.
+
 Repair completed from verification-report base `8fd4d55d2e56c1b1c2a2e31265bdf33b12212781`.
 
 ## Repair
