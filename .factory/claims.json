@@ -4,14 +4,14 @@
     "claim": "Works offline after the first visit",
     "where": "landing facts, README",
     "test": "npm test -- --grep @claim:offline-reload",
-    "sandbox": "fresh browser context at /demo; wait for the service worker, go offline, and reload"
+    "sandbox": "fresh browser context at /?demo=1; wait for the service worker, go offline, and reload"
   },
   {
     "id": "local-only",
-    "claim": "The app is free; entries stay on this device with no analytics, account, or bank connection",
+    "claim": "The app is free; entries stay on this device with no ads, analytics, account, bank connection, or cloud sync",
     "where": "landing facts, privacy page, README",
     "test": "npm test -- --grep @claim:local-only",
-    "sandbox": "fresh browser context at /demo; intercept the full entry flow and allow only same-origin requests"
+    "sandbox": "fresh browser context at /?demo=1; intercept the full entry flow and allow only same-origin requests"
   },
   {
     "id": "demo-sandbox",
@@ -25,35 +25,35 @@
     "claim": "A one-tap spending entry updates this week's rolling pace",
     "where": "live product and README",
     "test": "npm test -- --grep @claim:pace-check",
-    "sandbox": "fresh /demo sample; press the $10 quick-add control and assert the visible weekly spent total changes by $10"
+    "sandbox": "fresh /?demo=1 sample; press the $10 quick-add control and assert the visible weekly spent total changes by $10"
   },
   {
     "id": "data-export",
     "claim": "Exports local entries as JSON or CSV",
     "where": "settings data section and README",
     "test": "npm test -- --grep @claim:data-export",
-    "sandbox": "fresh /demo sample; download both formats and assert settings and entry rows"
+    "sandbox": "fresh /?demo=1 sample; download both formats and assert settings and entry rows"
   },
   {
     "id": "data-import",
     "claim": "Imports a JSON backup and replaces local data",
     "where": "settings data section",
     "test": "npm test -- --grep @claim:data-import",
-    "sandbox": "fresh /demo settings; import a complete valid backup and assert its amount and entry replace sample data"
+    "sandbox": "fresh /?demo=1 settings; import a complete valid backup and assert its amount and entry replace sample data"
   },
   {
     "id": "data-clear",
     "claim": "You can clear everything from Settings",
     "where": "landing privacy section, settings data section, privacy page",
     "test": "npm test -- --grep @claim:data-clear",
-    "sandbox": "fresh /demo settings; accept the clear confirmation and assert settings and entries are removed"
+    "sandbox": "fresh /?demo=1 settings; accept the clear confirmation and assert settings and entries are removed"
   },
   {
     "id": "demo-reset",
     "claim": "Reset demo restores the sample data",
     "where": "demo banner and demo explanation",
     "test": "npm test -- --grep @claim:demo-reset",
-    "sandbox": "fresh /demo sample; add a quick entry, reset the demo, and assert the original total and entry return"
+    "sandbox": "fresh /?demo=1 sample; add a quick entry, reset the demo, and assert the original total and entry return"
   },
   {
     "id": "notification-permission",

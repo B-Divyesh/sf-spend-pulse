@@ -14,14 +14,60 @@ test("landing page has the required structure and works at 390px", async ({ page
   await expect(page.locator("body")).toHaveJSProperty("scrollWidth", 390);
 });
 
-for (const route of ["/", "/demo", "/settings", "/privacy", "/terms", "/missing-page"]) {
-  test(`has no serious accessibility issues on ${route}`, async ({ page }) => {
-    await page.goto(route);
-    await expect(page.locator("h1")).toHaveCount(1);
-    const results = await new AxeBuilder({ page: page as never }).analyze();
-    expect(results.violations.filter((violation) => ["serious", "critical"].includes(violation.impact ?? ""))).toEqual([]);
+test("first-screen sample action opens the isolated query demo with its controls", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: "Try it with sample data" }).click();
+  await expect(page).toHaveURL("http://127.0.0.1:4173/?demo=1");
+  await expect(page).toHaveTitle("Demo — Spend Pulse");
+  await expect(page.getByText("Demo — sample data, nothing is saved")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Reset demo" })).toBeVisible();
+  await expect(page.locator(".pace-primary strong")).toHaveText("$82.80");
+});
+
+for (const colorScheme of ["light", "dark"] as const) {
+  for (const route of ["/", "/?demo=1", "/settings", "/privacy", "/terms", "/missing-page", "/404.html"]) {
+    test(`has no serious accessibility issues in ${colorScheme} mode on ${route}`, async ({ page }) => {
+      await page.emulateMedia({ colorScheme });
+      await page.goto(route);
+      await expect(page.locator("h1")).toHaveCount(1);
+      const results = await new AxeBuilder({ page: page as never }).analyze();
+      expect(results.violations.filter((violation) => ["serious", "critical"].includes(violation.impact ?? ""))).toEqual([]);
+    });
+  }
+}
+
+const metadataCases = [
+  { route: "/", title: "Spend Pulse — Keep weekly spending on pace", description: "Check weekly day-to-day spending against your plan with private entries that stay in this browser.", canonical: "/" },
+  { route: "/?demo=1", title: "Demo — Spend Pulse", description: "Try Spend Pulse with an isolated sample week. Reset the sample anytime without changing your entries.", canonical: "/demo" },
+  { route: "/settings", title: "Settings — Spend Pulse", description: "Set your weekly amount, reminder, and data controls in Spend Pulse.", canonical: "/settings" },
+  { route: "/privacy", title: "Privacy — Spend Pulse", description: "Read what Spend Pulse stores in your browser and how to export or clear it.", canonical: "/privacy" },
+  { route: "/terms", title: "Terms — Spend Pulse", description: "Read the terms for using the free Spend Pulse weekly spending check.", canonical: "/terms" },
+] as const;
+
+for (const expected of metadataCases) {
+  test(`sets complete route metadata on ${expected.route}`, async ({ page }) => {
+    await page.goto(expected.route);
+    await expect(page).toHaveTitle(expected.title);
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", expected.description);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://spend-pulse.sociobot.in${expected.canonical}`);
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", expected.title);
+    await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content", expected.description);
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", `https://spend-pulse.sociobot.in${expected.canonical}`);
+    await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute("content", expected.title);
+    await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute("content", expected.description);
   });
 }
+
+test("client routing and browser history restore the route and heading focus", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: "Privacy" }).first().click();
+  await expect(page).toHaveURL("http://127.0.0.1:4173/privacy");
+  await expect(page.getByRole("heading", { level: 1 })).toBeFocused();
+  await page.goBack();
+  await expect(page).toHaveURL("http://127.0.0.1:4173/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Keep weekly spending on pace");
+  await expect(page.getByRole("heading", { level: 1 })).toBeFocused();
+});
 
 test("keyboard setup and entry path works", async ({ page }) => {
   await page.goto("/");
@@ -82,7 +128,7 @@ test("invalid backups are rejected before existing data is replaced", async ({ p
 });
 
 test("@claim:pace-check adding spending updates the weekly pace", async ({ page }) => {
-  await page.goto("/demo");
+  await page.goto("/?demo=1");
   await expect(page.locator(".pace-primary strong")).toHaveText("$82.80");
   await page.getByRole("button", { name: "Add $10.00" }).click();
   await expect(page.locator(".pace-primary strong")).toHaveText("$92.80");
@@ -93,7 +139,7 @@ test("@claim:demo-sandbox demo changes do not touch real data", async ({ page })
   await page.goto("/");
   await page.locator("#allowance").fill("125");
   await page.getByRole("button", { name: "Set weekly amount" }).click();
-  await page.goto("/demo");
+  await page.goto("/?demo=1");
   await page.locator("#spend-amount").fill("9");
   await page.locator("#spend-note").fill("Demo only");
   await page.getByRole("button", { name: "Add spending" }).click();
@@ -104,7 +150,7 @@ test("@claim:demo-sandbox demo changes do not touch real data", async ({ page })
 });
 
 test("@claim:demo-reset reset demo restores the shipped sample week", async ({ page }) => {
-  await page.goto("/demo");
+  await page.goto("/?demo=1");
   await page.getByRole("button", { name: "Add $10.00" }).click();
   await expect(page.locator(".pace-primary strong")).toHaveText("$92.80");
   await page.getByRole("button", { name: "Reset demo" }).click();
@@ -119,7 +165,7 @@ test("@claim:local-only demo flow sends no cross-origin requests", async ({ page
     requests.push(request.url());
     if (new URL(request.url()).origin !== "http://127.0.0.1:4173") external.push(request.url());
   });
-  await page.goto("/demo");
+  await page.goto("/?demo=1");
   await page.locator("#spend-amount").fill("7.25");
   await page.getByRole("button", { name: "Add spending" }).click();
   await expect(page.locator(".pace-primary strong")).toHaveText("$90.05");
@@ -130,7 +176,7 @@ test("@claim:local-only demo flow sends no cross-origin requests", async ({ page
 });
 
 test("@claim:data-export exports JSON and CSV data", async ({ page }) => {
-  await page.goto("/demo");
+  await page.goto("/?demo=1");
   await page.getByRole("link", { name: "Export or import" }).click();
   const jsonDownload = page.waitForEvent("download");
   await page.getByRole("button", { name: "Export JSON" }).click();
@@ -162,7 +208,7 @@ test("@claim:data-import imports a valid backup and replaces the demo data", asy
   await page.locator("#import-file").setInputFiles({ name: "spend-pulse-backup.json", mimeType: "application/json", buffer: Buffer.from(JSON.stringify(backup)) });
   await expect(page.getByText("Backup imported. It replaced the previous local data.")).toBeVisible();
   await expect(page.locator("#settings-allowance")).toHaveValue("180");
-  await page.goto("/demo");
+  await page.goto("/?demo=1");
   await expect(page.getByText("Market", { exact: true })).toBeVisible();
   await expect(page.getByText("Lunch with Sam", { exact: true })).toHaveCount(0);
 });
@@ -172,7 +218,7 @@ test("@claim:data-clear clear all removes settings and entries after confirmatio
   page.once("dialog", (dialog) => dialog.accept());
   await page.getByRole("button", { name: "Clear all demo data" }).click();
   await expect(page.locator("#settings-allowance")).toHaveValue("");
-  await page.goto("/demo");
+  await page.goto("/?demo=1");
   await expect(page.locator(".pace-primary strong")).toHaveText("$82.80");
 });
 
@@ -228,7 +274,7 @@ test("@claim:on-device-reminder a due reminder is shown while open", async ({ pa
 });
 
 test("@claim:offline-reload demo reloads offline after the first visit", async ({ page, context }) => {
-  await page.goto("/demo");
+  await page.goto("/?demo=1");
   await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
     await new Promise<void>((resolve) => {
@@ -240,13 +286,6 @@ test("@claim:offline-reload demo reloads offline after the first visit", async (
   await page.reload();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("See this week’s spending pace");
   await expect(page.getByText("Demo — sample data, nothing is saved")).toBeVisible();
-});
-
-test("dark mode has no serious accessibility issues in the pace result", async ({ page }) => {
-  await page.emulateMedia({ colorScheme: "dark" });
-  await page.goto("/demo");
-  const results = await new AxeBuilder({ page: page as never }).analyze();
-  expect(results.violations.filter((violation) => ["serious", "critical"].includes(violation.impact ?? ""))).toEqual([]);
 });
 
 test("390px layout reflows at 200% text and core links meet touch targets", async ({ page }) => {
@@ -286,7 +325,25 @@ test("production output uses hashed assets and supplies a real 404 override", as
   expect(config.responseOverrides["404"].rewrite).toBe("/404.html");
   expect(config.navigationFallback).toBeUndefined();
   expect(config.routes.filter((route: { rewrite?: string }) => route.rewrite === "/index.html")).toHaveLength(4);
-  expect(readFileSync(join(process.cwd(), "dist", "404.html"), "utf8")).toContain("This page is not on the route");
+  const notFound = readFileSync(join(process.cwd(), "dist", "404.html"), "utf8");
+  expect(notFound).toContain("This page is not on the route");
+  expect(notFound).toContain('<meta name="description"');
+  expect(notFound).toContain('<link rel="canonical"');
+  expect(notFound).toContain('property="og:title"');
+  expect(notFound).toContain('name="twitter:title"');
+  expect(notFound).toContain('rel="apple-touch-icon"');
+  expect(notFound).toContain('<nav aria-label="Main navigation">');
+  expect(notFound).toContain('href="/privacy"');
+  expect(notFound).toContain('href="/terms"');
+});
+
+test("every listed claim has exactly one tagged browser test", async () => {
+  const claims = JSON.parse(readFileSync(join(process.cwd(), ".factory", "claims.json"), "utf8")) as Array<{ id: string; test: string }>;
+  const source = readFileSync(join(process.cwd(), "tests", "app.spec.ts"), "utf8");
+  for (const claim of claims) {
+    expect(claim.test).toBe(`npm test -- --grep @claim:${claim.id}`);
+    expect(source.match(new RegExp(`@claim:${claim.id}(?![a-z0-9-])`, "g"))).toHaveLength(1);
+  }
 });
 
 test("service worker precaches hashed shell assets", async ({ page }) => {

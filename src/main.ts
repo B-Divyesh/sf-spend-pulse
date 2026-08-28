@@ -18,12 +18,39 @@ const MAX_AMOUNT = 10_000_000;
 const currencies: readonly Currency[] = ["USD", "EUR", "GBP", "INR"];
 const reminderCadences: readonly ReminderCadence[] = ["none", "daily", "weekly"];
 
-const titles: Record<string, string> = {
-  "/": "Spend Pulse — Keep weekly spending on pace",
-  "/demo": "Demo — Spend Pulse",
-  "/settings": "Settings — Spend Pulse",
-  "/privacy": "Privacy — Spend Pulse",
-  "/terms": "Terms — Spend Pulse",
+type RouteMetadata = { title: string; description: string; canonical: string };
+
+const routeMetadata: Record<string, RouteMetadata> = {
+  "/": {
+    title: "Spend Pulse — Keep weekly spending on pace",
+    description: "Check weekly day-to-day spending against your plan with private entries that stay in this browser.",
+    canonical: "/",
+  },
+  "/demo": {
+    title: "Demo — Spend Pulse",
+    description: "Try Spend Pulse with an isolated sample week. Reset the sample anytime without changing your entries.",
+    canonical: "/demo",
+  },
+  "/settings": {
+    title: "Settings — Spend Pulse",
+    description: "Set your weekly amount, reminder, and data controls in Spend Pulse.",
+    canonical: "/settings",
+  },
+  "/privacy": {
+    title: "Privacy — Spend Pulse",
+    description: "Read what Spend Pulse stores in your browser and how to export or clear it.",
+    canonical: "/privacy",
+  },
+  "/terms": {
+    title: "Terms — Spend Pulse",
+    description: "Read the terms for using the free Spend Pulse weekly spending check.",
+    canonical: "/terms",
+  },
+  "/404": {
+    title: "Page not found — Spend Pulse",
+    description: "This Spend Pulse page could not be found. Return to the weekly spending check.",
+    canonical: "/404.html",
+  },
 };
 
 function escapeHtml(value: string): string {
@@ -94,7 +121,7 @@ function header(): string {
     <header class="site-header">
       <a class="wordmark" href="/" data-route="/"><span class="contour-mark" aria-hidden="true"><i></i></span>Spend Pulse</a>
       <nav aria-label="Main navigation">
-        <a href="/demo" data-route="/demo">Demo</a>
+        <a href="/?demo=1" data-route="/?demo=1">Demo</a>
         <a href="${isDemo ? "/settings?demo=1" : "/settings"}" data-route="${isDemo ? "/settings?demo=1" : "/settings"}">Settings</a>
         <a href="/privacy" data-route="/privacy">Privacy</a>
       </nav>
@@ -105,7 +132,7 @@ function footer(): string {
   return `<footer class="site-footer">
     <p>One small check for weekly spending pace.</p>
     <div><a href="/privacy" data-route="/privacy">Privacy</a><a href="/terms" data-route="/terms">Terms</a><a href="https://hello-factory.sociobot.in" rel="external">Built by Param Factory <span class="sr-only">(external site)</span></a></div>
-    <p class="build">Version 1.0.0 · Original generated map art</p>
+    <p class="build">Version 1.0.0</p>
   </footer>`;
 }
 
@@ -157,7 +184,7 @@ function pacePanel(settings: Settings, entries: SpendEntry[]): string {
         <div><dt>${pace.remaining >= 0 ? "Left this week" : "Past your amount"}</dt><dd>${money(Math.abs(pace.remaining))}</dd></div>
       </dl>
     </div>
-    <p class="pace-note">Pace compares your spending with ${pace.day}/7 of your weekly amount. It is a guide, not financial advice.</p>
+    <p class="pace-note">Pace compares your spending with ${pace.day}/7 of your weekly amount.</p>
   </section>`;
 }
 
@@ -203,7 +230,7 @@ function homePage(): string {
         <span class="eyebrow">A private weekly spending check</span>
         <h1 tabindex="-1">Keep weekly spending on pace</h1>
         <p class="lede">For people who want a quick budget check without another finance account.</p>
-        <div class="hero-actions"><a class="primary-button" href="/demo" data-route="/demo">Try it with sample data</a><span>See a filled week. Your data stays untouched.</span></div>
+        <div class="hero-actions"><a class="primary-button" href="/?demo=1" data-route="/?demo=1">Try it with sample data</a><span>See a filled week. Your data stays untouched.</span></div>
         ${facts()}
       </div>
       <figure class="hero-map">
@@ -241,7 +268,7 @@ function howItWorks(): string {
 function privacySection(): string {
   return `<section class="privacy-section" aria-labelledby="privacy-title">
     <div class="privacy-contours" aria-hidden="true"></div>
-    <div><span class="map-label">The boundary</span><h2 id="privacy-title">A budget tool without the baggage</h2><p>Spend Pulse does not connect to banks, import transactions, show investments, or give financial advice.</p><p>Your allowance and entries stay in this browser. You can export a copy or clear everything.</p><a href="/privacy" data-route="/privacy">Read the privacy note</a></div>
+    <div><span class="map-label">The boundary</span><h2 id="privacy-title">A budget tool without the baggage</h2><p>Spend Pulse is a manual weekly spending check with no bank connection.</p><p>Your allowance and entries stay in this browser. You can export a copy or clear everything.</p><a href="/privacy" data-route="/privacy">Read the privacy note</a></div>
   </section>`;
 }
 
@@ -275,7 +302,7 @@ function privacyPage(): string {
 }
 
 function termsPage(): string {
-  return `<main id="main" class="text-main"><span class="eyebrow">Terms · August 28, 2026</span><h1 tabindex="-1">Use Spend Pulse as a simple guide</h1><p class="lede">These short terms apply when you use this free app.</p><section><h2>The service</h2><p>Spend Pulse helps you compare manual entries with a weekly amount. It does not provide financial advice.</p><h2>Your responsibility</h2><p>You choose the amounts and entries. Keep your own export if you need a backup.</p><h2>Availability</h2><p>The app is provided as available, without a promise that local data can always be recovered.</p><h2>Acceptable use</h2><p>Do not misuse the site, interfere with it, or attempt to harm other visitors.</p><h2>Contact</h2><p>Questions can go to <a href="mailto:hello@sociobot.in">hello@sociobot.in</a>.</p></section></main>`;
+  return `<main id="main" class="text-main"><span class="eyebrow">Terms · August 28, 2026</span><h1 tabindex="-1">Use Spend Pulse as a simple guide</h1><p class="lede">These short terms apply when you use this free app.</p><section><h2>The service</h2><p>Spend Pulse compares manual entries with a weekly amount.</p><h2>Your responsibility</h2><p>You choose the amounts and entries. Keep your own export if you need a backup.</p><h2>Availability</h2><p>The app is provided as available, without a promise that local data can always be recovered.</p><h2>Acceptable use</h2><p>Do not misuse the site, interfere with it, or attempt to harm other visitors.</p><h2>Contact</h2><p>Questions can go to <a href="mailto:hello@sociobot.in">hello@sociobot.in</a>.</p></section></main>`;
 }
 
 function notFoundPage(): string {
@@ -284,10 +311,20 @@ function notFoundPage(): string {
 
 function render(moveFocus = false): void {
   const path = location.pathname;
-  document.title = titles[path] ?? "Page not found — Spend Pulse";
-  document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute("href", `https://spend-pulse.sociobot.in${path}`);
+  const metadataKey = isDemo && path === "/" ? "/demo" : path;
+  const metadata = routeMetadata[metadataKey] ?? routeMetadata["/404"];
+  const canonicalUrl = `https://spend-pulse.sociobot.in${metadata.canonical}`;
+  document.title = metadata.title;
+  document.querySelector<HTMLMetaElement>('meta[name="description"]')?.setAttribute("content", metadata.description);
+  document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute("href", canonicalUrl);
+  document.querySelector<HTMLMetaElement>('meta[property="og:title"]')?.setAttribute("content", metadata.title);
+  document.querySelector<HTMLMetaElement>('meta[property="og:description"]')?.setAttribute("content", metadata.description);
+  document.querySelector<HTMLMetaElement>('meta[property="og:url"]')?.setAttribute("content", canonicalUrl);
+  document.querySelector<HTMLMetaElement>('meta[name="twitter:title"]')?.setAttribute("content", metadata.title);
+  document.querySelector<HTMLMetaElement>('meta[name="twitter:description"]')?.setAttribute("content", metadata.description);
   let page = notFoundPage();
-  if (path === "/") page = homePage();
+  if (isDemo && path === "/") page = demoPage();
+  else if (path === "/") page = homePage();
   else if (path === "/demo") page = demoPage();
   else if (path === "/settings") page = settingsPage();
   else if (path === "/privacy") page = privacyPage();

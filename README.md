@@ -2,11 +2,11 @@
 
 See if your weekly spending is on pace with one quick entry.
 
-Spend Pulse is for people who abandon large finance apps but still want a small daily or weekly check. Set one weekly amount, add discretionary spending by hand, and read the pace against the elapsed week.
+Spend Pulse is for people who abandon large finance apps but still want a small daily or weekly check. Set one weekly amount, add day-to-day spending by hand, and check it against this week’s pace.
 
-Entries stay in IndexedDB on the device. There is no account, analytics, bank connection, or cloud sync. The app works offline after the first visit. JSON and CSV exports let users keep a copy.
+Your entries stay in this browser on your device. There is no account, analytics, bank connection, or cloud sync. The app works offline after the first visit. JSON and CSV exports let users keep a copy.
 
-Try the isolated sample at `/demo`. It uses a separate `spend-pulse-demo-v1` database and never reads or writes the real-data database.
+Try the isolated sample at `/?demo=1`. It uses a separate `spend-pulse-demo-v1` database and never reads or writes the real-data database.
 
 ## Run locally
 
@@ -17,7 +17,7 @@ npm ci
 npm run dev
 ```
 
-Open `http://localhost:5173`. The demo is at `http://localhost:5173/demo`.
+Open `http://localhost:5173`. The demo is at `http://localhost:5173/?demo=1`.
 
 ## Test and build
 
@@ -30,11 +30,11 @@ npm run build
 
 The exact production build command is `npm run build`. Static output lands in `dist/`, with `dist/index.html` at its root.
 
-Claim tests run with `npm run test:claims`. The full suite checks the demo sandbox and reset, pace updates, import/export/clear recovery, offline reloads, explicit notification permission, keyboard use, mobile reflow, and serious accessibility issues in both color schemes.
+Claim tests run with `npm run test:claims`. The full suite checks demo reset, pace updates, import/export/clear recovery, and offline reloads. It also checks notification permission, keyboard use, mobile reflow, and serious accessibility issues.
 
 ## Deploy
 
-Deploy the contents of `dist/` as a static site. `staticwebapp.config.json` provides SPA fallback and security headers for Azure Static Web Apps. No environment variables or external services are required.
+Deploy the contents of `dist/` as a static site. `staticwebapp.config.json` provides SPA fallback and security headers for Azure Static Web Apps.
 
 ## Project notes
 

@@ -40,7 +40,7 @@ Audited 2026-08-28. Counts treat hyphenated terms and amounts as one word. Fragm
 | See how spending compares with the elapsed week. | 8 | Pass |
 | The boundary | 2 | Pass |
 | A budget tool without the baggage | 6 | Pass |
-| Spend Pulse does not connect to banks, import transactions, show investments, or give financial advice. | 15 | Pass |
+| Spend Pulse is a manual weekly spending check with no bank connection. | 11 | Pass; covered by `local-only` |
 | Your allowance and entries stay in this browser. | 8 | Pass |
 | You can export a copy or clear everything. | 8 | Pass |
 | Read the privacy note | 4 | Pass |
@@ -48,9 +48,8 @@ Audited 2026-08-28. Counts treat hyphenated terms and amounts as one word. Fragm
 | Privacy | 1 | Pass |
 | Terms | 1 | Pass |
 | Built by Param Factory | 4 | Pass |
-| Original generated map art | 4 | Pass |
 
-No sentence exceeds 22 words. No banned word appears. The first screen can be read aloud in one breath: it names the weekly pace check, its intended user, the sample action, and the three product facts.
+No sentence exceeds 22 words. No banned word appears. The first screen names the weekly pace check, its intended user, the sample action, and the three product facts.
 
 ## Terminology
 
