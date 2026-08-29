@@ -1,6 +1,6 @@
 import { expect, test, type Browser } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 async function openReminderHarness(browser: Browser, fixedNow: string) {
@@ -163,6 +163,23 @@ test("invalid inputs explain what to do", async ({ page }) => {
   await page.locator("#allowance").fill("0");
   await page.getByRole("button", { name: "Set weekly amount" }).click();
   await expect(page.locator("#setup-error")).toContainText("0.01");
+});
+
+test("weekly amount controls expose and accept the 0.01 minimum", async ({ page }) => {
+  await page.goto("/");
+  const setupAmount = page.locator("#allowance");
+  await expect(setupAmount).toHaveAttribute("min", "0.01");
+  await setupAmount.fill("0.01");
+  await page.getByRole("button", { name: "Set weekly amount" }).click();
+  await expect(page.locator(".pace-primary small")).toContainText("$0.01");
+
+  await page.goto("/settings");
+  const settingsAmount = page.locator("#settings-allowance");
+  await expect(settingsAmount).toHaveAttribute("min", "0.01");
+  await settingsAmount.fill("0.01");
+  expect(await settingsAmount.evaluate((input) => (input as HTMLInputElement).validity.rangeUnderflow)).toBeFalsy();
+  await page.getByRole("button", { name: "Save settings" }).click();
+  await expect(page.locator("#notice")).toHaveText("Settings saved in this browser.");
 });
 
 test("amount caps are enforced even when browser validation is bypassed", async ({ page }) => {
@@ -452,6 +469,17 @@ test("production output uses hashed assets and supplies a real 404 override", as
   expect(notFound).toContain('<nav aria-label="Main navigation">');
   expect(notFound).toContain('href="/privacy"');
   expect(notFound).toContain('href="/terms"');
+});
+
+test("design provenance names the generated source and shipped hero paths", async () => {
+  const design = readFileSync(join(process.cwd(), ".factory", "design.md"), "utf8");
+  expect(design).toContain("`assets/src/terrain-ledger.png`");
+  expect(design).toContain("`src/assets/terrain-ledger.webp`");
+  expect(design).toContain("`dist/assets/terrain-ledger-*.webp`");
+  expect(existsSync(join(process.cwd(), "assets", "src", "terrain-ledger.png"))).toBeTruthy();
+  expect(existsSync(join(process.cwd(), "assets", "src", "terrain-ledger.prompt.json"))).toBeTruthy();
+  expect(existsSync(join(process.cwd(), "src", "assets", "terrain-ledger.webp"))).toBeTruthy();
+  expect(readdirSync(join(process.cwd(), "dist", "assets")).some((name) => /^terrain-ledger-[A-Za-z0-9_-]+\.webp$/.test(name))).toBeTruthy();
 });
 
 test("every listed claim has exactly one tagged browser test", async () => {

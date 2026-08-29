@@ -158,7 +158,7 @@ function setupPanel(): string {
       </div>
       <div class="field amount-field">
         <label for="allowance">Weekly amount</label>
-        <input id="allowance" name="allowance" type="number" inputmode="decimal" min="1" max="${MAX_AMOUNT}" step="0.01" required aria-describedby="setup-error" />
+        <input id="allowance" name="allowance" type="number" inputmode="decimal" min="0.01" max="${MAX_AMOUNT}" step="0.01" required aria-describedby="setup-error" />
       </div>
       <button class="primary-button" type="submit">Set weekly amount</button>
       <p id="setup-error" class="form-error" role="alert"></p>
@@ -283,7 +283,7 @@ function settingsPage(): string {
     ${loadError ? errorState() : `<form id="settings-form" class="settings-form" novalidate>
       <section aria-labelledby="weekly-settings"><h2 id="weekly-settings">Weekly amount</h2>
         <div class="settings-grid"><div class="field"><label for="settings-currency">Currency</label><select id="settings-currency" name="currency"><option value="USD" ${settings?.currency === "USD" ? "selected" : ""}>USD</option><option value="EUR" ${settings?.currency === "EUR" ? "selected" : ""}>EUR</option><option value="GBP" ${settings?.currency === "GBP" ? "selected" : ""}>GBP</option><option value="INR" ${settings?.currency === "INR" ? "selected" : ""}>INR</option></select></div>
-        <div class="field"><label for="settings-allowance">Weekly amount</label><input id="settings-allowance" name="allowance" type="number" inputmode="decimal" min="1" max="${MAX_AMOUNT}" step="0.01" value="${settings?.weeklyAllowance ?? ""}" required /></div>
+        <div class="field"><label for="settings-allowance">Weekly amount</label><input id="settings-allowance" name="allowance" type="number" inputmode="decimal" min="0.01" max="${MAX_AMOUNT}" step="0.01" value="${settings?.weeklyAllowance ?? ""}" required /></div>
         <div class="field"><label for="week-start">Week starts</label><select id="week-start" name="weekStart"><option value="1" ${settings?.weekStarts !== 0 ? "selected" : ""}>Monday</option><option value="0" ${settings?.weekStarts === 0 ? "selected" : ""}>Sunday</option></select></div></div>
       </section>
       <section aria-labelledby="reminder-settings"><h2 id="reminder-settings">On-device reminder</h2><p>The app checks reminders when it is open. Your browser may stop reminders after you close it.</p>

@@ -52,7 +52,7 @@ The signature motion is a single contour “settle”: after a saved entry, cont
 
 ## Asset plan and provenance
 
-- `public/assets/terrain-ledger.webp`: original generated hero illustration, shown beside the live product and reused as the source for the social preview.
+- `assets/src/terrain-ledger.png` is the generated source. `src/assets/terrain-ledger.webp` is the optimized app asset, emitted as `dist/assets/terrain-ledger-*.webp` by the production build. The illustration appears beside the live product and is the source for the social preview.
 - `public/social-card.webp`: locally composed 1200×630 crop using the original illustration and HTML text remains separate from the asset.
 - App icons and favicon: hand-authored geometric SVG contour mark, rasterized locally for install icons. No icon library.
 
@@ -69,4 +69,4 @@ The signature motion is a single contour “settle”: after a saved entry, cont
 **Style:** premium editorial still life mixed with precise relief-map illustration; tactile and understated  
 **Negative list:** no text, no numbers, no logos, no watermark, no people, no hands, no coins, no credit cards, no banking UI, no neon, no gradient, no glossy 3D, no illegible glyphs
 
-Generated with the factory image deployment on 2026-08-28. The generated image is original to Spend Pulse. Source PNG and prompt sidecar live in `assets/src/`; optimized derivatives ship in `public/assets/`.
+Generated with the factory image deployment on 2026-08-28. The generated image is original to Spend Pulse. The source PNG and prompt sidecar live in `assets/src/`; the optimized app asset lives in `src/assets/` and builds to a hashed file in `dist/assets/`.
