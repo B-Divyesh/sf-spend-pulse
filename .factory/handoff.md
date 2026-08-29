@@ -47,7 +47,17 @@ Production build sizes: JS 30.10 kB raw / 9.69 kB gzip; CSS 17.20 kB raw / 4.66 
 
 ## Deployment
 
-Push `main` to trigger the configured static deployment, then verify the deployed hashed JS/CSS identity, live `/settings?demo=1` focus behavior, service-worker offline reload/update behavior, headers, and the two demo-only notification claims.
+Committed and pushed the repair as `e5f37f77de57a73d6543103e76ab84687dc82f80`, then deployed `dist/` directly to the configured Azure Static Web App `sf-spend-pulse` (resource group `sociobot`, production). The custom domain is live at https://spend-pulse.sociobot.in.
+
+Live hashes match the production build exactly:
+
+```text
+index.html              c27994894e52bd6e7b891279633a77e24bcf214dc49cd466c9e6ad929c9d427b
+app-CmWiDC9o.js         268a0226ea9e0b8db2e313652446034bd2e658fbd2781183bec2e757bb45cac4
+app-DiaoErqL.css        32a4130e69af84212251a5d14eb1ce04505ec0a19a58b194b00e34e635c61184
+```
+
+Live browser verification at 390 px confirmed the focus ring, `spend-pulse-demo-v1` as the only database, no console errors, and no horizontal overflow. The notification-permission spy remained at zero until the explicit button press, then reached one while remaining in the demo database. The live service worker controlled `/?demo=1`; an offline reload retained the demo heading and banner. `verify-url.sh` passed against the custom domain in 672 ms. Response checks confirmed immutable cache headers on hashed assets, restrictive CSP/security headers, and HTTP 404 for `/missing-page`.
 
 ## Known gaps
 
