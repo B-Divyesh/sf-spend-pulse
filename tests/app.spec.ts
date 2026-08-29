@@ -10,18 +10,25 @@ test("landing page has the required structure and works at 390px", async ({ page
   await expect(page.locator("h1")).toHaveCount(1);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Keep weekly spending on pace");
   await expect(page.getByRole("link", { name: "Try it with sample data" })).toBeVisible();
+  for (const fact of ["Works offline after the first visit.", "Your entries stay in this browser.", "Free. No account or bank connection."]) {
+    const box = await page.getByText(fact, { exact: true }).boundingBox();
+    expect(box, `${fact} should be visible in the first mobile screen`).not.toBeNull();
+    expect((box?.y ?? Infinity) + (box?.height ?? 0), `${fact} should fit in the first mobile screen`).toBeLessThanOrEqual(844);
+  }
   await expect(page.locator("main")).toBeVisible();
   await expect(page.locator("body")).toHaveJSProperty("scrollWidth", 390);
 });
 
-test("first-screen sample action opens the isolated query demo with its controls", async ({ page }) => {
+test("@claim:sample-demo first-screen action opens a populated isolated query demo", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("link", { name: "Try it with sample data" }).click();
   await expect(page).toHaveURL("http://127.0.0.1:4173/?demo=1");
   await expect(page).toHaveTitle("Demo — Spend Pulse");
   await expect(page.getByText("Demo — sample data, nothing is saved")).toBeVisible();
   await expect(page.getByRole("button", { name: "Reset demo" })).toBeVisible();
+  await expect(page.getByText("The sample weekly amount is $250.")).toBeVisible();
   await expect(page.locator(".pace-primary strong")).toHaveText("$82.80");
+  for (const entry of ["Lunch with Sam", "Groceries", "Train and coffee"]) await expect(page.getByText(entry, { exact: true })).toBeVisible();
 });
 
 for (const colorScheme of ["light", "dark"] as const) {
@@ -214,12 +221,25 @@ test("@claim:data-import imports a valid backup and replaces the demo data", asy
 });
 
 test("@claim:data-clear clear all removes settings and entries after confirmation", async ({ page }) => {
+  await page.goto("/?demo=1");
+  await page.locator("#spend-amount").fill("7.25");
+  await page.locator("#spend-note").fill("Clear-data proof entry");
+  await page.getByRole("button", { name: "Add spending" }).click();
+  await expect(page.getByText("Clear-data proof entry", { exact: true })).toBeVisible();
   await page.goto("/settings?demo=1");
   page.once("dialog", (dialog) => dialog.accept());
   await page.getByRole("button", { name: "Clear all demo data" }).click();
   await expect(page.locator("#settings-allowance")).toHaveValue("");
-  await page.goto("/?demo=1");
-  await expect(page.locator(".pace-primary strong")).toHaveText("$82.80");
+  await expect(page.getByText("Clear-data proof entry", { exact: true })).toHaveCount(0);
+  const jsonDownload = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Export JSON" }).click();
+  const json = await jsonDownload;
+  const jsonStream = await json.createReadStream();
+  const chunks: Buffer[] = [];
+  for await (const chunk of jsonStream) chunks.push(Buffer.from(chunk));
+  const backup = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+  expect(backup.settings).toBeNull();
+  expect(backup.entries).toEqual([]);
 });
 
 test("@claim:notification-permission permission waits for an explicit press", async ({ page }) => {

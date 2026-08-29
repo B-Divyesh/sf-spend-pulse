@@ -4,9 +4,9 @@ See if your weekly spending is on pace with one quick entry.
 
 Spend Pulse is for people who abandon large finance apps but still want a small daily or weekly check. Set one weekly amount, add day-to-day spending by hand, and check it against this week’s pace.
 
-Your entries stay in this browser on your device. There is no account, analytics, bank connection, or cloud sync. The app works offline after the first visit. JSON and CSV exports let users keep a copy.
+Your entries stay in this browser. There is no account, analytics, bank connection, or cloud sync. The app works offline after the first visit. JSON and CSV exports let users keep a copy.
 
-Try the isolated sample at `/?demo=1`. It uses a separate `spend-pulse-demo-v1` database and never reads or writes the real-data database.
+Try the isolated sample at `/?demo=1`. The sample uses separate browser storage, so its changes never touch your entries.
 
 ## Run locally
 

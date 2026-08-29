@@ -8,7 +8,7 @@
   },
   {
     "id": "local-only",
-    "claim": "The app is free; entries stay on this device with no ads, analytics, account, bank connection, or cloud sync",
+    "claim": "The app is free; entries stay in this browser with no ads, analytics, account, bank connection, or cloud sync",
     "where": "landing facts, privacy page, README",
     "test": "npm test -- --grep @claim:local-only",
     "sandbox": "fresh browser context at /?demo=1; intercept the full entry flow and allow only same-origin requests"
@@ -19,6 +19,13 @@
     "where": "demo banner and demo explanation",
     "test": "npm test -- --grep @claim:demo-sandbox",
     "sandbox": "fresh browser context; create real data, change demo data, leave demo, and verify the real data"
+  },
+  {
+    "id": "sample-demo",
+    "claim": "Try it with sample data opens a populated $250 sample week",
+    "where": "landing action outcome and demo introduction",
+    "test": "npm test -- --grep @claim:sample-demo",
+    "sandbox": "fresh browser context; press the landing action and assert the $250 weekly amount and all three shipped sample entries on the first demo screen"
   },
   {
     "id": "pace-check",

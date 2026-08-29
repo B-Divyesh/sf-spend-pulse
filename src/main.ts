@@ -139,7 +139,7 @@ function footer(): string {
 function facts(): string {
   return `<ul class="facts" aria-label="Product facts">
     <li><span aria-hidden="true">◎</span> Works offline after the first visit.</li>
-    <li><span aria-hidden="true">⌂</span> Your entries stay on this device.</li>
+    <li><span aria-hidden="true">⌂</span> Your entries stay in this browser.</li>
     <li><span aria-hidden="true">○</span> Free. No account or bank connection.</li>
   </ul>`;
 }
@@ -170,7 +170,7 @@ function pacePanel(settings: Settings, entries: SpendEntry[]): string {
   const now = new Date();
   const pace = paceSummary(entries, settings.weeklyAllowance, now, settings.weekStarts);
   const overPace = pace.difference < 0;
-  const routeState = pace.remaining < 0 ? "Allowance passed" : overPace ? "Above today’s pace" : "On pace";
+  const routeState = pace.remaining < 0 ? "Weekly amount passed" : overPace ? "Above today’s pace" : "On pace";
   const weekStart = startOfWeek(now, settings.weekStarts);
   const weekEnd = new Date(weekStart);
   weekEnd.setDate(weekStart.getDate() + 6);
@@ -248,9 +248,9 @@ function homePage(): string {
 
 function demoPage(): string {
   return `<main id="main" class="demo-main">
-    <div class="demo-intro"><span class="eyebrow">Sample week</span><h1 tabindex="-1">See this week’s spending pace</h1><p>The sample allowance is $250. Try adding or deleting an entry.</p></div>
+    <div class="demo-intro"><span class="eyebrow">Sample week</span><h1 tabindex="-1">See this week’s spending pace</h1><p>The sample weekly amount is $250. Try adding or deleting an entry.</p></div>
     ${loadError ? errorState() : dashboard()}
-    <section class="demo-explain" aria-labelledby="demo-explain-title"><h2 id="demo-explain-title">This sandbox is separate</h2><p>Demo changes use a different local database. Reset them anytime, or start with empty real data.</p></section>
+    <section class="demo-explain" aria-labelledby="demo-explain-title"><h2 id="demo-explain-title">This sandbox is separate</h2><p>Demo changes use separate browser storage. Reset them anytime, or start with empty real data.</p></section>
   </main>`;
 }
 
@@ -268,7 +268,7 @@ function howItWorks(): string {
 function privacySection(): string {
   return `<section class="privacy-section" aria-labelledby="privacy-title">
     <div class="privacy-contours" aria-hidden="true"></div>
-    <div><span class="map-label">The boundary</span><h2 id="privacy-title">A budget tool without the baggage</h2><p>Spend Pulse is a manual weekly spending check with no bank connection.</p><p>Your allowance and entries stay in this browser. You can export a copy or clear everything.</p><a href="/privacy" data-route="/privacy">Read the privacy note</a></div>
+    <div><span class="map-label">The boundary</span><h2 id="privacy-title">A manual budget check with no bank connection</h2><p>Spend Pulse is a manual weekly spending check with no bank connection.</p><p>Your weekly amount and entries stay in this browser. You can export a copy or clear everything.</p><a href="/privacy" data-route="/privacy">Read the privacy note</a></div>
   </section>`;
 }
 
@@ -298,7 +298,7 @@ function settingsPage(): string {
 }
 
 function privacyPage(): string {
-  return `<main id="main" class="text-main"><span class="eyebrow">Privacy note · August 28, 2026</span><h1 tabindex="-1">Your spending stays in your browser</h1><p class="lede">Spend Pulse has no account, analytics, ads, or bank connection.</p><section><h2>What the app stores</h2><p>Your weekly amount, entries, preferences, and reminder time use IndexedDB in this browser. Demo data uses a separate database.</p><h2>What leaves your device</h2><p>No spending data is sent anywhere. Loading the site requests its files from the Spend Pulse web host.</p><h2>Your controls</h2><p>Export your data from Settings. You can also clear it there or remove this site’s data in your browser.</p><h2>Notifications</h2><p>Notification permission is optional. The app asks only after you press the test button. You can revoke permission in browser settings.</p><h2>Contact</h2><p>Questions can go to <a href="mailto:privacy@sociobot.in">privacy@sociobot.in</a>.</p></section></main>`;
+  return `<main id="main" class="text-main"><span class="eyebrow">Privacy note · August 28, 2026</span><h1 tabindex="-1">Your spending stays in your browser</h1><p class="lede">Spend Pulse has no account, analytics, ads, or bank connection.</p><section><h2>What the app stores</h2><p>Your weekly amount, entries, preferences, and reminder time stay in browser storage. Demo data uses separate browser storage.</p><h2>What leaves your device</h2><p>No spending data is sent anywhere. Loading the site requests its files from the Spend Pulse web host.</p><h2>Your controls</h2><p>Export your data from Settings. You can also clear it there or remove this site’s data in your browser.</p><h2>Notifications</h2><p>Notification permission is optional. The app asks only after you press the test button. You can revoke permission in browser settings.</p><h2>Contact</h2><p>Questions can go to <a href="mailto:privacy@sociobot.in">privacy@sociobot.in</a>.</p></section></main>`;
 }
 
 function termsPage(): string {

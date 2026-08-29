@@ -195,12 +195,15 @@ progress::-moz-progress-bar { background: #73c9a4; }
   .contour-mark { width: 30px; height: 30px; }
   .demo-bar { align-items: flex-start; flex-direction: column; gap: 0; }
   .demo-actions { width: 100%; justify-content: space-between; }
-  .hero { min-height: auto; padding-top: 24px; gap: 40px; }
-  .hero-map { min-height: 280px; }
-  .hero-map img { min-height: 280px; }
+  .hero { min-height: auto; padding-top: 20px; gap: 16px; }
+  .hero-map { min-height: 180px; }
+  .hero-map img { min-height: 180px; max-height: 180px; }
   .hero-map figcaption { max-width: 230px; }
-  .hero-actions { align-items: flex-start; flex-direction: column; }
+  .hero h1 { margin-bottom: 16px; }
+  .hero .lede { margin-bottom: 20px; }
+  .hero-actions { align-items: flex-start; flex-direction: column; gap: 8px; margin-bottom: 16px; }
   .hero-actions > span { max-width: none; }
+  .facts { gap: 6px; }
   .product-section { padding: 72px 0; }
   .setup-form, .entry-form { grid-template-columns: 1fr; }
   .note-field { grid-column: auto; }

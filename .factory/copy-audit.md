@@ -1,6 +1,6 @@
 # Landing copy audit
 
-Audited 2026-08-28. Counts treat hyphenated terms and amounts as one word. Fragments, labels, and buttons are included because users still read them.
+Audited 2026-08-29. Counts treat hyphenated terms and amounts as one word. Fragments, labels, and buttons are included because users still read them.
 
 | Copy | Words | Result |
 | --- | ---: | --- |
@@ -11,7 +11,7 @@ Audited 2026-08-28. Counts treat hyphenated terms and amounts as one word. Fragm
 | See a filled week. | 5 | Pass |
 | Your data stays untouched. | 4 | Pass |
 | Works offline after the first visit. | 6 | Pass |
-| Your entries stay on this device. | 6 | Pass |
+| Your entries stay in this browser. | 6 | Pass |
 | Free. | 1 | Pass |
 | No account or bank connection. | 5 | Pass |
 | One route. | 2 | Pass |
@@ -38,10 +38,11 @@ Audited 2026-08-28. Counts treat hyphenated terms and amounts as one word. Fragm
 | A short note is optional. | 5 | Pass |
 | Read today’s pace | 3 | Pass |
 | See how spending compares with the elapsed week. | 8 | Pass |
+| Weekly amount passed | 3 | Pass |
 | The boundary | 2 | Pass |
-| A budget tool without the baggage | 6 | Pass |
+| A manual budget check with no bank connection | 8 | Pass |
 | Spend Pulse is a manual weekly spending check with no bank connection. | 11 | Pass; covered by `local-only` |
-| Your allowance and entries stay in this browser. | 8 | Pass |
+| Your weekly amount and entries stay in this browser. | 10 | Pass |
 | You can export a copy or clear everything. | 8 | Pass |
 | Read the privacy note | 4 | Pass |
 | One small check for weekly spending pace. | 7 | Pass |
