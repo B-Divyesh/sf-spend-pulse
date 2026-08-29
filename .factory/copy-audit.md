@@ -58,6 +58,10 @@ Audited 2026-08-29. Counts treat hyphenated terms and amounts as one word. Label
 
 No sentence exceeds 22 words. No banned marketing word appears. The first screen names the weekly pace check, its intended user, the sample action, and the three product facts.
 
+## Catalog description
+
+“Check weekly spending pace with private entries kept in this browser.” has 11 words and 69 characters. It starts with a verb and is covered by `pace-check` and `local-only`.
+
 ## Terminology
 
 | Concept | Word used |

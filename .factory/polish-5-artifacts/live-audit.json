@@ -1,0 +1,186 @@
+{
+  "checkedAt": "2026-08-29T09:42:44.640Z",
+  "base": "https://spend-pulse.sociobot.in",
+  "failures": [],
+  "errors": [],
+  "firstScreen": {
+    "status": 200,
+    "title": "Spend Pulse — Keep weekly spending on pace",
+    "h1": [
+      "Keep weekly spending on pace"
+    ],
+    "firstText": "A PRIVATE WEEKLY SPENDING CHECK\nKeep weekly spending on pace\n\nFor people who want a quick budget check without another finance account.\n\nTry it with sample data\nSee a filled week. Your data stays untouched.\n◎\nWorks offline after the first visit.\n⌂\nYour entries stay in this browser.\n○\nFree. No account or bank connection.",
+    "factBottoms": [
+      690.390625,
+      719.390625,
+      748.390625
+    ],
+    "setupMin": "0.01",
+    "width": {
+      "scroll": 390,
+      "viewport": 390
+    }
+  },
+  "demo": {
+    "sampleTotal": "$82.80",
+    "changedTotal": "$92.80",
+    "resetTotal": "$82.80",
+    "entries": [
+      "Lunch with Sam",
+      "Groceries",
+      "Train and coffee"
+    ],
+    "settingsMin": "0.01",
+    "settingsUnderflow": false,
+    "saveNotice": "Settings saved in this browser.",
+    "clearNotice": "All demo data cleared."
+  },
+  "isolation": {
+    "databaseNames": [
+      "spend-pulse-demo-v1",
+      "spend-pulse-real-v1"
+    ],
+    "realAmount": "0% of $125.00",
+    "leakedEntries": 0
+  },
+  "routes": [
+    {
+      "route": "/",
+      "status": 200,
+      "title": "Spend Pulse — Keep weekly spending on pace",
+      "description": "Check weekly day-to-day spending against your plan with private entries that stay in this browser.",
+      "canonical": "https://spend-pulse.sociobot.in/",
+      "h1Count": 1,
+      "mainCount": 1,
+      "privacyLinks": 2,
+      "termsLinks": 1
+    },
+    {
+      "route": "/?demo=1",
+      "status": 200,
+      "title": "Demo — Spend Pulse",
+      "description": "Try Spend Pulse with an isolated sample week. Reset the sample anytime without changing your entries.",
+      "canonical": "https://spend-pulse.sociobot.in/demo",
+      "h1Count": 1,
+      "mainCount": 1,
+      "privacyLinks": 2,
+      "termsLinks": 1
+    },
+    {
+      "route": "/settings",
+      "status": 200,
+      "title": "Settings — Spend Pulse",
+      "description": "Set your weekly amount, reminder, and data controls in Spend Pulse.",
+      "canonical": "https://spend-pulse.sociobot.in/settings",
+      "h1Count": 1,
+      "mainCount": 1,
+      "privacyLinks": 2,
+      "termsLinks": 1
+    },
+    {
+      "route": "/privacy",
+      "status": 200,
+      "title": "Privacy — Spend Pulse",
+      "description": "Read what Spend Pulse stores in your browser and how to export or clear it.",
+      "canonical": "https://spend-pulse.sociobot.in/privacy",
+      "h1Count": 1,
+      "mainCount": 1,
+      "privacyLinks": 2,
+      "termsLinks": 1
+    },
+    {
+      "route": "/terms",
+      "status": 200,
+      "title": "Terms — Spend Pulse",
+      "description": "Read the terms for using the free Spend Pulse weekly spending check.",
+      "canonical": "https://spend-pulse.sociobot.in/terms",
+      "h1Count": 1,
+      "mainCount": 1,
+      "privacyLinks": 2,
+      "termsLinks": 1
+    }
+  ],
+  "axe": [
+    {
+      "colorScheme": "light",
+      "route": "/",
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "light",
+      "route": "/?demo=1",
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "light",
+      "route": "/settings",
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "light",
+      "route": "/privacy",
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "light",
+      "route": "/terms",
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "light",
+      "route": "/missing-page",
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "dark",
+      "route": "/",
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "dark",
+      "route": "/?demo=1",
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "dark",
+      "route": "/settings",
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "dark",
+      "route": "/privacy",
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "dark",
+      "route": "/terms",
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "dark",
+      "route": "/missing-page",
+      "violations": 0,
+      "serious": 0
+    }
+  ],
+  "offline": {
+    "heading": "See this week’s spending pace",
+    "offlineAdded": "$87.80",
+    "offlineReloaded": "$87.80"
+  },
+  "privacy": {
+    "requests": 32,
+    "crossOrigin": []
+  }
+}
