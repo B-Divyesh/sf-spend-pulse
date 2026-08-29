@@ -11,7 +11,7 @@ test("landing page has the required structure and works at 390px", async ({ page
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Keep weekly spending on pace");
   await expect(page.getByRole("link", { name: "Try it with sample data" })).toBeVisible();
   for (const fact of ["Works offline after the first visit.", "Your entries stay in this browser.", "Free. No account or bank connection."]) {
-    const box = await page.getByText(fact, { exact: true }).boundingBox();
+    const box = await page.locator(".facts li").filter({ hasText: fact }).boundingBox();
     expect(box, `${fact} should be visible in the first mobile screen`).not.toBeNull();
     expect((box?.y ?? Infinity) + (box?.height ?? 0), `${fact} should fit in the first mobile screen`).toBeLessThanOrEqual(844);
   }
