@@ -47,7 +47,7 @@ Audited 2026-08-29. Counts treat hyphenated terms and amounts as one word. Label
 | See how spending compares with the elapsed week. | 8 | Pass; `pace-check` |
 | Privacy and data | 3 | Pass |
 | A manual budget check with no bank connection | 8 | Pass |
-| Spend Pulse is a manual weekly spending check with no bank connection. | 11 | Pass; `local-only` |
+| Spend Pulse is a manual weekly spending check with no bank connection. | 12 | Pass; `local-only` |
 | Your weekly amount and entries stay in this browser. | 10 | Pass; `local-only` |
 | You can export a copy or clear everything. | 8 | Pass; `data-export` / `data-clear` |
 | Read the privacy note | 4 | Pass |
