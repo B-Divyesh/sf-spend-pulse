@@ -412,6 +412,9 @@ test("production output uses hashed assets and supplies a real 404 override", as
   const assets = readdirSync(join(process.cwd(), "dist", "assets"));
   expect(assets.some((name) => /^app-[a-zA-Z0-9_-]+\.js$/.test(name))).toBeTruthy();
   expect(assets.some((name) => /^app-[a-zA-Z0-9_-]+\.css$/.test(name))).toBeTruthy();
+  const index = readFileSync(join(process.cwd(), "dist", "index.html"), "utf8");
+  expect(index).toMatch(/rel="preload" href="\/assets\/terrain-ledger-[A-Za-z0-9_-]+\.webp" as="image"/);
+  expect(index).toContain('rel="preload" href="/fonts/atkinson.ttf" as="font"');
   const config = JSON.parse(readFileSync(join(process.cwd(), "dist", "staticwebapp.config.json"), "utf8"));
   expect(config.responseOverrides["404"].rewrite).toBe("/404.html");
   expect(config.navigationFallback).toBeUndefined();
