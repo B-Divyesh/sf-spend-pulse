@@ -1,4 +1,14 @@
-# Spend Pulse polish 2 handoff
+# Spend Pulse independent verification 4 handoff
+
+## Independent release decision
+
+**PASS** — candidate `90d4ea2f36a8399b3641b109fe8df487fe582673` is verified at https://spend-pulse.sociobot.in as of 2026-08-29 UTC. No product code was changed during verification.
+
+Fresh install, all 11 separately-run registered claim tests, the full 42-test browser suite, typecheck, lint, and production build passed. The live HTML, JS, CSS, and service worker byte-match the candidate build. The live sample demo, real entry flow, invalid-input recovery, privacy request log, response headers, 390px layout, keyboard focus, PWA offline reload/update check, and live AxeBuilder scans all passed. There are no known product defects.
+
+Full evidence, commands, caveats, and severity assessment: `.factory/verification-4.md`.
+
+## Previous builder handoff
 
 ## Outcome
 
