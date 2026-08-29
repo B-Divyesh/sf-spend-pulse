@@ -1,0 +1,11 @@
+offline-reload 0
+local-only 0
+demo-sandbox 0
+sample-demo 0
+pace-check 0
+data-export 0
+data-import 0
+data-clear 0
+demo-reset 0
+notification-permission 0
+on-device-reminder 0

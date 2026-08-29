@@ -1,0 +1,274 @@
+{
+  "checks": {
+    "liveFlow": "PASS",
+    "keyboard": "PASS",
+    "axe": "PASS",
+    "mobileReducedMotion": "PASS",
+    "pwaInstallability": "PASS"
+  },
+  "observations": {
+    "firstRead": {
+      "title": "Spend Pulse — Keep weekly spending on pace",
+      "heading": "Keep weekly spending on pace",
+      "audience": "For people who want a quick budget check without another finance account.",
+      "action": "Try it with sample data",
+      "actionOutcome": "See a filled week. Your data stays untouched.",
+      "facts": [
+        "◎\nWorks offline after the first visit.",
+        "⌂\nYour entries stay in this browser.",
+        "○\nFree. No account or bank connection."
+      ]
+    },
+    "serviceWorker": {
+      "controller": "https://spend-pulse.sociobot.in/sw.js",
+      "active": "activated",
+      "waiting": null,
+      "caches": [
+        "spend-pulse-shell-v5"
+      ]
+    },
+    "privacy": {
+      "requestCount": 25,
+      "uniqueRequests": [
+        "https://spend-pulse.sociobot.in/",
+        "https://spend-pulse.sociobot.in/?demo=1",
+        "https://spend-pulse.sociobot.in/assets/app-CmWiDC9o.js",
+        "https://spend-pulse.sociobot.in/assets/app-DiaoErqL.css",
+        "https://spend-pulse.sociobot.in/assets/terrain-ledger-PWEQjYm4.webp",
+        "https://spend-pulse.sociobot.in/fonts/atkinson.ttf"
+      ],
+      "dbs": [
+        "spend-pulse-demo-v1",
+        "spend-pulse-real-v1"
+      ],
+      "realData": {
+        "settings": null,
+        "entries": 0
+      },
+      "storage": {
+        "localStorage": 0,
+        "sessionStorage": 0,
+        "cookies": ""
+      },
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    "keyboard": {
+      "skip": {
+        "text": "Skip to main content",
+        "outline": "rgb(169, 79, 29) solid 3px"
+      },
+      "demoFocus": {
+        "text": "Try it with sample data",
+        "outline": "rgb(169, 79, 29) solid 3px"
+      },
+      "importFocus": {
+        "activeId": "import-file",
+        "inputFocusVisible": true,
+        "labelOutline": "rgb(169, 79, 29) solid 3px"
+      }
+    },
+    "axe": [
+      {
+        "colorScheme": "light",
+        "route": "/",
+        "serious": [],
+        "all": []
+      },
+      {
+        "colorScheme": "light",
+        "route": "/?demo=1",
+        "serious": [],
+        "all": []
+      },
+      {
+        "colorScheme": "light",
+        "route": "/settings",
+        "serious": [],
+        "all": []
+      },
+      {
+        "colorScheme": "light",
+        "route": "/privacy",
+        "serious": [],
+        "all": []
+      },
+      {
+        "colorScheme": "light",
+        "route": "/terms",
+        "serious": [],
+        "all": []
+      },
+      {
+        "colorScheme": "light",
+        "route": "/missing-page",
+        "serious": [],
+        "all": []
+      },
+      {
+        "colorScheme": "dark",
+        "route": "/",
+        "serious": [],
+        "all": []
+      },
+      {
+        "colorScheme": "dark",
+        "route": "/?demo=1",
+        "serious": [],
+        "all": []
+      },
+      {
+        "colorScheme": "dark",
+        "route": "/settings",
+        "serious": [],
+        "all": []
+      },
+      {
+        "colorScheme": "dark",
+        "route": "/privacy",
+        "serious": [],
+        "all": []
+      },
+      {
+        "colorScheme": "dark",
+        "route": "/terms",
+        "serious": [],
+        "all": []
+      },
+      {
+        "colorScheme": "dark",
+        "route": "/missing-page",
+        "serious": [],
+        "all": []
+      }
+    ],
+    "mobile": {
+      "innerWidth": 390,
+      "scrollWidth": 390,
+      "factsBottom": [
+        690.390625,
+        719.390625,
+        748.390625
+      ],
+      "transitionDurations": [
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s",
+        "1e-05s"
+      ],
+      "animations": 0,
+      "zoomWidth": 390
+    },
+    "installability": {
+      "installabilityErrors": []
+    }
+  }
+}
