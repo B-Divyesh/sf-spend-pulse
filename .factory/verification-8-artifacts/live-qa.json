@@ -1,0 +1,225 @@
+{
+  "checkedAt": "2026-08-29T10:39:34.769Z",
+  "base": "https://spend-pulse.sociobot.in",
+  "failures": [],
+  "firstRead": {
+    "status": 200,
+    "title": "Spend Pulse — Keep weekly spending on pace",
+    "h1": [
+      "Keep weekly spending on pace"
+    ],
+    "text": "A PRIVATE WEEKLY SPENDING CHECK\nKeep weekly spending on pace\n\nFor people who want a quick budget check without another finance account.\n\nTry it with sample data\nSee a filled week. Your data stays untouched.\n◎\nWorks offline after the first visit.\n⌂\nYour entries stay in this browser.\n○\nFree. No account or bank connection.\nTrack one weekly amount without connecting a bank.",
+    "actions": [
+      "Try it with sample data"
+    ],
+    "headerSubset": {
+      "cache-control": "public, must-revalidate, max-age=30",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+      "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=10886400; includeSubDomains; preload",
+      "x-content-type-options": "nosniff"
+    }
+  },
+  "demoFlow": {
+    "sampleTotal": "$82.80",
+    "quickTotal": "$92.80",
+    "zeroError": "Enter an amount from 0.01 to 10,000,000.",
+    "maxError": "Enter an amount from 0.01 to 10,000,000.",
+    "minTotal": "$92.81",
+    "hostileRenderedAsText": true,
+    "persistedReload": true,
+    "persistedSecondTab": true,
+    "deleteUndo": true,
+    "jsonRows": 5,
+    "csvRows": 5,
+    "malformedImportError": "The file is not a Spend Pulse backup. Choose a valid JSON backup.",
+    "resetTotal": "$82.80"
+  },
+  "isolation": {
+    "dbsDuringDemo": [
+      "spend-pulse-demo-v1",
+      "spend-pulse-real-v1"
+    ],
+    "realAllowance": "0% of $125.00",
+    "demoLeakCount": 0
+  },
+  "keyboard": {
+    "firstFocus": {
+      "text": "Skip to main content",
+      "outline": "rgb(169, 79, 29) solid 3px"
+    },
+    "actionFocus": "rgb(169, 79, 29) solid 3px",
+    "routeHeadingFocused": true
+  },
+  "mobile": {
+    "factsBottom": 748.390625,
+    "overflow": {
+      "width": 390,
+      "viewport": 390
+    },
+    "motion": {
+      "animations": 0,
+      "maxTransitionSeconds": 0.00001
+    },
+    "minWidth": 44,
+    "minHeight": 44,
+    "zoomOverflow": {
+      "width": 390,
+      "viewport": 390
+    }
+  },
+  "axe": [
+    {
+      "colorScheme": "light",
+      "route": "/",
+      "status": 200,
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "light",
+      "route": "/?demo=1",
+      "status": 200,
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "light",
+      "route": "/settings",
+      "status": 200,
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "light",
+      "route": "/privacy",
+      "status": 200,
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "light",
+      "route": "/terms",
+      "status": 200,
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "light",
+      "route": "/missing-page",
+      "status": 404,
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "dark",
+      "route": "/",
+      "status": 200,
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "dark",
+      "route": "/?demo=1",
+      "status": 200,
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "dark",
+      "route": "/settings",
+      "status": 200,
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "dark",
+      "route": "/privacy",
+      "status": 200,
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "dark",
+      "route": "/terms",
+      "status": 200,
+      "violations": 0,
+      "serious": 0
+    },
+    {
+      "colorScheme": "dark",
+      "route": "/missing-page",
+      "status": 404,
+      "violations": 0,
+      "serious": 0
+    }
+  ],
+  "privacy": {
+    "requestCount": 44,
+    "uniqueRequests": [
+      "https://spend-pulse.sociobot.in/",
+      "https://spend-pulse.sociobot.in/assets/terrain-ledger-PWEQjYm4.webp",
+      "https://spend-pulse.sociobot.in/fonts/atkinson.ttf",
+      "https://spend-pulse.sociobot.in/assets/app-vzRtLSax.js",
+      "https://spend-pulse.sociobot.in/assets/app-DiaoErqL.css",
+      "https://spend-pulse.sociobot.in/sw.js",
+      "https://spend-pulse.sociobot.in/?demo=1",
+      "https://spend-pulse.sociobot.in/demo",
+      "https://spend-pulse.sociobot.in/privacy",
+      "https://spend-pulse.sociobot.in/terms",
+      "https://spend-pulse.sociobot.in/settings",
+      "https://spend-pulse.sociobot.in/offline.html",
+      "https://spend-pulse.sociobot.in/manifest.webmanifest",
+      "https://spend-pulse.sociobot.in/favicon.svg",
+      "https://spend-pulse.sociobot.in/social-card.webp",
+      "https://spend-pulse.sociobot.in/icons/icon-192.png",
+      "https://spend-pulse.sociobot.in/icons/icon-512.png",
+      "https://spend-pulse.sociobot.in/icons/maskable-512.png",
+      "https://spend-pulse.sociobot.in/icons/apple-touch-icon.png"
+    ],
+    "crossOrigin": [],
+    "cookies": [],
+    "localStorageKeys": [],
+    "sessionStorageKeys": []
+  },
+  "pwa": {
+    "controller": "https://spend-pulse.sociobot.in/sw.js",
+    "active": "https://spend-pulse.sociobot.in/sw.js",
+    "waiting": null,
+    "installing": null,
+    "caches": [
+      "spend-pulse-shell-v5"
+    ],
+    "cachedUrls": [
+      "https://spend-pulse.sociobot.in/",
+      "https://spend-pulse.sociobot.in/?demo=1",
+      "https://spend-pulse.sociobot.in/demo",
+      "https://spend-pulse.sociobot.in/privacy",
+      "https://spend-pulse.sociobot.in/terms",
+      "https://spend-pulse.sociobot.in/settings",
+      "https://spend-pulse.sociobot.in/offline.html",
+      "https://spend-pulse.sociobot.in/manifest.webmanifest",
+      "https://spend-pulse.sociobot.in/favicon.svg",
+      "https://spend-pulse.sociobot.in/social-card.webp",
+      "https://spend-pulse.sociobot.in/fonts/atkinson.ttf",
+      "https://spend-pulse.sociobot.in/icons/icon-192.png",
+      "https://spend-pulse.sociobot.in/icons/icon-512.png",
+      "https://spend-pulse.sociobot.in/icons/maskable-512.png",
+      "https://spend-pulse.sociobot.in/assets/terrain-ledger-PWEQjYm4.webp",
+      "https://spend-pulse.sociobot.in/icons/apple-touch-icon.png",
+      "https://spend-pulse.sociobot.in/assets/app-vzRtLSax.js",
+      "https://spend-pulse.sociobot.in/assets/app-DiaoErqL.css"
+    ],
+    "updateNotice": "An update is ready. Reload to use it.",
+    "updateController": "https://spend-pulse.sociobot.in/sw.js?verification-update=8",
+    "offlineHeading": "See this week’s spending pace",
+    "offlineAdded": "$87.80",
+    "offlineReloaded": "$87.80"
+  },
+  "errors": [],
+  "notification": {
+    "permissionBefore": 0,
+    "permissionAfter": 1
+  }
+}

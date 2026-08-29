@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-08-29T10:40:36.687Z",
+  "path": "demo add -> wordmark home -> Demo nav",
+  "urlAfterExit": "https://spend-pulse.sociobot.in/",
+  "bannerAfterExit": 0,
+  "urlAfterReentry": "https://spend-pulse.sociobot.in/?demo=1",
+  "probeAfterReentry": 1,
+  "totalAfterReentry": "$90.57",
+  "invalidDateError": "Choose a valid date, then add the entry again.",
+  "databases": [
+    "spend-pulse-demo-v1",
+    "spend-pulse-real-v1"
+  ],
+  "errors": []
+}

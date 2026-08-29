@@ -1,0 +1,160 @@
+{
+  "checkedAt": "2026-08-29T10:42:07.906Z",
+  "pages": [
+    {
+      "route": "/",
+      "status": 200,
+      "title": "Spend Pulse — Keep weekly spending on pace",
+      "h1": [
+        "Keep weekly spending on pace"
+      ],
+      "main": 1,
+      "lang": "en",
+      "canonical": "https://spend-pulse.sociobot.in/",
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/?demo=1",
+      "status": 200,
+      "title": "Demo — Spend Pulse",
+      "h1": [
+        "See this week’s spending pace"
+      ],
+      "main": 1,
+      "lang": "en",
+      "canonical": "https://spend-pulse.sociobot.in/demo",
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/demo",
+      "status": 200,
+      "title": "Demo — Spend Pulse",
+      "h1": [
+        "See this week’s spending pace"
+      ],
+      "main": 1,
+      "lang": "en",
+      "canonical": "https://spend-pulse.sociobot.in/demo",
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/settings",
+      "status": 200,
+      "title": "Settings — Spend Pulse",
+      "h1": [
+        "Set your weekly amount"
+      ],
+      "main": 1,
+      "lang": "en",
+      "canonical": "https://spend-pulse.sociobot.in/settings",
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/privacy",
+      "status": 200,
+      "title": "Privacy — Spend Pulse",
+      "h1": [
+        "Your spending stays in your browser"
+      ],
+      "main": 1,
+      "lang": "en",
+      "canonical": "https://spend-pulse.sociobot.in/privacy",
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/terms",
+      "status": 200,
+      "title": "Terms — Spend Pulse",
+      "h1": [
+        "Terms for using Spend Pulse"
+      ],
+      "main": 1,
+      "lang": "en",
+      "canonical": "https://spend-pulse.sociobot.in/terms",
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/missing-page",
+      "status": 404,
+      "title": "Page not found — Spend Pulse",
+      "h1": [
+        "This page was not found"
+      ],
+      "main": 1,
+      "lang": "en",
+      "canonical": "https://spend-pulse.sociobot.in/404.html",
+      "horizontalOverflow": false
+    }
+  ],
+  "links": [
+    {
+      "href": "https://hello-factory.sociobot.in/",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/#main",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/?demo=1",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/?demo=1#main",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/demo#main",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/missing-page#main",
+      "status": 404
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/privacy",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/privacy#main",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/settings",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/settings#main",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/settings?demo=1",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/settings?demo=1#data",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/terms",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/terms#main",
+      "status": 200
+    },
+    {
+      "href": "mailto:hello@sociobot.in",
+      "status": "mailto"
+    },
+    {
+      "href": "mailto:privacy@sociobot.in",
+      "status": "mailto"
+    }
+  ],
+  "errors": []
+}
