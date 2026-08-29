@@ -1,0 +1,20 @@
+{
+  "wordmarkReset": true,
+  "privacyReset": true,
+  "historyReset": true,
+  "offlineDemo": true,
+  "axe": {
+    "light": [],
+    "dark": []
+  },
+  "currentSrc": "https://spend-pulse.sociobot.in/assets/terrain-ledger-640-CDZ5vZGW.webp",
+  "allSameOrigin": true,
+  "requestCount": 27,
+  "errors": [],
+  "serviceWorker": {
+    "controlled": true,
+    "caches": [
+      "spend-pulse-shell-v6"
+    ]
+  }
+}
