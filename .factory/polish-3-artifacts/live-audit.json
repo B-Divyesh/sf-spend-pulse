@@ -1,0 +1,166 @@
+{
+  "base": "https://spend-pulse.sociobot.in",
+  "auditedAt": "2026-08-29T06:07:26.310Z",
+  "firstScreen": {
+    "title": "Spend Pulse — Keep weekly spending on pace",
+    "h1": "Keep weekly spending on pace",
+    "action": "/?demo=1",
+    "outcome": "See a filled week. Your data stays untouched.",
+    "facts": [
+      {
+        "text": "◎ Works offline after the first visit.",
+        "bottom": 690.390625
+      },
+      {
+        "text": "⌂ Your entries stay in this browser.",
+        "bottom": 719.390625
+      },
+      {
+        "text": "○ Free. No account or bank connection.",
+        "bottom": 748.390625
+      }
+    ],
+    "caption": "Track one weekly amount without connecting a bank.",
+    "labels": [
+      "How it works",
+      "Privacy and data"
+    ],
+    "preload": "/assets/terrain-ledger-PWEQjYm4.webp",
+    "width": 390,
+    "consoleErrors": []
+  },
+  "demo": {
+    "url": "https://spend-pulse.sociobot.in/?demo=1",
+    "banner": true,
+    "reset": true,
+    "startReal": true,
+    "totalAfterReset": "$82.80",
+    "before": {
+      "progress": "33",
+      "pace": "$131.49"
+    },
+    "after": {
+      "progress": "37",
+      "pace": "$121.49"
+    },
+    "explanation": "Sample changes do not affect your entries\n\nThis sample is kept apart from your entries. Reset the sample anytime, or return to your real data.",
+    "resetCompleted": {
+      "total": "$82.80",
+      "entries": [
+        "Lunch with Sam",
+        "Groceries",
+        "Train and coffee"
+      ]
+    },
+    "entriesAfterReset": [
+      "Lunch with Sam",
+      "Groceries",
+      "Train and coffee"
+    ]
+  },
+  "settings": {
+    "notice": "Settings saved in this browser.",
+    "realAmount": "0% of $125.00",
+    "sampleEntryAbsent": true
+  },
+  "routes": {
+    "/": {
+      "status": 200,
+      "title": "Spend Pulse — Keep weekly spending on pace",
+      "expectedTitle": "Spend Pulse — Keep weekly spending on pace",
+      "canonical": "https://spend-pulse.sociobot.in/",
+      "expectedCanonical": "https://spend-pulse.sociobot.in/",
+      "h1": "Keep weekly spending on pace",
+      "legal": [
+        "Privacy",
+        "Terms",
+        "Built by Param Factory (external site)"
+      ]
+    },
+    "/?demo=1": {
+      "status": 200,
+      "title": "Demo — Spend Pulse",
+      "expectedTitle": "Demo — Spend Pulse",
+      "canonical": "https://spend-pulse.sociobot.in/demo",
+      "expectedCanonical": "https://spend-pulse.sociobot.in/demo",
+      "h1": "See this week’s spending pace",
+      "legal": [
+        "Privacy",
+        "Terms",
+        "Built by Param Factory (external site)"
+      ]
+    },
+    "/settings": {
+      "status": 200,
+      "title": "Settings — Spend Pulse",
+      "expectedTitle": "Settings — Spend Pulse",
+      "canonical": "https://spend-pulse.sociobot.in/settings",
+      "expectedCanonical": "https://spend-pulse.sociobot.in/settings",
+      "h1": "Set your weekly amount",
+      "legal": [
+        "Privacy",
+        "Terms",
+        "Built by Param Factory (external site)"
+      ]
+    },
+    "/privacy": {
+      "status": 200,
+      "title": "Privacy — Spend Pulse",
+      "expectedTitle": "Privacy — Spend Pulse",
+      "canonical": "https://spend-pulse.sociobot.in/privacy",
+      "expectedCanonical": "https://spend-pulse.sociobot.in/privacy",
+      "h1": "Your spending stays in your browser",
+      "legal": [
+        "Privacy",
+        "Terms",
+        "Built by Param Factory (external site)"
+      ]
+    },
+    "/terms": {
+      "status": 200,
+      "title": "Terms — Spend Pulse",
+      "expectedTitle": "Terms — Spend Pulse",
+      "canonical": "https://spend-pulse.sociobot.in/terms",
+      "expectedCanonical": "https://spend-pulse.sociobot.in/terms",
+      "h1": "Terms for using Spend Pulse",
+      "legal": [
+        "Privacy",
+        "Terms",
+        "Built by Param Factory (external site)"
+      ]
+    }
+  },
+  "status": {
+    "missing": 404,
+    "missingH1": "This page was not found",
+    "staticH1": "This page was not found"
+  },
+  "axe": {
+    "light": {
+      "/": [],
+      "/?demo=1": [],
+      "/settings": [],
+      "/privacy": [],
+      "/terms": [],
+      "/missing-page": []
+    },
+    "dark": {
+      "/": [],
+      "/?demo=1": [],
+      "/settings": [],
+      "/privacy": [],
+      "/terms": [],
+      "/missing-page": []
+    }
+  },
+  "privacy": {
+    "requests": [
+      "https://spend-pulse.sociobot.in/?demo=1",
+      "https://spend-pulse.sociobot.in/assets/terrain-ledger-PWEQjYm4.webp",
+      "https://spend-pulse.sociobot.in/fonts/atkinson.ttf",
+      "https://spend-pulse.sociobot.in/assets/app-DorSZahL.js",
+      "https://spend-pulse.sociobot.in/assets/app-BryEukPc.css"
+    ],
+    "crossOrigin": []
+  }
+}
