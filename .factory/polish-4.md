@@ -29,7 +29,7 @@ Repairs started from release candidate `a33e56a952822b4a92e6cc57355ec8a2827b8d34
 | F-3-6 | Replaced demo developer jargon with “Sample changes do not affect your entries.” | Live demo; `demo-mobile-390.png`; clean-clone `@claim:demo-sandbox`. |
 | F-3-7 | Replaced the false empty-real-data promise with accurate return/reset language. | Clean-clone `@claim:demo-sandbox`; live demo isolation flow. |
 | F-3-8 | Kept “404” and “This page was not found” on SPA/static 404 surfaces. | Live [404](https://spend-pulse.sociobot.in/missing-page); 404 route audit. |
-| F-4-1 | Made clear-data success text scope-aware: demo shows “All demo data cleared,” real mode keeps “All local data cleared.” | Clean-clone `@claim:data-clear` passed 1/1; live [demo settings](https://spend-pulse.sociobot.in/settings?demo=1); `demo-clear-mobile-390.png`. |
+| F-4-1 | Made clear-data success text scope-aware: demo shows “All demo data cleared,” real mode keeps “All local data cleared.” | Clean-clone `@claim:data-clear` passed 1/1; live [demo settings](https://spend-pulse.sociobot.in/settings?demo=1) and a fresh real-data context asserted both exact messages; `demo-clear-mobile-390.png`. |
 
 ## Verification
 
