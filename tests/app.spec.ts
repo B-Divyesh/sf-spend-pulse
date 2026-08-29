@@ -1,7 +1,54 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Browser } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
+
+async function openReminderHarness(browser: Browser, fixedNow: string) {
+  const context = await browser.newContext({ baseURL: "http://127.0.0.1:4173" });
+  const page = await context.newPage();
+  await page.addInitScript((now) => {
+    const state = window as unknown as { __notifications: Array<{ title: string; body: string }> };
+    state.__notifications = [];
+    Object.defineProperty(window, "Notification", {
+      configurable: true,
+      value: { permission: "granted", requestPermission: () => Promise.resolve("granted") },
+    });
+    Object.defineProperty(navigator, "serviceWorker", {
+      configurable: true,
+      value: {
+        controller: {},
+        addEventListener: () => undefined,
+        register: () => Promise.resolve({}),
+        ready: Promise.resolve({
+          showNotification: (title: string, options: { body: string }) => {
+            state.__notifications.push({ title, body: options.body });
+            return Promise.resolve();
+          },
+        }),
+      },
+    });
+    const NativeDate = Date;
+    const fixedTime = NativeDate.parse(now);
+    const FixedDate = function (this: unknown, ...args: any[]) {
+      return Reflect.construct(NativeDate, args.length ? args : [fixedTime]);
+    };
+    FixedDate.prototype = NativeDate.prototype;
+    Object.setPrototypeOf(FixedDate, NativeDate);
+    Object.defineProperty(FixedDate, "now", { value: () => fixedTime });
+    Object.defineProperty(globalThis, "Date", { configurable: true, value: FixedDate });
+  }, fixedNow);
+  return { context, page };
+}
+
+async function saveReminder(page: import("@playwright/test").Page, cadence: "daily" | "weekly") {
+  await page.goto("/settings");
+  await page.locator("#settings-allowance").fill("200");
+  await page.locator("#week-start").selectOption("1");
+  await page.locator("#reminder-cadence").selectOption(cadence);
+  await page.locator("#reminder-time").fill("09:00");
+  await page.getByRole("button", { name: "Save settings" }).click();
+  await expect(page.locator("#notice")).toContainText("Settings saved in this browser.");
+}
 
 test("landing page has the required structure and works at 390px", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -17,6 +64,21 @@ test("landing page has the required structure and works at 390px", async ({ page
   }
   await expect(page.locator("main")).toBeVisible();
   await expect(page.locator("body")).toHaveJSProperty("scrollWidth", 390);
+});
+
+test("uses plain labels for the landing, demo, and missing-page states", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("figcaption")).toHaveText("Track one weekly amount without connecting a bank.");
+  await expect(page.getByText("How it works", { exact: true })).toBeVisible();
+  await expect(page.getByText("Privacy and data", { exact: true })).toBeVisible();
+
+  await page.goto("/?demo=1");
+  await expect(page.getByRole("heading", { level: 2, name: "Sample changes do not affect your entries" })).toBeVisible();
+  await expect(page.getByText("This sample is kept apart from your entries. Reset the sample anytime, or return to your real data.")).toBeVisible();
+
+  await page.goto("/missing-page");
+  await expect(page.locator(".not-found .eyebrow")).toHaveText("404");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("This page was not found");
 });
 
 test("@claim:sample-demo first-screen action opens a populated isolated query demo", async ({ page }) => {
@@ -136,10 +198,18 @@ test("invalid backups are rejected before existing data is replaced", async ({ p
 
 test("@claim:pace-check adding spending updates the weekly pace", async ({ page }) => {
   await page.goto("/?demo=1");
-  await expect(page.locator(".pace-primary strong")).toHaveText("$82.80");
+  const progress = page.locator(".pace-primary progress");
+  const paceDifference = page.locator(".pace-grid dl div").first();
+  const beforeProgress = Number(await progress.getAttribute("value"));
+  const beforeLabel = await paceDifference.locator("dt").innerText();
+  const beforeDifference = Number((await paceDifference.locator("dd").innerText()).replace(/[^0-9.-]/g, ""));
   await page.getByRole("button", { name: "Add $10.00" }).click();
-  await expect(page.locator(".pace-primary strong")).toHaveText("$92.80");
-  await expect(page.getByText("Quick add", { exact: true }).last()).toBeVisible();
+  const afterProgress = Number(await progress.getAttribute("value"));
+  const afterLabel = await paceDifference.locator("dt").innerText();
+  const afterDifference = Number((await paceDifference.locator("dd").innerText()).replace(/[^0-9.-]/g, ""));
+  expect(afterProgress).toBe(beforeProgress + 4);
+  expect(afterLabel).toBe(beforeLabel);
+  expect(Math.abs(afterDifference - beforeDifference)).toBeCloseTo(10, 2);
 });
 
 test("@claim:demo-sandbox demo changes do not touch real data", async ({ page }) => {
@@ -262,35 +332,33 @@ test("@claim:notification-permission permission waits for an explicit press", as
   await expect.poll(() => page.evaluate(() => (window as unknown as { __permissionRequests: number }).__permissionRequests)).toBe(1);
 });
 
-test("@claim:on-device-reminder a due reminder is shown while open", async ({ page }) => {
-  await page.addInitScript(() => {
-    const state = window as unknown as { __notifications: Array<{ title: string; body: string }> };
-    state.__notifications = [];
-    Object.defineProperty(window, "Notification", { configurable: true, value: { permission: "granted", requestPermission: () => Promise.resolve("granted") } });
-    Object.defineProperty(navigator, "serviceWorker", {
-      configurable: true,
-      value: {
-        controller: {},
-        addEventListener: () => undefined,
-        register: () => Promise.resolve({}),
-        ready: Promise.resolve({
-          showNotification: (title: string, options: { body: string }) => {
-            state.__notifications.push({ title, body: options.body });
-            return Promise.resolve();
-          },
-        }),
-      },
-    });
-  });
-  await page.goto("/settings");
-  await page.locator("#settings-allowance").fill("200");
-  await page.locator("#reminder-cadence").selectOption("daily");
-  await page.locator("#reminder-time").fill("00:00");
-  await page.getByRole("button", { name: "Save settings" }).click();
-  await expect.poll(() => page.evaluate(() => (window as unknown as { __notifications: unknown[] }).__notifications.length)).toBe(1);
-  const notification = await page.evaluate(() => (window as unknown as { __notifications: Array<{ title: string; body: string }> }).__notifications[0]);
-  expect(notification.title).toBe("Check this week’s pace");
-  expect(notification.body).toContain("Add today’s spending");
+test("@claim:on-device-reminder daily and weekly reminders run only when due", async ({ browser }) => {
+  const daily = await openReminderHarness(browser, "2026-08-31T18:05:00.000Z");
+  try {
+    await saveReminder(daily.page, "daily");
+    await expect.poll(() => daily.page.evaluate(() => (window as unknown as { __notifications: unknown[] }).__notifications.length)).toBe(1);
+    const notification = await daily.page.evaluate(() => (window as unknown as { __notifications: Array<{ title: string; body: string }> }).__notifications[0]);
+    expect(notification.title).toBe("Check this week’s pace");
+    expect(notification.body).toContain("Add today’s spending");
+  } finally {
+    await daily.context.close();
+  }
+
+  const weeklyDue = await openReminderHarness(browser, "2026-08-31T18:05:00.000Z");
+  try {
+    await saveReminder(weeklyDue.page, "weekly");
+    await expect.poll(() => weeklyDue.page.evaluate(() => (window as unknown as { __notifications: unknown[] }).__notifications.length)).toBe(1);
+  } finally {
+    await weeklyDue.context.close();
+  }
+
+  const weeklyNotDue = await openReminderHarness(browser, "2026-09-01T18:05:00.000Z");
+  try {
+    await saveReminder(weeklyNotDue.page, "weekly");
+    await expect.poll(() => weeklyNotDue.page.evaluate(() => (window as unknown as { __notifications: unknown[] }).__notifications.length)).toBe(0);
+  } finally {
+    await weeklyNotDue.context.close();
+  }
 });
 
 test("@claim:offline-reload demo reloads offline after the first visit", async ({ page, context }) => {
@@ -346,7 +414,8 @@ test("production output uses hashed assets and supplies a real 404 override", as
   expect(config.navigationFallback).toBeUndefined();
   expect(config.routes.filter((route: { rewrite?: string }) => route.rewrite === "/index.html")).toHaveLength(4);
   const notFound = readFileSync(join(process.cwd(), "dist", "404.html"), "utf8");
-  expect(notFound).toContain("This page is not on the route");
+  expect(notFound).toContain("This page was not found");
+  expect(notFound).toContain("<p class=\"eyebrow\">404</p>");
   expect(notFound).toContain('<meta name="description"');
   expect(notFound).toContain('<link rel="canonical"');
   expect(notFound).toContain('property="og:title"');

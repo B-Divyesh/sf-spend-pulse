@@ -190,7 +190,7 @@ function pacePanel(settings: Settings, entries: SpendEntry[]): string {
 
 function entryForm(): string {
   return `<section class="entry-panel" aria-labelledby="entry-title">
-    <div class="section-heading"><div><span class="map-label">New marker · 02</span><h2 id="entry-title">Add today’s spending</h2></div></div>
+    <div class="section-heading"><div><span class="map-label">Add spending · 02</span><h2 id="entry-title">Add today’s spending</h2></div></div>
     <div class="quick-add" aria-label="Quick amounts"><span>Quick add</span>${[5, 10, 20].map((amount) => `<button class="quick-button" type="button" data-action="quick-add" data-amount="${amount}" aria-label="Add ${money(amount)}">+${money(amount)}</button>`).join("")}</div>
     <form id="entry-form" class="entry-form" novalidate>
       <div class="field"><label for="spend-amount">Amount</label><input id="spend-amount" name="amount" type="number" inputmode="decimal" min="0.01" max="${MAX_AMOUNT}" step="0.01" required /></div>
@@ -213,7 +213,7 @@ function historyPanel(settings: Settings, entries: SpendEntry[]): string {
       </li>`).join("")}</ol>`
     : `<div class="empty-state"><span class="empty-contours" aria-hidden="true"></span><h3>No spending marked this week</h3><p>Your entries will appear here. Add today’s first amount above.</p></div>`;
   return `<section class="history-panel" aria-labelledby="history-title">
-    <div class="section-heading"><div><span class="map-label">Trail log · 03</span><h2 id="history-title">This week’s entries</h2></div><a href="${isDemo ? "/settings?demo=1#data" : "/settings#data"}" data-route="${isDemo ? "/settings?demo=1#data" : "/settings#data"}" class="small-link">Export or import</a></div>
+    <div class="section-heading"><div><span class="map-label">Your entries · 03</span><h2 id="history-title">This week’s entries</h2></div><a href="${isDemo ? "/settings?demo=1#data" : "/settings#data"}" data-route="${isDemo ? "/settings?demo=1#data" : "/settings#data"}" class="small-link">Export or import</a></div>
     ${rows}
   </section>`;
 }
@@ -235,7 +235,7 @@ function homePage(): string {
       </div>
       <figure class="hero-map">
         <img src="${terrainLedgerUrl}" width="1200" height="800" alt="A paper relief map turns a weekly route into seven trail markers." fetchpriority="high" decoding="async" />
-        <figcaption>One route. Seven days. No bank connection.</figcaption>
+        <figcaption>Track one weekly amount without connecting a bank.</figcaption>
       </figure>
     </section>
     <section class="product-section" aria-label="Spend Pulse app">
@@ -250,13 +250,13 @@ function demoPage(): string {
   return `<main id="main" class="demo-main">
     <div class="demo-intro"><span class="eyebrow">Sample week</span><h1 tabindex="-1">See this week’s spending pace</h1><p>The sample weekly amount is $250. Try adding or deleting an entry.</p></div>
     ${loadError ? errorState() : dashboard()}
-    <section class="demo-explain" aria-labelledby="demo-explain-title"><h2 id="demo-explain-title">This sandbox is separate</h2><p>Demo changes use separate browser storage. Reset them anytime, or start with empty real data.</p></section>
+    <section class="demo-explain" aria-labelledby="demo-explain-title"><h2 id="demo-explain-title">Sample changes do not affect your entries</h2><p>This sample is kept apart from your entries. Reset the sample anytime, or return to your real data.</p></section>
   </main>`;
 }
 
 function howItWorks(): string {
   return `<section class="how-section" aria-labelledby="how-title">
-    <div><span class="map-label">Route notes</span><h2 id="how-title">Check your pace in three steps</h2></div>
+    <div><span class="map-label">How it works</span><h2 id="how-title">Check your pace in three steps</h2></div>
     <ol>
       <li><span>01</span><div><h3>Set one weekly amount</h3><p>Use the money you plan for day-to-day extras.</p></div></li>
       <li><span>02</span><div><h3>Add spending as it happens</h3><p>Enter an amount. A short note is optional.</p></div></li>
@@ -268,7 +268,7 @@ function howItWorks(): string {
 function privacySection(): string {
   return `<section class="privacy-section" aria-labelledby="privacy-title">
     <div class="privacy-contours" aria-hidden="true"></div>
-    <div><span class="map-label">The boundary</span><h2 id="privacy-title">A manual budget check with no bank connection</h2><p>Spend Pulse is a manual weekly spending check with no bank connection.</p><p>Your weekly amount and entries stay in this browser. You can export a copy or clear everything.</p><a href="/privacy" data-route="/privacy">Read the privacy note</a></div>
+    <div><span class="map-label">Privacy and data</span><h2 id="privacy-title">A manual budget check with no bank connection</h2><p>Spend Pulse is a manual weekly spending check with no bank connection.</p><p>Your weekly amount and entries stay in this browser. You can export a copy or clear everything.</p><a href="/privacy" data-route="/privacy">Read the privacy note</a></div>
   </section>`;
 }
 
@@ -279,7 +279,7 @@ function errorState(): string {
 function settingsPage(): string {
   const settings = data.settings;
   return `<main id="main" class="text-main settings-main">
-    <span class="eyebrow">Your map key</span><h1 tabindex="-1">Set your weekly plan</h1><p class="lede">Change your amount, week, reminder, or local data.</p>
+    <span class="eyebrow">Settings</span><h1 tabindex="-1">Set your weekly amount</h1><p class="lede">Change your weekly amount, first day, reminder, or data.</p>
     ${loadError ? errorState() : `<form id="settings-form" class="settings-form" novalidate>
       <section aria-labelledby="weekly-settings"><h2 id="weekly-settings">Weekly amount</h2>
         <div class="settings-grid"><div class="field"><label for="settings-currency">Currency</label><select id="settings-currency" name="currency"><option value="USD" ${settings?.currency === "USD" ? "selected" : ""}>USD</option><option value="EUR" ${settings?.currency === "EUR" ? "selected" : ""}>EUR</option><option value="GBP" ${settings?.currency === "GBP" ? "selected" : ""}>GBP</option><option value="INR" ${settings?.currency === "INR" ? "selected" : ""}>INR</option></select></div>
@@ -302,11 +302,11 @@ function privacyPage(): string {
 }
 
 function termsPage(): string {
-  return `<main id="main" class="text-main"><span class="eyebrow">Terms · August 28, 2026</span><h1 tabindex="-1">Use Spend Pulse as a simple guide</h1><p class="lede">These short terms apply when you use this free app.</p><section><h2>The service</h2><p>Spend Pulse compares manual entries with a weekly amount.</p><h2>Your responsibility</h2><p>You choose the amounts and entries. Keep your own export if you need a backup.</p><h2>Availability</h2><p>The app is provided as available, without a promise that local data can always be recovered.</p><h2>Acceptable use</h2><p>Do not misuse the site, interfere with it, or attempt to harm other visitors.</p><h2>Contact</h2><p>Questions can go to <a href="mailto:hello@sociobot.in">hello@sociobot.in</a>.</p></section></main>`;
+  return `<main id="main" class="text-main"><span class="eyebrow">Terms · August 28, 2026</span><h1 tabindex="-1">Terms for using Spend Pulse</h1><p class="lede">These short terms apply when you use this free app.</p><section><h2>The service</h2><p>Spend Pulse compares manual entries with a weekly amount.</p><h2>Your responsibility</h2><p>You choose the amounts and entries. Keep your own export if you need a backup.</p><h2>Availability</h2><p>The app is provided as available, without a promise that local data can always be recovered.</p><h2>Acceptable use</h2><p>Do not misuse the site, interfere with it, or attempt to harm other visitors.</p><h2>Contact</h2><p>Questions can go to <a href="mailto:hello@sociobot.in">hello@sociobot.in</a>.</p></section></main>`;
 }
 
 function notFoundPage(): string {
-  return `<main id="main" class="not-found"><div class="lost-map" aria-hidden="true"><span>404</span></div><div><span class="eyebrow">Off the map</span><h1 tabindex="-1">This page is not on the route</h1><p>The address may be old or mistyped.</p><a class="primary-button" href="/" data-route="/">Return to Spend Pulse</a></div></main>`;
+  return `<main id="main" class="not-found"><div class="lost-map" aria-hidden="true"><span>404</span></div><div><span class="eyebrow">404</span><h1 tabindex="-1">This page was not found</h1><p>The address may be old or mistyped.</p><a class="primary-button" href="/" data-route="/">Return to Spend Pulse</a></div></main>`;
 }
 
 function render(moveFocus = false): void {
@@ -454,7 +454,7 @@ async function submitSettings(form: HTMLFormElement): Promise<void> {
   try {
     await saveSettings(isDemo, settings);
     data.settings = settings;
-    showNotice("Settings saved on this device.");
+    showNotice("Settings saved in this browser.");
     await checkReminder();
   } catch {
     setFormError("settings-error", "Settings were not saved. Check browser storage, then try again.");

@@ -32,7 +32,7 @@
     "claim": "A one-tap spending entry updates this week's rolling pace",
     "where": "live product and README",
     "test": "npm test -- --grep @claim:pace-check",
-    "sandbox": "fresh /?demo=1 sample; press the $10 quick-add control and assert the visible weekly spent total changes by $10"
+    "sandbox": "fresh /?demo=1 sample; press the $10 quick-add control and assert the progress percentage and today's under/over pace amount both recalculate"
   },
   {
     "id": "data-export",
@@ -74,6 +74,6 @@
     "claim": "Checks a daily or weekly reminder while the app is open",
     "where": "settings",
     "test": "npm test -- --grep @claim:on-device-reminder",
-    "sandbox": "fresh browser context with on-device notification APIs recorded; save a due daily reminder and assert its title and body"
+    "sandbox": "fresh browser contexts with recorded on-device notification APIs and fixed clocks; assert due daily and weekly reminders, then assert weekly does not run on another day"
   }
 ]

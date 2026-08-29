@@ -40,7 +40,7 @@ Deploy the contents of `dist/` as a static site. `staticwebapp.config.json` rout
 
 - `.factory/brief.json` records the product scope.
 - `.factory/design.md` records the topographic visual system and image provenance.
-- `.factory/demo.md` documents sandbox behavior.
+- `.factory/demo.md` documents demo behavior.
 - `.factory/claims.json` maps every product claim to a test.
 
 Licensed under the MIT License. See `LICENSE`.
