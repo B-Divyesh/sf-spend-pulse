@@ -1,44 +1,32 @@
-# Spend Pulse independent verification 4 handoff
-
-## Independent release decision
-
-**PASS** — candidate `90d4ea2f36a8399b3641b109fe8df487fe582673` is verified at https://spend-pulse.sociobot.in as of 2026-08-29 UTC. No product code was changed during verification.
-
-Fresh install, all 11 separately-run registered claim tests, the full 42-test browser suite, typecheck, lint, and production build passed. The live HTML, JS, CSS, and service worker byte-match the candidate build. The live sample demo, real entry flow, invalid-input recovery, privacy request log, response headers, 390px layout, keyboard focus, PWA offline reload/update check, and live AxeBuilder scans all passed. There are no known product defects.
-
-Full evidence, commands, caveats, and severity assessment: `.factory/verification-4.md`.
-
-## Previous builder handoff
+# Spend Pulse adversarial review 3 handoff
 
 ## Outcome
 
-All cumulative review findings are repaired. The source repair is `043189fcf84cc66afdf35aebbd17b9b152d41c01`; the final first-screen test and live evidence commit is `00113500f6bcbcc601d8c32dc49cfec6546ab7c5`. Both are pushed to `main`.
+**FAIL** — review 3 found three blocking and six minor defects. No product code was changed.
 
-The static work-order deployment completed as `a66bce72-42e5-44b3-b480-49cada8bda16`. https://spend-pulse.sociobot.in is serving the repair.
+The blocking defects are the reopened F-2-4 browser/device storage terminology mismatch, incomplete observable coverage for the rolling-pace claim, and no weekly-branch coverage for the daily-or-weekly reminder claim. The remaining findings cover metaphorical landing/404 labels, demo jargon, and an inaccurate demo-exit sentence.
 
-## What changed
+Full findings, exact quotes, rewrites, copy counts, history checks, and evidence are in `.factory/review-3.md`.
 
-- Clear-data claim coverage now observes an exported empty backup after clearing a uniquely named entry.
-- `sample-demo` is registered and has exactly one tagged browser test for the one-click $250 populated demo.
-- Mobile hero spacing keeps offline, browser-local, and free/no-account facts in the first 390 × 844 screen.
-- Storage and weekly-limit terms now consistently use “this browser” and “weekly amount.”
-- The privacy heading and README demo-storage sentence now use plain, self-contained wording.
-- Earlier fixes for demo isolation, route metadata, focus/history, 404, legal links, privacy, offline behavior, and visual identity remain covered by regression tests.
+## Verification performed
 
-## Verification
+- Opened the live site cold in fresh 390 × 844 and 1440 × 900 Chromium contexts.
+- Exercised the live one-click demo, quick-add, Reset demo, Start for real, separate IndexedDB namespaces, and offline reload.
+- Recorded the complete demo request log; all requests were same-origin product files.
+- Crawled links across all routes and checked route metadata, H1/main/header/footer structure, 404 behavior, Back navigation, and heading focus.
+- Ran `/opt/fleet/lib/verify-url.sh` and live AxeBuilder scans in light and dark mode; no serious or critical accessibility issue was found.
+- Used clean clone `/tmp/spend-pulse-review-3-22Cmzj` at candidate `4b4ab2b0e53cfc95c4c215de9f579abf52ec9fa9`.
+- Ran `npm ci`, all 11 `claims.json` commands separately, `npm test` (42/42), `npm run typecheck`, `npm run lint`, and `npm run build`; all commands passed.
+- Confirmed live `index.html`, JavaScript, CSS, and `sw.js` hashes match the clean build.
 
-From a fresh clone, the lockfile install passed (`24` packages; audit found `0` vulnerabilities). Every `.factory/claims.json` command was run separately and passed with one selected test: `offline-reload`, `local-only`, `demo-sandbox`, `sample-demo`, `pace-check`, `data-export`, `data-import`, `data-clear`, `demo-reset`, `notification-permission`, and `on-device-reminder`.
+## Evidence
 
-The fresh-clone full browser suite passed `42/42`. `npm run typecheck`, `npm run lint`, `npm run build`, and `npm audit --omit=dev` passed. The production build emits `dist/`, with 9.71 kB gzip JavaScript, 4.65 kB gzip CSS, and a 130.94 kB hero image.
+- `.factory/review-3-artifacts/cold-mobile.png`
+- `.factory/review-3-artifacts/cold-desktop.png`
+- `.factory/review-3-artifacts/demo-mobile.png`
+- `.factory/review-3-artifacts/live-audit.json`
+- `.factory/review-3-artifacts/verify-url/verify.json`
 
-Live checks passed after deployment:
+## Next steps
 
-- Factory URL verification wrote [verify.json](polish-2-live/verify.json) and screenshots. It found 200, no console errors, `lang=en`, one H1, main, and complete image/button labels.
-- A fresh 390 × 844 live landing shows the three product facts by y=748; see [cold mobile](polish-2-live/cold-mobile-390.png).
-- A cold one-click live `?demo=1` shows the persistent banner, Reset demo, Start for real, $250 sample, and all three entries; see [demo mobile](polish-2-live/demo-mobile-390.png).
-- Live route checks confirmed titles, descriptions, canonicals, H1/main/header/footer for `/`, `/?demo=1`, `/settings`, `/privacy`, `/terms`, and `/missing-page`; the unknown route returned HTTP 404.
-- Live AxeBuilder scans on those six routes in light and dark modes found zero serious/critical violations. The standalone `@axe-core/cli` could not launch its Selenium Chrome binary in this container; the project’s Playwright AxeBuilder integration is the applied accessibility verifier.
-
-No known gaps remain.
-
-See `.factory/review-2.md` for exact quotes, word counts, evidence, and concrete rewrites.
+Repair F-2-4 and F-3-1 through F-3-8, add the missing pace and weekly-reminder assertions, and rerun the complete review from a clean clone. A PASS requires zero findings and no partially tested claim.

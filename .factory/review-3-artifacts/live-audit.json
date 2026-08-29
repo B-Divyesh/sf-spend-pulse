@@ -1,0 +1,937 @@
+{
+  "auditedAt": "2026-08-29T05:32:14.816Z",
+  "base": "https://spend-pulse.sociobot.in",
+  "cold": {
+    "mobile": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "scrollY": 0,
+      "title": "Spend Pulse — Keep weekly spending on pace",
+      "bodyText": "Skip to main content\nSpend Pulse\nDemo\nSettings\nPrivacy\nA PRIVATE WEEKLY SPENDING CHECK\nKeep weekly spending on pace\n\nFor people who want a quick budget check without another finance account.\n\nTry it with sample data\nSee a filled week. Your data stays untouched.\n◎\nWorks offline after the first visit.\n⌂\nYour entries stay in this browser.\n○\nFree. No account or bank connection.\nOne route. Seven days. No bank connection.\nSTART HERE · 01\nSet your weekly amount\n\nChoose what you can spend on day-to-day extras this week.\n\nCurrency\nUSD\nEUR\nGBP\nINR\nWeekly amount\nSet weekly amount\n\nROUTE NOTES\nCheck your pace in three steps\n01\nSet one weekly amount\n\nUse the money you plan for day-to-day extras.\n\n02\nAdd spending as it happens\n\nEnter an amount. A short note is optional.\n\n03\nRead today’s pace\n\nSee how spending compares with the elapsed week.\n\nTHE BOUNDARY\nA manual budget check with no bank connection\n\nSpend Pulse is a manual weekly spending check with no bank connection.\n\nYour weekly amount and entries stay in this browser. You can export a copy or clear everything.\n\nRead the privacy note\n\nOne small check for weekly spending pace.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0",
+      "h1": {
+        "text": "Keep weekly spending on pace",
+        "box": {
+          "x": 16,
+          "y": 393,
+          "width": 358,
+          "height": 85.5625
+        }
+      },
+      "audience": {
+        "text": "For people who want a quick budget check without another finance account.",
+        "box": {
+          "x": 16,
+          "y": 494.5625,
+          "width": 358,
+          "height": 60.1875
+        }
+      },
+      "action": {
+        "text": "Try it with sample data",
+        "box": {
+          "x": 16,
+          "y": 574.75,
+          "width": 209,
+          "height": 48
+        }
+      },
+      "outcome": {
+        "text": "See a filled week. Your data stays untouched.",
+        "box": {
+          "x": 16,
+          "y": 630.75,
+          "width": 293,
+          "height": 20.640625
+        }
+      },
+      "facts": [
+        {
+          "text": "◎ Works offline after the first visit.",
+          "box": {
+            "x": 16,
+            "y": 667.390625,
+            "width": 358,
+            "height": 23,
+            "top": 667.390625,
+            "right": 374,
+            "bottom": 690.390625,
+            "left": 16
+          }
+        },
+        {
+          "text": "⌂ Your entries stay in this browser.",
+          "box": {
+            "x": 16,
+            "y": 696.390625,
+            "width": 358,
+            "height": 23,
+            "top": 696.390625,
+            "right": 374,
+            "bottom": 719.390625,
+            "left": 16
+          }
+        },
+        {
+          "text": "○ Free. No account or bank connection.",
+          "box": {
+            "x": 16,
+            "y": 725.390625,
+            "width": 358,
+            "height": 23,
+            "top": 725.390625,
+            "right": 374,
+            "bottom": 748.390625,
+            "left": 16
+          }
+        }
+      ],
+      "visibleUnits": [
+        {
+          "tag": "a",
+          "text": "Skip to main content"
+        },
+        {
+          "tag": "a",
+          "text": "Spend Pulse"
+        },
+        {
+          "tag": "a",
+          "text": "Demo"
+        },
+        {
+          "tag": "a",
+          "text": "Settings"
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "span",
+          "text": "A private weekly spending check"
+        },
+        {
+          "tag": "h1",
+          "text": "Keep weekly spending on pace"
+        },
+        {
+          "tag": "p",
+          "text": "For people who want a quick budget check without another finance account."
+        },
+        {
+          "tag": "a",
+          "text": "Try it with sample data"
+        },
+        {
+          "tag": "li",
+          "text": "◎ Works offline after the first visit."
+        },
+        {
+          "tag": "li",
+          "text": "⌂ Your entries stay in this browser."
+        },
+        {
+          "tag": "li",
+          "text": "○ Free. No account or bank connection."
+        },
+        {
+          "tag": "figcaption",
+          "text": "One route. Seven days. No bank connection."
+        },
+        {
+          "tag": "div",
+          "text": "Start here · 01"
+        },
+        {
+          "tag": "h2",
+          "text": "Set your weekly amount"
+        },
+        {
+          "tag": "p",
+          "text": "Choose what you can spend on day-to-day extras this week."
+        },
+        {
+          "tag": "label",
+          "text": "Currency"
+        },
+        {
+          "tag": "label",
+          "text": "Weekly amount"
+        },
+        {
+          "tag": "button",
+          "text": "Set weekly amount"
+        },
+        {
+          "tag": "span",
+          "text": "Route notes"
+        },
+        {
+          "tag": "h2",
+          "text": "Check your pace in three steps"
+        },
+        {
+          "tag": "li",
+          "text": "01Set one weekly amountUse the money you plan for day-to-day extras."
+        },
+        {
+          "tag": "h3",
+          "text": "Set one weekly amount"
+        },
+        {
+          "tag": "p",
+          "text": "Use the money you plan for day-to-day extras."
+        },
+        {
+          "tag": "li",
+          "text": "02Add spending as it happensEnter an amount. A short note is optional."
+        },
+        {
+          "tag": "h3",
+          "text": "Add spending as it happens"
+        },
+        {
+          "tag": "p",
+          "text": "Enter an amount. A short note is optional."
+        },
+        {
+          "tag": "li",
+          "text": "03Read today’s paceSee how spending compares with the elapsed week."
+        },
+        {
+          "tag": "h3",
+          "text": "Read today’s pace"
+        },
+        {
+          "tag": "p",
+          "text": "See how spending compares with the elapsed week."
+        },
+        {
+          "tag": "span",
+          "text": "The boundary"
+        },
+        {
+          "tag": "h2",
+          "text": "A manual budget check with no bank connection"
+        },
+        {
+          "tag": "p",
+          "text": "Spend Pulse is a manual weekly spending check with no bank connection."
+        },
+        {
+          "tag": "p",
+          "text": "Your weekly amount and entries stay in this browser. You can export a copy or clear everything."
+        },
+        {
+          "tag": "a",
+          "text": "Read the privacy note"
+        },
+        {
+          "tag": "p",
+          "text": "One small check for weekly spending pace."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "a",
+          "text": "Built by Param Factory (external site)"
+        },
+        {
+          "tag": "p",
+          "text": "Version 1.0.0"
+        }
+      ],
+      "requests": [
+        "https://spend-pulse.sociobot.in/",
+        "https://spend-pulse.sociobot.in/assets/app-DhZVsPED.js",
+        "https://spend-pulse.sociobot.in/assets/app-BryEukPc.css",
+        "https://spend-pulse.sociobot.in/fonts/atkinson.ttf",
+        "https://spend-pulse.sociobot.in/assets/terrain-ledger-PWEQjYm4.webp"
+      ],
+      "crossOriginRequests": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    "desktop": {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": 200,
+      "scrollY": 0,
+      "title": "Spend Pulse — Keep weekly spending on pace",
+      "bodyText": "Skip to main content\nSpend Pulse\nDemo\nSettings\nPrivacy\nA PRIVATE WEEKLY SPENDING CHECK\nKeep weekly spending on pace\n\nFor people who want a quick budget check without another finance account.\n\nTry it with sample data\nSee a filled week. Your data stays untouched.\n◎\nWorks offline after the first visit.\n⌂\nYour entries stay in this browser.\n○\nFree. No account or bank connection.\nOne route. Seven days. No bank connection.\nSTART HERE · 01\nSet your weekly amount\n\nChoose what you can spend on day-to-day extras this week.\n\nCurrency\nUSD\nEUR\nGBP\nINR\nWeekly amount\nSet weekly amount\n\nROUTE NOTES\nCheck your pace in three steps\n01\nSet one weekly amount\n\nUse the money you plan for day-to-day extras.\n\n02\nAdd spending as it happens\n\nEnter an amount. A short note is optional.\n\n03\nRead today’s pace\n\nSee how spending compares with the elapsed week.\n\nTHE BOUNDARY\nA manual budget check with no bank connection\n\nSpend Pulse is a manual weekly spending check with no bank connection.\n\nYour weekly amount and entries stay in this browser. You can export a copy or clear everything.\n\nRead the privacy note\n\nOne small check for weekly spending pace.\n\nPrivacy\nTerms\nBuilt by Param Factory\n(external site)\n\nVersion 1.0.0",
+      "h1": {
+        "text": "Keep weekly spending on pace",
+        "box": {
+          "x": 130,
+          "y": 208.25,
+          "width": 477.4375,
+          "height": 271.3125
+        }
+      },
+      "audience": {
+        "text": "For people who want a quick budget check without another finance account.",
+        "box": {
+          "x": 130,
+          "y": 503.5625,
+          "width": 477.4375,
+          "height": 60.1875
+        }
+      },
+      "action": {
+        "text": "Try it with sample data",
+        "box": {
+          "x": 130,
+          "y": 595.75,
+          "width": 209,
+          "height": 48
+        }
+      },
+      "outcome": {
+        "text": "See a filled week. Your data stays untouched.",
+        "box": {
+          "x": 355,
+          "y": 599.109375,
+          "width": 210,
+          "height": 41.28125
+        }
+      },
+      "facts": [
+        {
+          "text": "◎ Works offline after the first visit.",
+          "box": {
+            "x": 130,
+            "y": 675.75,
+            "width": 477.4375,
+            "height": 23,
+            "top": 675.75,
+            "right": 607.4375,
+            "bottom": 698.75,
+            "left": 130
+          }
+        },
+        {
+          "text": "⌂ Your entries stay in this browser.",
+          "box": {
+            "x": 130,
+            "y": 708.75,
+            "width": 477.4375,
+            "height": 23,
+            "top": 708.75,
+            "right": 607.4375,
+            "bottom": 731.75,
+            "left": 130
+          }
+        },
+        {
+          "text": "○ Free. No account or bank connection.",
+          "box": {
+            "x": 130,
+            "y": 741.75,
+            "width": 477.4375,
+            "height": 23,
+            "top": 741.75,
+            "right": 607.4375,
+            "bottom": 764.75,
+            "left": 130
+          }
+        }
+      ],
+      "visibleUnits": [
+        {
+          "tag": "a",
+          "text": "Skip to main content"
+        },
+        {
+          "tag": "a",
+          "text": "Spend Pulse"
+        },
+        {
+          "tag": "a",
+          "text": "Demo"
+        },
+        {
+          "tag": "a",
+          "text": "Settings"
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "span",
+          "text": "A private weekly spending check"
+        },
+        {
+          "tag": "h1",
+          "text": "Keep weekly spending on pace"
+        },
+        {
+          "tag": "p",
+          "text": "For people who want a quick budget check without another finance account."
+        },
+        {
+          "tag": "a",
+          "text": "Try it with sample data"
+        },
+        {
+          "tag": "li",
+          "text": "◎ Works offline after the first visit."
+        },
+        {
+          "tag": "li",
+          "text": "⌂ Your entries stay in this browser."
+        },
+        {
+          "tag": "li",
+          "text": "○ Free. No account or bank connection."
+        },
+        {
+          "tag": "figcaption",
+          "text": "One route. Seven days. No bank connection."
+        },
+        {
+          "tag": "div",
+          "text": "Start here · 01"
+        },
+        {
+          "tag": "h2",
+          "text": "Set your weekly amount"
+        },
+        {
+          "tag": "p",
+          "text": "Choose what you can spend on day-to-day extras this week."
+        },
+        {
+          "tag": "label",
+          "text": "Currency"
+        },
+        {
+          "tag": "label",
+          "text": "Weekly amount"
+        },
+        {
+          "tag": "button",
+          "text": "Set weekly amount"
+        },
+        {
+          "tag": "span",
+          "text": "Route notes"
+        },
+        {
+          "tag": "h2",
+          "text": "Check your pace in three steps"
+        },
+        {
+          "tag": "li",
+          "text": "01Set one weekly amountUse the money you plan for day-to-day extras."
+        },
+        {
+          "tag": "h3",
+          "text": "Set one weekly amount"
+        },
+        {
+          "tag": "p",
+          "text": "Use the money you plan for day-to-day extras."
+        },
+        {
+          "tag": "li",
+          "text": "02Add spending as it happensEnter an amount. A short note is optional."
+        },
+        {
+          "tag": "h3",
+          "text": "Add spending as it happens"
+        },
+        {
+          "tag": "p",
+          "text": "Enter an amount. A short note is optional."
+        },
+        {
+          "tag": "li",
+          "text": "03Read today’s paceSee how spending compares with the elapsed week."
+        },
+        {
+          "tag": "h3",
+          "text": "Read today’s pace"
+        },
+        {
+          "tag": "p",
+          "text": "See how spending compares with the elapsed week."
+        },
+        {
+          "tag": "span",
+          "text": "The boundary"
+        },
+        {
+          "tag": "h2",
+          "text": "A manual budget check with no bank connection"
+        },
+        {
+          "tag": "p",
+          "text": "Spend Pulse is a manual weekly spending check with no bank connection."
+        },
+        {
+          "tag": "p",
+          "text": "Your weekly amount and entries stay in this browser. You can export a copy or clear everything."
+        },
+        {
+          "tag": "a",
+          "text": "Read the privacy note"
+        },
+        {
+          "tag": "p",
+          "text": "One small check for weekly spending pace."
+        },
+        {
+          "tag": "a",
+          "text": "Privacy"
+        },
+        {
+          "tag": "a",
+          "text": "Terms"
+        },
+        {
+          "tag": "a",
+          "text": "Built by Param Factory (external site)"
+        },
+        {
+          "tag": "p",
+          "text": "Version 1.0.0"
+        }
+      ],
+      "requests": [
+        "https://spend-pulse.sociobot.in/",
+        "https://spend-pulse.sociobot.in/assets/app-DhZVsPED.js",
+        "https://spend-pulse.sociobot.in/assets/app-BryEukPc.css",
+        "https://spend-pulse.sociobot.in/fonts/atkinson.ttf",
+        "https://spend-pulse.sociobot.in/assets/terrain-ledger-PWEQjYm4.webp"
+      ],
+      "crossOriginRequests": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    }
+  },
+  "demo": {
+    "initial": {
+      "url": "https://spend-pulse.sociobot.in/?demo=1",
+      "title": "Demo — Spend Pulse",
+      "h1": "See this week’s spending pace",
+      "banner": "Demo — sample data, nothing is saved\nReset demo\nStart for real",
+      "total": "$82.80",
+      "weeklyAmount": "33% of $250.00",
+      "entries": [
+        "Lunch with Sam",
+        "Groceries",
+        "Train and coffee"
+      ],
+      "databases": [
+        "spend-pulse-demo-v1",
+        "spend-pulse-real-v1"
+      ]
+    },
+    "afterQuickAdd": "$92.80",
+    "afterReset": {
+      "total": "$82.80",
+      "entries": [
+        "Lunch with Sam",
+        "Groceries",
+        "Train and coffee"
+      ]
+    },
+    "afterExit": {
+      "url": "https://spend-pulse.sociobot.in/",
+      "totalPlan": "0% of $125.00",
+      "leakedDemoEntryCount": 0,
+      "databases": [
+        "spend-pulse-real-v1"
+      ]
+    },
+    "requests": [
+      "https://spend-pulse.sociobot.in/",
+      "https://spend-pulse.sociobot.in/assets/app-DhZVsPED.js",
+      "https://spend-pulse.sociobot.in/assets/app-BryEukPc.css",
+      "https://spend-pulse.sociobot.in/fonts/atkinson.ttf",
+      "https://spend-pulse.sociobot.in/assets/terrain-ledger-PWEQjYm4.webp",
+      "https://spend-pulse.sociobot.in/assets/terrain-ledger-PWEQjYm4.webp",
+      "https://spend-pulse.sociobot.in/",
+      "https://spend-pulse.sociobot.in/assets/app-DhZVsPED.js",
+      "https://spend-pulse.sociobot.in/assets/app-BryEukPc.css",
+      "https://spend-pulse.sociobot.in/fonts/atkinson.ttf",
+      "https://spend-pulse.sociobot.in/assets/terrain-ledger-PWEQjYm4.webp"
+    ],
+    "crossOriginRequests": [],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "offlineReload": {
+      "title": "Demo — Spend Pulse",
+      "h1": "See this week’s spending pace",
+      "bannerVisible": true
+    }
+  },
+  "routes": [
+    {
+      "path": "/",
+      "status": 200,
+      "lang": "en",
+      "title": "Spend Pulse — Keep weekly spending on pace",
+      "description": "Check weekly day-to-day spending against your plan with private entries that stay in this browser.",
+      "canonical": "https://spend-pulse.sociobot.in/",
+      "ogTitle": "Spend Pulse — Keep weekly spending on pace",
+      "ogDescription": "Check weekly day-to-day spending against your plan with private entries that stay in this browser.",
+      "ogImage": "https://spend-pulse.sociobot.in/social-card.webp",
+      "twitterTitle": "Spend Pulse — Keep weekly spending on pace",
+      "favicon": "https://spend-pulse.sociobot.in/favicon.svg",
+      "appleTouch": "https://spend-pulse.sociobot.in/icons/apple-touch-icon.png",
+      "h1": [
+        "Keep weekly spending on pace"
+      ],
+      "mainCount": 1,
+      "headerCount": 1,
+      "footerCount": 1,
+      "privacyLinks": 3,
+      "termsLinks": 1,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "path": "/?demo=1",
+      "status": 200,
+      "lang": "en",
+      "title": "Demo — Spend Pulse",
+      "description": "Try Spend Pulse with an isolated sample week. Reset the sample anytime without changing your entries.",
+      "canonical": "https://spend-pulse.sociobot.in/demo",
+      "ogTitle": "Demo — Spend Pulse",
+      "ogDescription": "Try Spend Pulse with an isolated sample week. Reset the sample anytime without changing your entries.",
+      "ogImage": "https://spend-pulse.sociobot.in/social-card.webp",
+      "twitterTitle": "Demo — Spend Pulse",
+      "favicon": "https://spend-pulse.sociobot.in/favicon.svg",
+      "appleTouch": "https://spend-pulse.sociobot.in/icons/apple-touch-icon.png",
+      "h1": [
+        "See this week’s spending pace"
+      ],
+      "mainCount": 1,
+      "headerCount": 1,
+      "footerCount": 1,
+      "privacyLinks": 2,
+      "termsLinks": 1,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "path": "/demo",
+      "status": 200,
+      "lang": "en",
+      "title": "Demo — Spend Pulse",
+      "description": "Try Spend Pulse with an isolated sample week. Reset the sample anytime without changing your entries.",
+      "canonical": "https://spend-pulse.sociobot.in/demo",
+      "ogTitle": "Demo — Spend Pulse",
+      "ogDescription": "Try Spend Pulse with an isolated sample week. Reset the sample anytime without changing your entries.",
+      "ogImage": "https://spend-pulse.sociobot.in/social-card.webp",
+      "twitterTitle": "Demo — Spend Pulse",
+      "favicon": "https://spend-pulse.sociobot.in/favicon.svg",
+      "appleTouch": "https://spend-pulse.sociobot.in/icons/apple-touch-icon.png",
+      "h1": [
+        "See this week’s spending pace"
+      ],
+      "mainCount": 1,
+      "headerCount": 1,
+      "footerCount": 1,
+      "privacyLinks": 2,
+      "termsLinks": 1,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "path": "/settings",
+      "status": 200,
+      "lang": "en",
+      "title": "Settings — Spend Pulse",
+      "description": "Set your weekly amount, reminder, and data controls in Spend Pulse.",
+      "canonical": "https://spend-pulse.sociobot.in/settings",
+      "ogTitle": "Settings — Spend Pulse",
+      "ogDescription": "Set your weekly amount, reminder, and data controls in Spend Pulse.",
+      "ogImage": "https://spend-pulse.sociobot.in/social-card.webp",
+      "twitterTitle": "Settings — Spend Pulse",
+      "favicon": "https://spend-pulse.sociobot.in/favicon.svg",
+      "appleTouch": "https://spend-pulse.sociobot.in/icons/apple-touch-icon.png",
+      "h1": [
+        "Set your weekly plan"
+      ],
+      "mainCount": 1,
+      "headerCount": 1,
+      "footerCount": 1,
+      "privacyLinks": 2,
+      "termsLinks": 1,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "lang": "en",
+      "title": "Privacy — Spend Pulse",
+      "description": "Read what Spend Pulse stores in your browser and how to export or clear it.",
+      "canonical": "https://spend-pulse.sociobot.in/privacy",
+      "ogTitle": "Privacy — Spend Pulse",
+      "ogDescription": "Read what Spend Pulse stores in your browser and how to export or clear it.",
+      "ogImage": "https://spend-pulse.sociobot.in/social-card.webp",
+      "twitterTitle": "Privacy — Spend Pulse",
+      "favicon": "https://spend-pulse.sociobot.in/favicon.svg",
+      "appleTouch": "https://spend-pulse.sociobot.in/icons/apple-touch-icon.png",
+      "h1": [
+        "Your spending stays in your browser"
+      ],
+      "mainCount": 1,
+      "headerCount": 1,
+      "footerCount": 1,
+      "privacyLinks": 2,
+      "termsLinks": 1,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "lang": "en",
+      "title": "Terms — Spend Pulse",
+      "description": "Read the terms for using the free Spend Pulse weekly spending check.",
+      "canonical": "https://spend-pulse.sociobot.in/terms",
+      "ogTitle": "Terms — Spend Pulse",
+      "ogDescription": "Read the terms for using the free Spend Pulse weekly spending check.",
+      "ogImage": "https://spend-pulse.sociobot.in/social-card.webp",
+      "twitterTitle": "Terms — Spend Pulse",
+      "favicon": "https://spend-pulse.sociobot.in/favicon.svg",
+      "appleTouch": "https://spend-pulse.sociobot.in/icons/apple-touch-icon.png",
+      "h1": [
+        "Use Spend Pulse as a simple guide"
+      ],
+      "mainCount": 1,
+      "headerCount": 1,
+      "footerCount": 1,
+      "privacyLinks": 2,
+      "termsLinks": 1,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "path": "/missing-review-3",
+      "status": 404,
+      "lang": "en",
+      "title": "Page not found — Spend Pulse",
+      "description": "This Spend Pulse page could not be found. Return to the weekly spending check.",
+      "canonical": "https://spend-pulse.sociobot.in/404.html",
+      "ogTitle": "Page not found — Spend Pulse",
+      "ogDescription": "This Spend Pulse page could not be found. Return to the weekly spending check.",
+      "ogImage": "https://spend-pulse.sociobot.in/social-card.webp",
+      "twitterTitle": "Page not found — Spend Pulse",
+      "favicon": "https://spend-pulse.sociobot.in/favicon.svg",
+      "appleTouch": "https://spend-pulse.sociobot.in/icons/apple-touch-icon.png",
+      "h1": [
+        "This page is not on the route"
+      ],
+      "mainCount": 1,
+      "headerCount": 1,
+      "footerCount": 1,
+      "privacyLinks": 2,
+      "termsLinks": 1,
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/404.html",
+      "status": 200,
+      "lang": "en",
+      "title": "Page not found — Spend Pulse",
+      "description": "This Spend Pulse page could not be found. Return to the weekly spending check.",
+      "canonical": "https://spend-pulse.sociobot.in/404.html",
+      "ogTitle": "Page not found — Spend Pulse",
+      "ogDescription": "This Spend Pulse page could not be found. Return to the weekly spending check.",
+      "ogImage": "https://spend-pulse.sociobot.in/social-card.webp",
+      "twitterTitle": "Page not found — Spend Pulse",
+      "favicon": "https://spend-pulse.sociobot.in/favicon.svg",
+      "appleTouch": "https://spend-pulse.sociobot.in/icons/apple-touch-icon.png",
+      "h1": [
+        "This page is not on the route"
+      ],
+      "mainCount": 1,
+      "headerCount": 1,
+      "footerCount": 1,
+      "privacyLinks": 2,
+      "termsLinks": 1,
+      "consoleErrors": [],
+      "pageErrors": []
+    }
+  ],
+  "links": [
+    {
+      "href": "https://spend-pulse.sociobot.in/#main",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/?demo=1",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/settings",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/privacy",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/terms",
+      "status": 200
+    },
+    {
+      "href": "https://hello-factory.sociobot.in/",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/demo#main",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/settings?demo=1",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/settings?demo=1#data",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/settings#main",
+      "status": 200
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/privacy#main",
+      "status": 200
+    },
+    {
+      "href": "mailto:privacy@sociobot.in",
+      "status": "mailto"
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/terms#main",
+      "status": 200
+    },
+    {
+      "href": "mailto:hello@sociobot.in",
+      "status": "mailto"
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/missing-review-3#main",
+      "status": 404
+    },
+    {
+      "href": "https://spend-pulse.sociobot.in/404.html#main",
+      "status": 200
+    }
+  ],
+  "axe": [
+    {
+      "colorScheme": "light",
+      "path": "/",
+      "seriousOrCritical": []
+    },
+    {
+      "colorScheme": "light",
+      "path": "/?demo=1",
+      "seriousOrCritical": []
+    },
+    {
+      "colorScheme": "light",
+      "path": "/settings",
+      "seriousOrCritical": []
+    },
+    {
+      "colorScheme": "light",
+      "path": "/privacy",
+      "seriousOrCritical": []
+    },
+    {
+      "colorScheme": "light",
+      "path": "/terms",
+      "seriousOrCritical": []
+    },
+    {
+      "colorScheme": "light",
+      "path": "/missing-review-3",
+      "seriousOrCritical": []
+    },
+    {
+      "colorScheme": "dark",
+      "path": "/",
+      "seriousOrCritical": []
+    },
+    {
+      "colorScheme": "dark",
+      "path": "/?demo=1",
+      "seriousOrCritical": []
+    },
+    {
+      "colorScheme": "dark",
+      "path": "/settings",
+      "seriousOrCritical": []
+    },
+    {
+      "colorScheme": "dark",
+      "path": "/privacy",
+      "seriousOrCritical": []
+    },
+    {
+      "colorScheme": "dark",
+      "path": "/terms",
+      "seriousOrCritical": []
+    },
+    {
+      "colorScheme": "dark",
+      "path": "/missing-review-3",
+      "seriousOrCritical": []
+    }
+  ],
+  "headers": {
+    "content-type": "text/html",
+    "date": "Sat, 29 Aug 2026 05:32:43 GMT",
+    "cache-control": "public, must-revalidate, max-age=30",
+    "content-encoding": "br",
+    "etag": "\"28587818\"",
+    "last-modified": "Sat, 29 Aug 2026 04:41:36 GMT",
+    "transfer-encoding": "chunked",
+    "vary": "Accept-Encoding",
+    "strict-transport-security": "max-age=10886400; includeSubDomains; preload",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "x-dns-prefetch-control": "off",
+    "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+    "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()"
+  },
+  "settingsSaveNotice": "Settings saved on this device.",
+  "history": {
+    "forward": {
+      "url": "https://spend-pulse.sociobot.in/privacy",
+      "focused": "Your spending stays in your browser"
+    },
+    "back": {
+      "url": "https://spend-pulse.sociobot.in/",
+      "focused": "Keep weekly spending on pace"
+    }
+  }
+}
