@@ -67,13 +67,13 @@
     "claim": "Notification permission is requested only after the user presses the test button",
     "where": "settings and privacy page",
     "test": "npm test -- --grep @claim:notification-permission",
-    "sandbox": "fresh context with a requestPermission spy; load settings, then press the explicit control"
+    "sandbox": "fresh context at /settings?demo=1 with a requestPermission spy; assert only spend-pulse-demo-v1 exists before and after pressing the explicit control"
   },
   {
     "id": "on-device-reminder",
     "claim": "Checks a daily or weekly reminder while the app is open",
     "where": "settings",
     "test": "npm test -- --grep @claim:on-device-reminder",
-    "sandbox": "fresh browser contexts with recorded on-device notification APIs and fixed clocks; assert due daily and weekly reminders, then assert weekly does not run on another day"
+    "sandbox": "fresh browser contexts at /settings?demo=1 with recorded on-device notification APIs and fixed clocks; assert only spend-pulse-demo-v1 exists, then assert due daily and weekly reminders and that weekly does not run on another day"
   }
 ]

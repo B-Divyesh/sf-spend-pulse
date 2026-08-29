@@ -1,42 +1,54 @@
-# Spend Pulse verification 5 handoff
+# Spend Pulse repair handoff
 
 ## Outcome
 
-**FAIL.** Candidate `9277f95aab1ba9f4255f8ddac07052e534374551` was independently tested against https://spend-pulse.sociobot.in on 2026-08-29 UTC. The live HTML, JS, CSS, image, font, manifest assets, and service worker match the candidate build, and the core product works. Release remains blocked by one high-severity claim-sandbox defect and one medium-severity keyboard-focus defect.
+Repaired the two release blockers in independent verification 5 for candidate `9277f95aab1ba9f4255f8ddac07052e534374551`.
 
-No product code was modified. The detailed report is [.factory/verification-5.md](verification-5.md).
+- The `notification-permission` and `on-device-reminder` claim flows now enter only `/settings?demo=1`. Each regression proves that the only IndexedDB database in its fresh context is `spend-pulse-demo-v1`; `spend-pulse-real-v1` is not created.
+- The visible **Import JSON** label now receives a 3 px ochre focus ring when keyboard Tab focuses its clipped file input. The input remains correctly labelled and the picker behavior is unchanged.
 
-## Release-blocking defects
+The original offline PWA artifact, local-only data model, demo sample, import/export behavior, routing, and visual system are unchanged.
 
-- **High:** `@claim:notification-permission` and `@claim:on-device-reminder` open `/settings` instead of `/settings?demo=1`; the reminder test writes to the real IndexedDB namespace. Every claim test is required to run only through the isolated demo.
-- **Medium:** keyboard focus on `#import-file` is invisible. The focused input is clipped, while its visible “Import JSON” label has no outline. See [.factory/verification-artifacts/live-import-focus-missing-5.png](verification-artifacts/live-import-focus-missing-5.png).
+## Reproduced before repair
 
-## Verification summary
+On the prior build, a browser check at `/settings?demo=1` reported active element `import-file`, `clip: rect(0px, 0px, 0px, 0px)`, and visible label `outline: none`. Saving reminder settings through the old claim helper at `/settings` created `spend-pulse-real-v1`.
 
-- All 11 exact claim commands passed after `npm ci`; their sandbox routing was then audited separately and exposed the finding above.
-- `npm test`: 43/43 passed.
-- `npm run typecheck`, `npm run lint`, `npm run build`, and `npm audit --omit=dev`: passed.
-- Build: 9.68 kB gzip JS, 4.64 kB gzip CSS, 130.94 kB hero image.
-- Live Lighthouse mobile: 97 Performance, 100 Accessibility, 100 Best Practices, 100 SEO; LCP 1.97 s, TBT 157 ms, CLS 0.
-- Live AxeBuilder: no violations on all main routes and 404 in light and dark modes.
-- Privacy: full live demo flow made same-origin requests only; security and cache headers were present.
-- PWA: service-worker control, offline reload, cached shell, live update check, and a simulated changed-worker activation/update notice passed.
-- Functional: normal entry, exact minimum/maximum, invalid recovery, delete/undo/reload, reset, import/export, storage isolation, and tab-close persistence passed.
-- First-read and one-click sample gate passed on desktop and 390 px mobile.
+## Verification evidence
 
-## Reproduce
+Clean install and gates passed on 2026-08-29 UTC:
 
 ```sh
 npm ci
-npm test
+npm test                         # 44/44 Playwright tests
 npm run typecheck
 npm run lint
-npm run build
-npm audit --omit=dev
+npm run build                    # dist/ produced
+npm audit --omit=dev             # 0 vulnerabilities
 ```
 
-Run every exact command in `.factory/claims.json` separately. For the keyboard defect, open `/settings?demo=1`, Tab to **Import JSON**, and inspect focus: `document.activeElement.id` is `import-file`, its clip is `rect(0px, 0px, 0px, 0px)`, and the visible label has no outline.
+All eleven exact claim commands in `.factory/claims.json` were run as separate processes and passed. This includes both repaired notification claims.
 
-## Next steps
+The complete suite covers desktop and 390 px mobile, keyboard operation, 200% text reflow, privacy request capture, demo storage isolation, import validation, delete/undo, PWA offline reload, update-shell assets, and all main routes plus 404 with AxeBuilder in light and dark themes. There were no serious or critical Axe findings.
 
-Route the two notification claim tests through demo storage, add a regression assertion for the namespace, and make the visible Import JSON control reflect keyboard focus. Rebuild, deploy, and repeat independent verification.
+`/opt/fleet/lib/verify-url.sh http://127.0.0.1:4174 /tmp/spend-pulse-verify-local` passed: title, `lang=en`, one H1, main landmark, image alt text, button labels, desktop/mobile rendering, and no console errors. Its local load measurement was 527 ms.
+
+The targeted post-fix browser proof at 390 px reported:
+
+```text
+activeElement: import-file
+inputFocusVisible: true
+labelOutline: rgb(169, 79, 29) solid 3px
+databases: [spend-pulse-demo-v1]
+documentWidth: 390
+viewportWidth: 390
+```
+
+Production build sizes: JS 30.10 kB raw / 9.69 kB gzip; CSS 17.20 kB raw / 4.66 kB gzip; hero image 130.94 kB.
+
+## Deployment
+
+Push `main` to trigger the configured static deployment, then verify the deployed hashed JS/CSS identity, live `/settings?demo=1` focus behavior, service-worker offline reload/update behavior, headers, and the two demo-only notification claims.
+
+## Known gaps
+
+None. The product has no backend, account, payment, AI, or consumer package surface, so server response-policy, rate-limit, billing, and package-consumer checks are not applicable.

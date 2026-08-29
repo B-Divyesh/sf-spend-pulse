@@ -41,13 +41,20 @@ async function openReminderHarness(browser: Browser, fixedNow: string) {
 }
 
 async function saveReminder(page: import("@playwright/test").Page, cadence: "daily" | "weekly") {
-  await page.goto("/settings");
+  await page.goto("/settings?demo=1");
+  await expect(page).toHaveURL("http://127.0.0.1:4173/settings?demo=1");
   await page.locator("#settings-allowance").fill("200");
   await page.locator("#week-start").selectOption("1");
   await page.locator("#reminder-cadence").selectOption(cadence);
   await page.locator("#reminder-time").fill("09:00");
   await page.getByRole("button", { name: "Save settings" }).click();
   await expect(page.locator("#notice")).toContainText("Settings saved in this browser.");
+  await expectDemoDatabaseOnly(page);
+}
+
+async function expectDemoDatabaseOnly(page: import("@playwright/test").Page) {
+  const databaseNames = await page.evaluate(async () => (await indexedDB.databases()).map(({ name }) => name).filter(Boolean).sort());
+  expect(databaseNames).toEqual(["spend-pulse-demo-v1"]);
 }
 
 test("landing page has the required structure and works at 390px", async ({ page }) => {
@@ -196,6 +203,17 @@ test("invalid backups are rejected before existing data is replaced", async ({ p
   await expect(page.locator(".pace-primary strong")).toHaveText("$82.80");
 });
 
+test("keyboard focus on Import JSON is visible on its label", async ({ page }) => {
+  await page.goto("/settings?demo=1");
+  await page.getByRole("button", { name: "Export CSV" }).focus();
+  await page.keyboard.press("Tab");
+  await expect(page.locator("#import-file")).toBeFocused();
+  const focusState = await page.locator("#import-file").evaluate((input) => input.matches(":focus-visible"));
+  expect(focusState).toBeTruthy();
+  await expect(page.locator("label[for=import-file]")).toHaveCSS("outline-style", "solid");
+  await expect(page.locator("label[for=import-file]")).toHaveCSS("outline-width", "3px");
+});
+
 test("@claim:pace-check adding spending updates the weekly pace", async ({ page }) => {
   await page.goto("/?demo=1");
   const progress = page.locator(".pace-primary progress");
@@ -329,10 +347,13 @@ test("@claim:notification-permission permission waits for an explicit press", as
       },
     });
   });
-  await page.goto("/settings");
+  await page.goto("/settings?demo=1");
+  await expect(page).toHaveURL("http://127.0.0.1:4173/settings?demo=1");
+  await expectDemoDatabaseOnly(page);
   await expect.poll(() => page.evaluate(() => (window as unknown as { __permissionRequests: number }).__permissionRequests)).toBe(0);
   await page.getByRole("button", { name: "Allow and test notification" }).click();
   await expect.poll(() => page.evaluate(() => (window as unknown as { __permissionRequests: number }).__permissionRequests)).toBe(1);
+  await expectDemoDatabaseOnly(page);
 });
 
 test("@claim:on-device-reminder daily and weekly reminders run only when due", async ({ browser }) => {

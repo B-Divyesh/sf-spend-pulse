@@ -293,7 +293,7 @@ function settingsPage(): string {
       </section>
       <button class="primary-button" type="submit">Save settings</button><p id="settings-error" class="form-error" role="alert"></p>
     </form>
-    <section id="data" class="data-section" aria-labelledby="data-title"><h2 id="data-title">Own your data</h2><p>Export a JSON backup or a CSV list. Importing a backup replaces data in this ${isDemo ? "demo" : "browser"}.</p><div class="data-actions"><button class="secondary-button" data-action="export-json">Export JSON</button><button class="secondary-button" data-action="export-csv">Export CSV</button><label class="secondary-button file-label" for="import-file">Import JSON</label><input class="sr-only" id="import-file" type="file" accept="application/json,.json" /></div><button class="danger-button" data-action="clear-data">Clear all ${isDemo ? "demo" : "local"} data</button><p id="data-message" class="form-error" role="status"></p></section>`}
+    <section id="data" class="data-section" aria-labelledby="data-title"><h2 id="data-title">Own your data</h2><p>Export a JSON backup or a CSV list. Importing a backup replaces data in this ${isDemo ? "demo" : "browser"}.</p><div class="data-actions"><button class="secondary-button" data-action="export-json">Export JSON</button><button class="secondary-button" data-action="export-csv">Export CSV</button><input class="sr-only" id="import-file" type="file" accept="application/json,.json" /><label class="secondary-button file-label" for="import-file">Import JSON</label></div><button class="danger-button" data-action="clear-data">Clear all ${isDemo ? "demo" : "local"} data</button><p id="data-message" class="form-error" role="status"></p></section>`}
   </main>`;
 }
 
