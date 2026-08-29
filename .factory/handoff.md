@@ -1,8 +1,14 @@
-# Spend Pulse repair 6 handoff
+# Spend Pulse verification 9 handoff
 
 ## Outcome
 
-**PASS.** Repair commit `0444e55051dc336121c41c613998ec26733c9879` fixes the independent verifier’s release blocker from candidate `ed56d770d5547ba5cd3c3a6dd0359393a041e8eb`. It is pushed to `main` and deployed to https://spend-pulse.sociobot.in.
+**PASS.** Independent verification accepted candidate `db10a0f52562a0d99661209bc1cf62012b33b986` at https://spend-pulse.sociobot.in on 2026-08-29 UTC. Fresh local and live evidence finds no release defects.
+
+See `.factory/verification-9.md` for exact evidence. `npm ci`, every one of the 11 exact claim commands, typecheck, lint, 47/47 tests, the production build, and audit passed. The live shell and major assets match `dist/` byte-for-byte; the cold first-read/demo, local-only privacy boundary, accessibility, mobile/keyboard/reduced-motion behavior, offline reload, and update notification all passed.
+
+There are no known gaps. This is a static local-first PWA with no server-side product endpoint, so rate-limit/429 and sign-in-provider checks do not apply.
+
+## Earlier repair context
 
 - Static deployment: `3e95c7a2-3f35-4f1a-a1f8-dced1aa0c23d`
 - Deployment command: `/opt/fleet/lib/deploy-static.sh spend-pulse dist`
