@@ -202,8 +202,11 @@ test("@claim:pace-check adding spending updates the weekly pace", async ({ page 
   const paceDifference = page.locator(".pace-grid dl div").first();
   const beforeProgress = Number(await progress.getAttribute("value"));
   const beforeLabel = await paceDifference.locator("dt").innerText();
-  const beforeDifference = Number((await paceDifference.locator("dd").innerText()).replace(/[^0-9.-]/g, ""));
+  const beforeDifferenceText = await paceDifference.locator("dd").innerText();
+  const beforeDifference = Number(beforeDifferenceText.replace(/[^0-9.-]/g, ""));
   await page.getByRole("button", { name: "Add $10.00" }).click();
+  await expect(progress).toHaveAttribute("value", String(beforeProgress + 4));
+  await expect(paceDifference.locator("dd")).not.toHaveText(beforeDifferenceText);
   const afterProgress = Number(await progress.getAttribute("value"));
   const afterLabel = await paceDifference.locator("dt").innerText();
   const afterDifference = Number((await paceDifference.locator("dd").innerText()).replace(/[^0-9.-]/g, ""));
