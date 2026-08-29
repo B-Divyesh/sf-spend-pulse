@@ -320,6 +320,7 @@ test("@claim:data-clear clear all removes settings and entries after confirmatio
   await page.goto("/settings?demo=1");
   page.once("dialog", (dialog) => dialog.accept());
   await page.getByRole("button", { name: "Clear all demo data" }).click();
+  await expect(page.locator("#notice")).toHaveText("All demo data cleared.");
   await expect(page.locator("#settings-allowance")).toHaveValue("");
   await expect(page.getByText("Clear-data proof entry", { exact: true })).toHaveCount(0);
   const jsonDownload = page.waitForEvent("download");

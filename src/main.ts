@@ -594,7 +594,8 @@ function bindEvents(): void {
     if (action === "test-notification") await testNotification();
     if (action === "clear-data") {
       if (confirm(`Clear every ${isDemo ? "demo" : "local"} entry and setting? This cannot be undone.`)) {
-        await deleteDatabase(isDemo); data = { settings: null, entries: [] }; undoEntry = null; render(); showNotice("All local data cleared.");
+        const clearedScope = isDemo ? "demo" : "local";
+        await deleteDatabase(isDemo); data = { settings: null, entries: [] }; undoEntry = null; render(); showNotice(`All ${clearedScope} data cleared.`);
       }
     }
   }));
