@@ -52,7 +52,7 @@ The signature motion is a single contour “settle”: after a saved entry, cont
 
 ## Asset plan and provenance
 
-- `assets/src/terrain-ledger.png` is the generated source. `src/assets/terrain-ledger.webp` is the optimized app asset, emitted as `dist/assets/terrain-ledger-*.webp` by the production build. The illustration appears beside the live product and is the source for the social preview.
+- `assets/src/terrain-ledger.png` is the generated source. `src/assets/terrain-ledger.webp` plus 960 px and 640 px WebP derivatives are the optimized responsive app assets, emitted as `dist/assets/terrain-ledger-*.webp` files by the production build. The illustration appears beside the live product and is the source for the social preview.
 - `public/social-card.webp`: locally composed 1200×630 crop using the original illustration and HTML text remains separate from the asset.
 - App icons and favicon: hand-authored geometric SVG contour mark, rasterized locally for install icons. No icon library.
 

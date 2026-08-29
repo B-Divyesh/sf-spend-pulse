@@ -1,4 +1,4 @@
-const CACHE = "spend-pulse-shell-v5";
+const CACHE = "spend-pulse-shell-v6";
 const SHELL = [
   "/",
   "/?demo=1",

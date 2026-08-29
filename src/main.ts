@@ -3,12 +3,18 @@ import { deleteDatabase, loadData, removeEntry, replaceData, saveEntry, saveSett
 import { entriesThisWeek, paceSummary, startOfWeek } from "./pace";
 import type { AppData, Currency, ReminderCadence, Settings, SpendEntry } from "./types";
 import terrainLedgerUrl from "./assets/terrain-ledger.webp";
+import terrainLedger640Url from "./assets/terrain-ledger-640.webp";
+import terrainLedger960Url from "./assets/terrain-ledger-960.webp";
 
 const appRoot = document.querySelector<HTMLDivElement>("#app");
 if (!appRoot) throw new Error("The app root is missing.");
 const app: HTMLDivElement = appRoot;
 
-let isDemo = location.pathname === "/demo" || new URLSearchParams(location.search).get("demo") === "1";
+function isDemoUrl(url: URL): boolean {
+  return url.pathname === "/demo" || url.searchParams.get("demo") === "1";
+}
+
+let isDemo = isDemoUrl(new URL(location.href));
 let data: AppData = { settings: null, entries: [] };
 let loadError = "";
 let undoEntry: SpendEntry | null = null;
@@ -101,7 +107,7 @@ function sampleData(): AppData {
 }
 
 async function load(): Promise<void> {
-  isDemo = location.pathname === "/demo" || new URLSearchParams(location.search).get("demo") === "1";
+  isDemo = isDemoUrl(new URL(location.href));
   try {
     data = await loadData(isDemo);
     if (isDemo && !data.settings) {
@@ -234,7 +240,7 @@ function homePage(): string {
         ${facts()}
       </div>
       <figure class="hero-map">
-        <img src="${terrainLedgerUrl}" width="1200" height="800" alt="A paper relief map turns a weekly route into seven trail markers." fetchpriority="high" decoding="async" />
+        <picture><source media="(max-width: 560px)" srcset="${terrainLedger640Url}" width="640" height="427" /><source media="(max-width: 820px)" srcset="${terrainLedger960Url}" width="960" height="640" /><img src="${terrainLedgerUrl}" width="1200" height="800" alt="A paper relief map turns a weekly route into seven trail markers." fetchpriority="high" decoding="async" /></picture>
         <figcaption>Track one weekly amount without connecting a bank.</figcaption>
       </figure>
     </section>
@@ -250,7 +256,7 @@ function demoPage(): string {
   return `<main id="main" class="demo-main">
     <div class="demo-intro"><span class="eyebrow">Sample week</span><h1 tabindex="-1">See this week’s spending pace</h1><p>The sample weekly amount is $250. Try adding or deleting an entry.</p></div>
     ${loadError ? errorState() : dashboard()}
-    <section class="demo-explain" aria-labelledby="demo-explain-title"><h2 id="demo-explain-title">Sample changes do not affect your entries</h2><p>This sample is kept apart from your entries. Reset the sample anytime, or return to your real data.</p></section>
+    <section class="demo-explain" aria-labelledby="demo-explain-title"><h2 id="demo-explain-title">Sample changes do not affect your entries</h2><p>This sample is kept apart from your entries. Leaving demo deletes its changes.</p></section>
   </main>`;
 }
 
@@ -342,8 +348,15 @@ function render(moveFocus = false): void {
   if (location.hash) requestAnimationFrame(() => document.querySelector(location.hash)?.scrollIntoView());
 }
 
+async function discardDemoOnExit(nextUrl: URL): Promise<void> {
+  if (!isDemo || isDemoUrl(nextUrl)) return;
+  await deleteDatabase(true);
+  undoEntry = null;
+}
+
 async function navigate(target: string): Promise<void> {
   const url = new URL(target, location.href);
+  await discardDemoOnExit(url);
   history.pushState({}, "", `${url.pathname}${url.search}${url.hash}`);
   await load();
   render(true);
@@ -582,7 +595,7 @@ function bindEvents(): void {
     const action = button.dataset.action;
     if (action === "reload") location.reload();
     if (action === "reset-demo") { await deleteDatabase(true); undoEntry = null; await load(); render(); showNotice("Demo reset to the sample week."); }
-    if (action === "start-real") { await deleteDatabase(true); await navigate("/"); }
+    if (action === "start-real") await navigate("/");
     if (action === "delete-entry") {
       const entry = data.entries.find((item) => item.id === button.dataset.id);
       if (!entry) return;
@@ -601,7 +614,11 @@ function bindEvents(): void {
   }));
 }
 
-window.addEventListener("popstate", async () => { await load(); render(true); });
+window.addEventListener("popstate", async () => {
+  await discardDemoOnExit(new URL(location.href));
+  await load();
+  render(true);
+});
 window.addEventListener("online", updateOnlineState);
 window.addEventListener("offline", updateOnlineState);
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") void checkReminder(); });

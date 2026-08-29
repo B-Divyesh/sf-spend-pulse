@@ -15,8 +15,8 @@
   },
   {
     "id": "demo-sandbox",
-    "claim": "Demo changes never touch real data",
-    "where": "demo banner and demo explanation",
+    "claim": "Demo changes never touch real data and are discarded when you leave",
+    "where": "demo banner, demo explanation, and demo documentation",
     "test": "npm test -- --grep @claim:demo-sandbox",
     "sandbox": "fresh browser context; create real data, change demo data, leave demo, and verify the real data"
   },

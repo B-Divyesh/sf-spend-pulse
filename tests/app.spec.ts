@@ -81,7 +81,7 @@ test("uses plain labels for the landing, demo, and missing-page states", async (
 
   await page.goto("/?demo=1");
   await expect(page.getByRole("heading", { level: 2, name: "Sample changes do not affect your entries" })).toBeVisible();
-  await expect(page.getByText("This sample is kept apart from your entries. Reset the sample anytime, or return to your real data.")).toBeVisible();
+  await expect(page.getByText("This sample is kept apart from your entries. Leaving demo deletes its changes.")).toBeVisible();
 
   await page.goto("/missing-page");
   await expect(page.locator(".not-found .eyebrow")).toHaveText("404");
@@ -98,6 +98,22 @@ test("@claim:sample-demo first-screen action opens a populated isolated query de
   await expect(page.getByText("The sample weekly amount is $250.")).toBeVisible();
   await expect(page.locator(".pace-primary strong")).toHaveText("$82.80");
   for (const entry of ["Lunch with Sam", "Groceries", "Train and coffee"]) await expect(page.getByText(entry, { exact: true })).toBeVisible();
+});
+
+test("hero uses a width-aware responsive image source on mobile", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  const hero = page.locator(".hero-map img");
+  await expect(page.locator(".hero-map source").first()).toHaveAttribute("media", "(max-width: 560px)");
+  await expect(page.locator(".hero-map source").first()).toHaveAttribute("srcset", /terrain-ledger-640-[A-Za-z0-9_-]+\.webp/);
+  await expect(page.locator(".hero-map source").nth(1)).toHaveAttribute("media", "(max-width: 820px)");
+  await expect(page.locator(".hero-map source").nth(1)).toHaveAttribute("srcset", /terrain-ledger-960-[A-Za-z0-9_-]+\.webp/);
+  const currentSrc = await hero.evaluate(async (element) => {
+    const image = element as HTMLImageElement;
+    await image.decode();
+    return image.currentSrc;
+  });
+  expect(currentSrc).toContain("terrain-ledger-640-");
 });
 
 for (const colorScheme of ["light", "dark"] as const) {
@@ -250,18 +266,39 @@ test("@claim:pace-check adding spending updates the weekly pace", async ({ page 
   expect(Math.abs(afterDifference - beforeDifference)).toBeCloseTo(10, 2);
 });
 
-test("@claim:demo-sandbox demo changes do not touch real data", async ({ page }) => {
+test("@claim:demo-sandbox demo changes do not touch real data and are discarded after ordinary exits", async ({ page }) => {
   await page.goto("/");
   await page.locator("#allowance").fill("125");
   await page.getByRole("button", { name: "Set weekly amount" }).click();
-  await page.goto("/?demo=1");
+  await page.getByRole("link", { name: "Demo" }).click();
   await page.locator("#spend-amount").fill("9");
-  await page.locator("#spend-note").fill("Demo only");
+  await page.locator("#spend-note").fill("Wordmark exit probe");
   await page.getByRole("button", { name: "Add spending" }).click();
-  await page.getByRole("button", { name: "Start for real" }).click();
+  await page.getByRole("link", { name: "Spend Pulse" }).click();
   await expect(page).toHaveURL("http://127.0.0.1:4173/");
   await expect(page.locator(".pace-primary small")).toContainText("$125.00");
-  await expect(page.getByText("Demo only", { exact: true })).toHaveCount(0);
+  await expect(page.getByText("Wordmark exit probe", { exact: true })).toHaveCount(0);
+
+  await page.getByRole("link", { name: "Demo" }).click();
+  await expect(page.locator(".pace-primary strong")).toHaveText("$82.80");
+  await expect(page.getByText("Wordmark exit probe", { exact: true })).toHaveCount(0);
+  await page.locator("#spend-amount").fill("7.77");
+  await page.locator("#spend-note").fill("Privacy exit probe");
+  await page.getByRole("button", { name: "Add spending" }).click();
+  await page.getByRole("link", { name: "Privacy" }).first().click();
+  await expect(page).toHaveURL("http://127.0.0.1:4173/privacy");
+  await page.getByRole("link", { name: "Demo" }).click();
+  await expect(page.locator(".pace-primary strong")).toHaveText("$82.80");
+  await expect(page.getByText("Privacy exit probe", { exact: true })).toHaveCount(0);
+
+  await page.locator("#spend-amount").fill("6");
+  await page.locator("#spend-note").fill("History exit probe");
+  await page.getByRole("button", { name: "Add spending" }).click();
+  await page.goBack();
+  await expect(page).toHaveURL("http://127.0.0.1:4173/privacy");
+  await page.goForward();
+  await expect(page.locator(".pace-primary strong")).toHaveText("$82.80");
+  await expect(page.getByText("History exit probe", { exact: true })).toHaveCount(0);
 });
 
 test("@claim:demo-reset reset demo restores the shipped sample week", async ({ page }) => {
@@ -507,4 +544,6 @@ test("service worker precaches hashed shell assets", async ({ page }) => {
   expect(cachedPaths).toContainEqual(expect.stringMatching(/^\/assets\/app-[A-Za-z0-9_-]+\.js$/));
   expect(cachedPaths).toContainEqual(expect.stringMatching(/^\/assets\/app-[A-Za-z0-9_-]+\.css$/));
   expect(cachedPaths).toContainEqual(expect.stringMatching(/^\/assets\/terrain-ledger-[A-Za-z0-9_-]+\.webp$/));
+  expect(cachedPaths).toContainEqual(expect.stringMatching(/^\/assets\/terrain-ledger-640-[A-Za-z0-9_-]+\.webp$/));
+  expect(cachedPaths).toContainEqual(expect.stringMatching(/^\/assets\/terrain-ledger-960-[A-Za-z0-9_-]+\.webp$/));
 });
